@@ -123,9 +123,10 @@ this repo run against a local server, so without the guard every test run would
 invent a visitor.
 
 Captured: one pageview, autocaptured clicks (so click maps and heatmaps work),
-`landing_cta_clicked` (with which of the four CTAs it was), and
-`landing_language_switched`. Session recording is off, and the page has no input
-fields at all, so there is nothing a visitor can type that could be captured.
+`landing_cta_clicked` (with which of the five CTAs it was — `header`, `hero`,
+`cta-band`, `install`, `footer`), and `landing_language_switched`. Session
+recording is off, and the page has no input fields at all, so there is nothing a
+visitor can type that could be captured.
 
 ### Cookies and consent
 
@@ -139,6 +140,22 @@ visitors and return visits, but it stores an identifier in the browser, which
 needs consent under GDPR/ePrivacy for EU visitors — so it has to come with a
 consent banner. Given the audience is largely French, that is a deliberate
 choice rather than a default to drift into.
+
+## The install CTA
+
+The **Install on your phone** button in the closing CTA band points at
+`https://app.kikouchou.app/?install=1` rather than at the `#install` section.
+That query parameter is a contract with the app: it means *this visitor came
+here to install*, and the app is expected to surface its install affordance
+immediately instead of waiting for its own heuristics (`useInstallPrompt` +
+`InstallPrompt`, which otherwise stays hidden for seven days after a dismissal).
+
+No link can install a PWA on its own — the prompt needs a gesture inside the
+app's own origin, and only Chromium browsers offer one at all. So the parameter
+is a hint, not a guarantee, and the header's and footer's **Install** nav links
+still go to the `#install` section, which explains the manual steps for every
+browser. Do not repoint them at the app: Safari on iOS and Firefox have no
+install prompt, and those steps are the only path there.
 
 ## DNS
 

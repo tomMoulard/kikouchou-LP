@@ -1086,7 +1086,12 @@
         <span data-i18n="cta.openFree">Open the app — it’s free</span>
         <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
       </a>
-      <a class="btn btn--ghost btn--lg" href="#install">
+      <!-- Straight into the app with the install banner primed, rather than back
+           up to the steps: on Chromium the app can offer the real install
+           prompt, and on Safari and Firefox — where no prompt exists — it shows
+           the steps for that browser itself. The nav's "Install" link still
+           reaches the section above for anyone who wants to read first. -->
+      <a class="btn btn--ghost btn--lg" href="https://app.kikouchou.app/?install=1" data-cta="install">
         <svg aria-hidden="true"><use href="#i-download"/></svg>
         <span data-i18n="cta.install">Install on your phone</span>
       </a>
