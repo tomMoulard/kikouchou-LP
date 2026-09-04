@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       # The site is plain static files, so there is nothing to compile. We still
       # stage it explicitly rather than uploading the repository root, so that
@@ -109,12 +109,17 @@ jobs:
           exit $missing
 
       - name: Setup Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: _site
+          # v4 started excluding dotfiles from the tarball, which would drop
+          # the _site/.nojekyll staged above. Pages deployed from Actions never
+          # runs Jekyll, so the file is belt and braces — but the bump should
+          # not quietly change what gets served.
+          include-hidden-files: true
 
   deploy:
     environment:
@@ -125,4 +130,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
