@@ -85,6 +85,8 @@
       }
     });
 
+    fillAvatarInitials();
+
     doc.title = (dict && dict['html.title']) || englishSnapshot['meta:title'];
     var desc = doc.querySelector('meta[name="description"]');
     if (desc) desc.content = (dict && dict['html.description']) || englishSnapshot['meta:description'];
@@ -100,6 +102,17 @@
     if (canonical) {
       canonical.href = 'https://www.kikouchou.app/' + (lang === DEFAULT_LOCALE ? '' : '?lang=' + lang);
     }
+  }
+
+  /* The mockups pair a coloured circle with a name. Deriving the letter from
+     the name it sits next to means a translated name can never disagree with
+     its own initial — the example names differ between locales. */
+  function fillAvatarInitials() {
+    doc.querySelectorAll('.avatar[data-initial]').forEach(function (el) {
+      var label = el.nextElementSibling;
+      var name = label ? label.textContent.trim() : '';
+      el.textContent = name ? name.charAt(0).toLocaleUpperCase(root.lang || 'en') : '';
+    });
   }
 
   function pickInitialLang() {

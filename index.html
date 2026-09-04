@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Kikouchou — Who sleeps where, and who picks up whom</title>
-<meta name="description" content="Kikouchou is a free, offline-first app for group holidays in a rented house. Assign rooms, track every arrival and departure, never forget a station pickup. Share one link, everyone fills in their own details.">
+<meta name="description" content="Kikouchou takes the mental load of a group holiday off one person. Rooms, arrivals, departures and station pickups on one shared plan that every guest fills in themselves. Free, offline-first, open source.">
 
 <link rel="canonical" href="https://www.kikouchou.app/">
 <link rel="alternate" hreflang="en" href="https://www.kikouchou.app/?lang=en">
@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="Kikouchou">
 <meta property="og:url" content="https://www.kikouchou.app/">
 <meta property="og:title" content="Kikouchou — Who sleeps where, and who picks up whom">
-<meta property="og:description" content="Rooms, arrivals, departures and station pickups for a group holiday in a rented house. Free, offline-first, no account needed to start.">
+<meta property="og:description" content="Rooms, arrivals, departures and station pickups for a group holiday — so it is not all in one person’s head. Free, offline-first, open source.">
 <meta property="og:image" content="https://www.kikouchou.app/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@
 <meta property="og:locale:alternate" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Kikouchou — Who sleeps where, and who picks up whom">
-<meta name="twitter:description" content="Rooms, arrivals, departures and station pickups for a group holiday in a rented house. Free and offline-first.">
+<meta name="twitter:description" content="Rooms, arrivals, departures and station pickups for a group holiday — so it is not all in one person’s head. Free and offline-first.">
 <meta name="twitter:image" content="https://www.kikouchou.app/assets/img/og.png">
 
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
@@ -64,7 +64,7 @@
       "url": "https://www.kikouchou.app/",
       "applicationCategory": "TravelApplication",
       "operatingSystem": "Web browser, iOS, Android, Windows, macOS, Linux",
-      "description": "Offline-first app to organise a group holiday in a rented house: room assignments, arrivals and departures, and station pickups, shared with one link.",
+      "description": "Offline-first app that takes the mental load of a group holiday off one person: room assignments, arrivals and departures, and station pickups on one shared plan every guest fills in themselves.",
       "inLanguage": ["en", "fr"],
       "license": "https://opensource.org/licenses/MIT",
       "isAccessibleForFree": true,
@@ -75,6 +75,7 @@
         "Arrivals, departures and station pickups",
         "Activity agenda with sign-ups",
         "Real-time collaboration and offline sync",
+        "Shared trips synced through a database hosted in Europe",
         "On-device AI assistant",
         "Installable PWA, works offline"
       ]
@@ -95,22 +96,15 @@
 
 <!-- Icon sprite (lucide-style, matching the icon set the app itself uses). -->
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true" focusable="false">
-  <defs>
-    <g id="s" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></g>
-  </defs>
   <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
   <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
-  <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></symbol>
   <symbol id="i-bed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20v-8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v8"/><path d="M4 10V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4"/><path d="M12 4v6M2 18h20"/></symbol>
   <symbol id="i-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.1V7a4 4 0 0 0 8 0V3.1"/><path d="m9 15-1-1M15 15l1-1M9 19l-2 3M15 19l2 3"/><rect width="16" height="16" x="4" y="3" rx="4"/><path d="M4 11h16"/></symbol>
   <symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
   <symbol id="i-share" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></symbol>
-  <symbol id="i-qr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3M12 7v3a2 2 0 0 1-2 2H7M7 17h.01M12 22v.01M17 12h.01M22 12h.01M12 12h.01"/></symbol>
   <symbol id="i-wifi-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M8.5 16.4a5 5 0 0 1 7 0"/><path d="M5 12.9a10 10 0 0 1 5.2-2.7M19 12.9a10 10 0 0 0-3.4-2.3"/><path d="M2 8.8a15 15 0 0 1 4.6-2.9M22 8.8a15 15 0 0 0-9.7-3.7"/><path d="m2 2 20 20"/></symbol>
   <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.9 2.7a.6.6 0 0 1 1.1 0l1.5 4a.6.6 0 0 0 .35.35l4 1.5a.6.6 0 0 1 0 1.1l-4 1.5a.6.6 0 0 0-.35.35l-1.5 4a.6.6 0 0 1-1.1 0l-1.5-4a.6.6 0 0 0-.35-.35l-4-1.5a.6.6 0 0 1 0-1.1l4-1.5a.6.6 0 0 0 .35-.35z"/><path d="M18 5v4M16 7h4M17.5 16.5v3M16 18h3"/></symbol>
-  <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1 1 0 0 1 1.5 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
   <symbol id="i-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.4-6.1 11-7.4 12.3a1 1 0 0 1-1.2 0C10.1 21 4 14.4 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></symbol>
-  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
   <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 16v-4M12 16V8M17 16v-7"/></symbol>
   <symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18 15 15 0 0 1 0-18"/></symbol>
   <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.1 14.5A8.5 8.5 0 0 1 9.5 3.9 8.5 8.5 0 1 0 20.1 14.5"/></symbol>
@@ -126,7 +120,6 @@
   <symbol id="i-cloud-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 2 20 20"/><path d="M5.8 5.8A7 7 0 0 0 8 19h9a4 4 0 0 0 1.3-7.8"/><path d="M9.7 4.3A7 7 0 0 1 19 11"/></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3.3-7"/><path d="M21 3v6h-6"/></symbol>
   <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
-  <symbol id="i-external" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
 </svg>
 
 <header class="header" id="header">
@@ -190,8 +183,9 @@
 
       <p class="hero__lede" data-i18n="hero.lede">
         You have rented a house with friends. Eleven people, six rooms, arrivals spread
-        over four days and three trains to meet at the station. Kikouchou keeps all of
-        it in one place that everyone can see — and edit.
+        over four days and three trains to meet at the station. Kikouchou gets all of
+        that out of one person’s head and onto a plan everyone can see — and fill in
+        themselves.
       </p>
 
       <div class="hero__cta">
@@ -205,7 +199,7 @@
       </div>
 
       <p class="hero__note" data-i18n="hero.note">
-        No sign-up, no install, no credit card. Create a trip and it is already saved on your device.
+        Nothing to install, nothing to pay. Create a trip and it is already saved on your device.
       </p>
 
       <ul class="trust">
@@ -246,32 +240,32 @@
 
             <!-- Columns 2–8 are Tue 12 … Mon 18; every row fills all seven. -->
             <div class="tl__row">
-              <span class="tl__name"><i style="background:var(--p1-label)"></i>Sarah</span>
+              <span class="tl__name"><i style="background:var(--p1-label)"></i><span data-i18n="mock.n1">Aurélia</span></span>
               <div class="tl__bar" data-c="1" style="grid-column:2 / 9;animation-delay:.05s" data-i18n="mock.roomMaster">Master bedroom</div>
             </div>
             <div class="tl__row">
-              <span class="tl__name"><i style="background:var(--p2-label)"></i>Tom</span>
+              <span class="tl__name"><i style="background:var(--p2-label)"></i><span data-i18n="mock.n2">Tom</span></span>
               <div class="tl__bar" data-c="2" style="grid-column:2 / 6;animation-delay:.12s" data-i18n="mock.roomAttic">Attic</div>
               <div class="tl__cell"></div><div class="tl__cell"></div><div class="tl__cell"></div>
             </div>
             <div class="tl__row">
-              <span class="tl__name"><i style="background:var(--p3-label)"></i>Léa + Max</span>
+              <span class="tl__name"><i style="background:var(--p3-label)"></i><span data-i18n="mock.n3">Alice + Julie</span></span>
               <div class="tl__cell"></div>
               <div class="tl__bar" data-c="3" style="grid-column:3 / 9;animation-delay:.19s" data-i18n="mock.roomGarden">Garden room · 2 people</div>
             </div>
             <div class="tl__row">
-              <span class="tl__name"><i style="background:var(--p4-label)"></i>Yann</span>
+              <span class="tl__name"><i style="background:var(--p4-label)"></i><span data-i18n="mock.n4">Guillaume</span></span>
               <div class="tl__cell"></div><div class="tl__cell"></div>
               <div class="tl__bar" data-c="4" style="grid-column:4 / 7;animation-delay:.26s" data-i18n="mock.roomBunk">Bunk room</div>
               <div class="tl__cell"></div><div class="tl__cell"></div>
             </div>
             <div class="tl__row">
-              <span class="tl__name"><i style="background:var(--p5-label)"></i>Chloé</span>
+              <span class="tl__name"><i style="background:var(--p5-label)"></i><span data-i18n="mock.n5">Clémentine</span></span>
               <div class="tl__cell"></div><div class="tl__cell"></div><div class="tl__cell"></div>
               <div class="tl__bar" data-c="5" style="grid-column:5 / 9;animation-delay:.33s" data-i18n="mock.roomBlue">Blue room</div>
             </div>
             <div class="tl__row">
-              <span class="tl__name"><i style="background:var(--p6-label)"></i>Nico</span>
+              <span class="tl__name"><i style="background:var(--p6-label)"></i><span data-i18n="mock.n6">Hipolite</span></span>
               <div class="tl__cell"></div>
               <div class="tl__bar" data-c="6" style="grid-column:3 / 5;animation-delay:.4s" data-i18n="mock.roomSofa">Sofa bed</div>
               <div class="tl__cell"></div><div class="tl__cell"></div><div class="tl__cell"></div><div class="tl__cell"></div>
@@ -281,7 +275,7 @@
           <div class="tl__legend">
             <span class="chip">
               <svg aria-hidden="true" style="width:.85rem;height:.85rem"><use href="#i-train"/></svg>
-              <span data-i18n="mock.legendTrain">Thu 14 · 22:40 · Chloé, TGV 8541 — Vannes</span>
+              <span data-i18n="mock.legendTrain">Thu 14 · 22:40 · Clémentine, TGV 8541 — Vannes</span>
             </span>
             <span class="chip chip--warn" data-i18n="mock.legendPickup">Needs pickup</span>
           </div>
@@ -318,7 +312,7 @@
       <li>
         <span class="pain__mark" aria-hidden="true">?</span>
         <div>
-          <p class="pain__quote" data-i18n="problem.q2">“Wait — is anyone picking up Chloé tonight?”</p>
+          <p class="pain__quote" data-i18n="problem.q2">“Wait — is anyone picking up Clémentine tonight?”</p>
           <p data-i18n="problem.a2">
             Her train time was posted in the chat four days ago, above sixty messages
             about aperitifs. Nobody volunteered because nobody was asked directly.
@@ -349,9 +343,10 @@
 
     <div class="answer">
       <p data-i18n="problem.answer">
-        Kikouchou replaces the chat thread and the spreadsheet with one shared page:
-        a calendar of who sleeps where, a room board with real bed counts, and a
-        pickup list with a name against every train.
+        Notice what these have in common: one person is expected to hold all of it in
+        their head. That is the mental load, and getting rid of it is the whole point of
+        Kikouchou — the plan lives somewhere everyone can see, and each guest carries
+        their own piece of it.
       </p>
     </div>
   </div>
@@ -364,8 +359,9 @@
       <p class="eyebrow" data-i18n="how.eyebrow">How it works</p>
       <h2 data-i18n="how.title">Three steps, and the organiser stops being a switchboard.</h2>
       <p data-i18n="how.lede">
-        The point is that you do not fill everything in yourself. You set up the house;
-        your friends add their own arrival times and claim their own beds.
+        The point is that you do not fill everything in yourself. The work gets shared
+        out rather than stacked on the organiser: you set up the house, and your friends
+        add their own arrival times and claim their own beds.
       </p>
     </div>
 
@@ -391,7 +387,7 @@
         </p>
         <ul class="step__detail">
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s2a">Link or QR code</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s2b">Guests need no account to look</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s2b">Each guest signs up once, in a tap</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s2c">Works on any phone browser</span></li>
         </ul>
       </li>
@@ -399,12 +395,13 @@
       <li class="step" data-reveal>
         <h3 data-i18n="how.s3t">Everyone fills in their own part</h3>
         <p data-i18n="how.s3d">
-          A guest opens the link and walks a short wizard: who am I, which room do I
-          claim, when do I arrive and leave, do I need a lift. Then the calendar is simply correct.
+          A guest opens the link and walks a short wizard: create an account, say which
+          one they are, claim a room, add their travel times and whether they need a
+          lift. Then the calendar is simply correct.
         </p>
         <ul class="step__detail">
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s3a">Rooms show live availability</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s3b">Full rooms cannot be double-booked</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s3b">Warnings when a room is tight, never walls</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s3c">Changes appear on everyone’s phone</span></li>
         </ul>
       </li>
@@ -435,7 +432,7 @@
           and warns you before you overbook a night.
         </p>
         <ul class="feature__list">
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f1a-b">Capacity that is enforced.</b> <span data-i18n="feat.f1a-t">“3 of 4 spots taken”, “Full”, and a warning when a stay would push a room over its beds.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f1a-b">Capacity you can see, not a rule you fight.</b> <span data-i18n="feat.f1a-t">“3 of 4 spots taken”, “Full”, and a warning when a stay would push a room past its bed count — a warning, not a refusal. Three friends squeezing into a double is a decision, not an error.</span></span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f1b-b">Optimise automatically.</b> <span data-i18n="feat.f1b-t">One tap reshuffles the week to fit everyone in with the fewest room changes — the puzzle that staggered arrivals create.</span></span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f1c-b">Month and timeline views.</b> <span data-i18n="feat.f1c-t">A month grid for the shape of the trip, a per-guest timeline for who is where tonight.</span></span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f1d-b">Guests tonight.</b> <span data-i18n="feat.f1d-t">A permanent count of who is actually sleeping in the house on today’s date — the number you need before you cook.</span></span></li>
@@ -462,20 +459,20 @@
               <div class="room-col">
                 <h4 data-i18n="mock.r1">Master bedroom</h4>
                 <p data-i18n="mock.r1c">2 beds · 1 spot open</p>
-                <div class="room-slot"><span class="avatar" style="background:var(--p1-label)">S</span>Sarah</div>
+                <div class="room-slot"><span class="avatar" data-initial style="background:var(--p1-label)" aria-hidden="true"></span><span data-i18n="mock.a1">Aurélia</span></div>
                 <div class="room-slot room-slot--empty" data-i18n="mock.freeBed">Free bed</div>
               </div>
               <div class="room-col" data-full="true">
                 <h4 data-i18n="mock.r2">Garden room</h4>
                 <p data-i18n="mock.r2c">2 beds · Full</p>
-                <div class="room-slot"><span class="avatar" style="background:var(--p3-label)">L</span>Léa</div>
-                <div class="room-slot"><span class="avatar" style="background:var(--p3-label)">M</span>Max</div>
+                <div class="room-slot"><span class="avatar" data-initial style="background:var(--p3-label)" aria-hidden="true"></span><span data-i18n="mock.a2">Alice</span></div>
+                <div class="room-slot"><span class="avatar" data-initial style="background:var(--p3-label)" aria-hidden="true"></span><span data-i18n="mock.a3">Julie</span></div>
               </div>
               <div class="room-col">
                 <h4 data-i18n="mock.r3">Bunk room</h4>
                 <p data-i18n="mock.r3c">4 beds · 2 spots open</p>
-                <div class="room-slot"><span class="avatar" style="background:var(--p4-label)">Y</span>Yann</div>
-                <div class="room-slot"><span class="avatar" style="background:var(--p6-label)">N</span>Nico</div>
+                <div class="room-slot"><span class="avatar" data-initial style="background:var(--p4-label)" aria-hidden="true"></span><span data-i18n="mock.a4">Guillaume</span></div>
+                <div class="room-slot"><span class="avatar" data-initial style="background:var(--p6-label)" aria-hidden="true"></span><span data-i18n="mock.a5">Hipolite</span></div>
               </div>
             </div>
 
@@ -519,7 +516,7 @@
               <div class="pickup__item">
                 <span class="pickup__when">22:40<small data-i18n="mock.pw1">Thu 14</small></span>
                 <div class="pickup__what">
-                  <strong data-i18n="mock.pn1">Chloé · TGV 8541</strong>
+                  <strong data-i18n="mock.pn1">Clémentine · TGV 8541</strong>
                   <p data-i18n="mock.pl1">Arrival · Gare de Vannes</p>
                 </div>
                 <span class="chip chip--warn" data-i18n="mock.needsDriver">Needs a driver</span>
@@ -527,23 +524,23 @@
               <div class="pickup__item">
                 <span class="pickup__when">09:15<small data-i18n="mock.pw2">Fri 15</small></span>
                 <div class="pickup__what">
-                  <strong data-i18n="mock.pn2">Yann · Flight AF7621</strong>
+                  <strong data-i18n="mock.pn2">Guillaume · Flight AF7621</strong>
                   <p data-i18n="mock.pl2">Arrival · Nantes Atlantique</p>
                 </div>
                 <span class="chip">
-                  <span class="avatar" style="background:var(--p2-label);width:1.1rem;height:1.1rem;font-size:.55rem">T</span>
-                  <span data-i18n="mock.driverTom">Tom drives</span>
+                  <span class="avatar" data-initial style="background:var(--p2-label);width:1.1rem;height:1.1rem;font-size:.55rem" aria-hidden="true"></span>
+                  <span data-i18n="mock.driver1">Tom drives</span>
                 </span>
               </div>
               <div class="pickup__item">
                 <span class="pickup__when">17:05<small data-i18n="mock.pw3">Sun 17</small></span>
                 <div class="pickup__what">
-                  <strong data-i18n="mock.pn3">Nico · Train 8776</strong>
+                  <strong data-i18n="mock.pn3">Hipolite · Train 8776</strong>
                   <p data-i18n="mock.pl3">Departure · Gare de Vannes</p>
                 </div>
                 <span class="chip">
-                  <span class="avatar" style="background:var(--p1-label);width:1.1rem;height:1.1rem;font-size:.55rem">S</span>
-                  <span data-i18n="mock.driverSarah">Sarah drives</span>
+                  <span class="avatar" data-initial style="background:var(--p5-label);width:1.1rem;height:1.1rem;font-size:.55rem" aria-hidden="true"></span>
+                  <span data-i18n="mock.driver2">Valérie drives</span>
                 </span>
               </div>
             </div>
@@ -565,20 +562,20 @@
         <h3 data-i18n="feat.f3t">One link. Eleven people editing. No conflicts.</h3>
         <p data-i18n="feat.f3d">
           Everyone works on the same trip at the same time and sees each other’s changes
-          land. Two people claiming the last bed at once is resolved without either of
-          them losing work — no “who has the latest version?”.
+          land. Two people editing the same room at once get merged rather than one
+          overwriting the other — no “who has the latest version?”.
         </p>
         <ul class="feature__list">
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3a-b">A guided join.</b> <span data-i18n="feat.f3a-t">Who are you → pick your room → your travel details → summary. Four screens, and their part is done.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3a-b">A guided join.</b> <span data-i18n="feat.f3a-t">Create an account → which one are you → pick your room → your travel details. Four screens, and their part is done.</span></span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3b-b">Presence.</b> <span data-i18n="feat.f3b-t">“3 people online”, “Everyone is up to date” — you can tell whether the plan you are looking at is the current one.</span></span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3c-b">QR code sharing, no server.</b> <span data-i18n="feat.f3c-t">Hand the whole trip to a friend by having them scan a code. The data travels between the two devices, not through a cloud database.</span></span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3d-b">An account only to sync.</b> <span data-i18n="feat.f3d-t">You need one to share a trip across devices. To plan one on your own phone, you need nothing at all.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3c-b">Synced in Europe.</b> <span data-i18n="feat.f3c-t">The shared copy of your trip lives in a database hosted in Europe, under EU data protection rules — not in whichever region happened to be cheapest.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3d-b">Everyone gets an account.</b> <span data-i18n="feat.f3d-t">That is what makes a guest’s room and travel times follow them between devices and show up live for everyone else. Planning a trip on your own still needs nothing at all.</span></span></li>
         </ul>
       </div>
 
       <div class="feature__media" data-reveal>
         <div class="device" role="img" data-i18n-aria="feat.f3alt"
-             aria-label="The join screen a guest sees: pick who you are, claim a room showing spots taken, add your travel times, then a summary.">
+             aria-label="The join screen a guest sees: create an account, pick which guest you are, claim a room showing spots taken, then add your travel times.">
           <div class="device__bar">
             <span class="device__dots"><i></i><i></i><i></i></span>
             <span class="device__title" data-i18n="mock.joinTitle">Join · Summer house</span>
@@ -589,31 +586,31 @@
 
             <ul class="flow" style="gap:.5rem">
               <li style="padding:.7rem .8rem">
+                <span class="flow__badge"><svg aria-hidden="true"><use href="#i-lock"/></svg></span>
+                <div>
+                  <strong style="font-size:.88rem" data-i18n="mock.j1">Create your account</strong>
+                  <p style="font-size:.8rem" data-i18n="mock.j1d">So your room and your train follow you</p>
+                </div>
+              </li>
+              <li style="padding:.7rem .8rem">
                 <span class="flow__badge"><svg aria-hidden="true"><use href="#i-users"/></svg></span>
                 <div>
-                  <strong style="font-size:.88rem" data-i18n="mock.j1">Who are you?</strong>
-                  <p style="font-size:.8rem" data-i18n="mock.j1d">Chloé — selected ✓</p>
+                  <strong style="font-size:.88rem" data-i18n="mock.j2">Which one are you?</strong>
+                  <p style="font-size:.8rem" data-i18n="mock.j2d">Clémentine — selected ✓</p>
                 </div>
               </li>
               <li style="padding:.7rem .8rem">
                 <span class="flow__badge"><svg aria-hidden="true"><use href="#i-bed"/></svg></span>
                 <div>
-                  <strong style="font-size:.88rem" data-i18n="mock.j2">Pick your room</strong>
-                  <p style="font-size:.8rem" data-i18n="mock.j2d">Blue room — 1 of 2 spots taken</p>
+                  <strong style="font-size:.88rem" data-i18n="mock.j3">Pick your room</strong>
+                  <p style="font-size:.8rem" data-i18n="mock.j3d">Blue room — 1 of 2 spots taken</p>
                 </div>
               </li>
               <li style="padding:.7rem .8rem">
                 <span class="flow__badge"><svg aria-hidden="true"><use href="#i-train"/></svg></span>
                 <div>
-                  <strong style="font-size:.88rem" data-i18n="mock.j3">Your travel details</strong>
-                  <p style="font-size:.8rem" data-i18n="mock.j3d">Thu 14, 22:40 · Vannes · needs a pickup</p>
-                </div>
-              </li>
-              <li style="padding:.7rem .8rem">
-                <span class="flow__badge"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
-                <div>
-                  <strong style="font-size:.88rem" data-i18n="mock.j4">You’re all set!</strong>
-                  <p style="font-size:.8rem" data-i18n="mock.j4d">Everyone can see your room and your train</p>
+                  <strong style="font-size:.88rem" data-i18n="mock.j4">Your travel details</strong>
+                  <p style="font-size:.8rem" data-i18n="mock.j4d">Thu 14, 22:40 · Vannes · needs a pickup</p>
                 </div>
               </li>
             </ul>
@@ -661,7 +658,7 @@
                 <span class="flow__badge"><svg aria-hidden="true"><use href="#i-refresh"/></svg></span>
                 <div class="pickup__what">
                   <strong data-i18n="mock.pendH">2 changes not sent yet</strong>
-                  <p data-i18n="mock.pendD">Yann → Bunk room · Chloé’s train time</p>
+                  <p data-i18n="mock.pendD">Guillaume → Bunk room · Clémentine’s train time</p>
                 </div>
                 <span class="chip" data-i18n="mock.queued">Queued</span>
               </div>
@@ -669,7 +666,7 @@
                 <span class="flow__badge" style="color:var(--p3-label)"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
                 <div class="pickup__what">
                   <strong data-i18n="mock.syncH">Back online — everyone is up to date</strong>
-                  <p data-i18n="mock.syncD">Sent 2 changes · merged with 1 from Léa</p>
+                  <p data-i18n="mock.syncD">Sent 2 changes · merged with 1 from Alice</p>
                 </div>
                 <span class="chip chip--accent" data-i18n="mock.synced">Synced</span>
               </div>
@@ -703,7 +700,7 @@
         <span class="card__icon"><svg aria-hidden="true"><use href="#i-users"/></svg></span>
         <h3 data-i18n="more.c2t">Guests, not just names</h3>
         <p data-i18n="more.c2d">
-          A colour each, their own stay dates, and a headcount — “Alice + Auré” counts as
+          A colour each, their own stay dates, and a headcount — “Alice + Julie” counts as
           two for beds and for dinner. Notes carry the things hosts forget: vegan,
           allergic to cats, arriving with a dog.
         </p>
@@ -712,7 +709,7 @@
         <span class="card__icon"><svg aria-hidden="true"><use href="#i-sparkles"/></svg></span>
         <h3 data-i18n="more.c3t">An assistant that runs on your phone</h3>
         <p data-i18n="more.c3d">
-          Ask “who is staying tonight?” or say “add a guest named Alice” in plain
+          Ask “who is staying tonight?” or say “add a guest named Margerite” in plain
           language. The model is downloaded once and runs on your own device — your trip
           is never sent to an AI provider.
         </p>
@@ -886,16 +883,18 @@
   <div class="container privacy">
     <div>
       <p class="eyebrow" data-i18n="priv.eyebrow">Your data</p>
-      <h2 style="font-size:var(--step-3)" data-i18n="priv.title">Local-first, not cloud-first.</h2>
+      <h2 style="font-size:var(--step-3)" data-i18n="priv.title">Local first, European when it is shared.</h2>
       <p style="margin-top:1.1rem;font-size:var(--step-1);color:var(--text-muted)" data-i18n="priv.lede">
         Most planning apps put your data on their server and lend it back to you.
-        Kikouchou is the other way round: the trip lives in your browser, and the network
-        is only ever an optional extra for sharing it.
+        Kikouchou starts the other way round: a trip you plan on your own never leaves
+        your device. Share it, and it syncs through a database hosted in Europe —
+        because a plan several people edit has to live somewhere they can all reach.
       </p>
       <p style="margin-top:1rem;color:var(--text-muted)" data-i18n="priv.lede2">
-        That is what makes it work on a train, and it is also why there is no account
-        wall in front of you. Kikouchou is open source under the MIT licence — the code
-        is on GitHub, and you can read exactly what it does with what you type in.
+        That is what makes it work on a train, and it is why there is no account wall in
+        front of you when you start. Kikouchou is open source under the MIT licence — the
+        code is on GitHub, so you can read exactly what it stores, where it goes, and
+        what never leaves your device at all.
       </p>
       <div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-top:1.75rem">
         <a class="btn btn--ghost" href="https://github.com/tomMoulard/kikoushou" rel="noopener">
@@ -914,17 +913,17 @@
         </div>
       </li>
       <li>
-        <span class="flow__badge"><svg aria-hidden="true"><use href="#i-qr"/></svg></span>
+        <span class="flow__badge"><svg aria-hidden="true"><use href="#i-globe"/></svg></span>
         <div>
-          <strong data-i18n="priv.p2t">Share with no server at all</strong>
-          <p data-i18n="priv.p2d">Export the whole trip as a QR code or a block of text and hand it to a friend directly. Nothing is stored online in between.</p>
+          <strong data-i18n="priv.p2t">Shared trips sync in Europe</strong>
+          <p data-i18n="priv.p2d">The moment you invite someone, the shared copy lives in a database hosted in Europe and covered by EU data protection rules.</p>
         </div>
       </li>
       <li>
         <span class="flow__badge"><svg aria-hidden="true"><use href="#i-share"/></svg></span>
         <div>
-          <strong data-i18n="priv.p3t">Or sync, if you want live collaboration</strong>
-          <p data-i18n="priv.p3d">Create an account and the trip syncs so the people you invite can edit it with you in real time. That is the only thing an account is for.</p>
+          <strong data-i18n="priv.p3t">An account is for sharing, not for using</strong>
+          <p data-i18n="priv.p3d">Plan an entire trip without one. Signing up is what lets the people you invite see your room and your travel times, and edit the plan alongside you.</p>
         </div>
       </li>
       <li>
@@ -1003,9 +1002,10 @@
       <details>
         <summary data-i18n="faq.q1">Do my friends need to create an account?</summary>
         <div class="faq__answer" data-i18n="faq.a1">
-          No. They open the link, pick their name, claim a room and add their travel
-          times. An account only comes into it if you want the trip to sync live across
-          several devices — and even then, guests can look without one.
+          Yes — it is the first step when they open your invite link, and it takes a tap.
+          That account is what keeps their room and their travel times attached to them
+          across devices, and what lets the change show up live on everyone else’s phone.
+          You do not need one to start planning a trip on your own.
         </div>
       </details>
       <details>
@@ -1027,17 +1027,19 @@
       <details>
         <summary data-i18n="faq.q4">Where is my data stored?</summary>
         <div class="faq__answer" data-i18n="faq.a4">
-          In your browser, in a local database on your device. It only leaves your device
-          if you choose to sync a trip so others can edit it, or if you hand it to
-          someone directly via a QR code or an exported block of text.
+          In your browser, in a local database on your device. A trip you keep to
+          yourself stays there. Once you share one, the shared copy also lives in a
+          database hosted in Europe, so the people you invited can read and edit it.
         </div>
       </details>
       <details>
-        <summary data-i18n="faq.q5">What happens if two of us claim the same bed at the same time?</summary>
+        <summary data-i18n="faq.q5">What if two of us end up in the same bed?</summary>
         <div class="faq__answer" data-i18n="faq.a5">
-          Room capacity is checked as people claim, so a full room stops accepting
-          guests. When two edits genuinely cross in mid-air, they are merged rather than
-          one overwriting the other, and the board tells you the room just filled up.
+          The board tells you: it shows how many spots are taken and warns you when a
+          stay would push a room past its bed count. Then it lets you go ahead anyway —
+          sharing a double, or throwing a mattress on the floor, is a normal holiday
+          decision rather than a data error. And when two edits genuinely cross in
+          mid-air they are merged, instead of one overwriting the other.
         </div>
       </details>
       <details>
@@ -1076,10 +1078,10 @@
     <h2 data-i18n="final.title">Your next trip is already a spreadsheet. Make it a plan.</h2>
     <p data-i18n="final.lede">
       Create the trip, share the link, and let everyone sort out their own bed and their
-      own train. It takes about two minutes and costs nothing.
+      own train. Two minutes, and it stops being one person’s problem.
     </p>
     <div class="cta__actions">
-      <a class="btn btn--lg" href="https://app.kikouchou.app" data-cta="footer"
+      <a class="btn btn--lg" href="https://app.kikouchou.app" data-cta="cta-band"
          style="--btn-bg:#f8fafc;--btn-fg:#0f172a">
         <span data-i18n="cta.openFree">Open the app — it’s free</span>
         <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
@@ -1090,7 +1092,7 @@
       </a>
     </div>
     <p class="cta__fine" data-i18n="final.fine">
-      No account, no card, no cookie banner. Works offline. Open source.
+      Free, open source and offline-first. An account only when you share.
     </p>
   </div>
 </section>
@@ -1108,14 +1110,15 @@
         </a>
         <p data-i18n="footer.about">
           A small, free, offline-first app for the least restful part of a group holiday:
-          who sleeps where, and who is picking up whom.
+          who sleeps where, and who is picking up whom — so it is not all in one
+          person’s head.
         </p>
       </div>
 
       <div>
         <h2 data-i18n="footer.product">Product</h2>
         <ul>
-          <li><a href="https://app.kikouchou.app" data-i18n="cta.open">Open the app</a></li>
+          <li><a href="https://app.kikouchou.app" data-cta="footer" data-i18n="cta.open">Open the app</a></li>
           <li><a href="#features" data-i18n="nav.features">Features</a></li>
           <li><a href="#usecases" data-i18n="nav.usecases">Use cases</a></li>
           <li><a href="#install" data-i18n="nav.install">Install</a></li>
@@ -1141,5 +1144,7 @@
 </footer>
 <script src="/assets/i18n/fr.js" defer></script>
 <script src="/assets/app.js" defer></script>
+<script src="/assets/analytics-config.js" defer></script>
+<script src="/assets/analytics.js" defer></script>
 </body>
 </html>

@@ -1,8 +1,8 @@
 # kikouchou-LP
 
-The landing page for [Kikouchou](https://app.kikouchou.app) — the app that keeps
-track of who sleeps where and who picks up whom during a group holiday in a
-rented house.
+The landing page for [Kikouchou](https://app.kikouchou.app) — the app that takes
+the mental load of a group holiday off the person organising it: who sleeps
+where, and who is picking up whom.
 
 - **Live:** <https://www.kikouchou.app>
 - **The app:** <https://app.kikouchou.app>
@@ -16,14 +16,16 @@ copies the site into `_site` and hands it to GitHub Pages on every push to
 there is no toolchain to keep alive between trips.
 
 ```
-index.html            the entire page
-404.html              not-found page
-assets/styles.css     design tokens + every component
-assets/app.js         language, theme, nav, scroll reveal
-assets/i18n/fr.js     French copy (English lives in index.html)
-assets/img/           logo, favicon, icons, Open Graph image
-CNAME                 www.kikouchou.app
-site.webmanifest      icon + name metadata for the browser
+index.html                   the entire page
+404.html                     not-found page
+assets/styles.css            design tokens + every component
+assets/app.js                language, theme, nav, scroll reveal
+assets/i18n/fr.js            French copy (English lives in index.html)
+assets/analytics-config.js   PostHog key + persistence choice
+assets/analytics.js          PostHog loader
+assets/img/                  logo, favicon, icons, Open Graph image
+CNAME                        www.kikouchou.app
+site.webmanifest             icon + name metadata for the browser
 sitemap.xml robots.txt
 ```
 
@@ -87,6 +89,37 @@ PY
 The browser's preferred language is detected on first visit; `?lang=<code>`
 forces one, and an explicit choice is remembered in `localStorage`.
 
+## Analytics
+
+PostHog, configured in `assets/analytics-config.js`. **With no key there,
+nothing loads and nothing is captured** — the same contract the app uses in
+`src/lib/posthog.ts`, so a fork or a local checkout stays silent. Paste the
+project's `phc_…` key in to switch it on.
+
+It also refuses to run on localhost and on LAN addresses unless
+`allowLocalhost: true` is set. The app's PostHog project once accumulated 20
+persons against 3 real accounts, 19 of them minted on dev servers; the checks in
+this repo run against a local server, so without the guard every test run would
+invent a visitor.
+
+Captured: one pageview, autocaptured clicks (so click maps and heatmaps work),
+`landing_cta_clicked` (with which of the four CTAs it was), and
+`landing_language_switched`. Session recording is off, and the page has no input
+fields at all, so there is nothing a visitor can type that could be captured.
+
+### Cookies and consent
+
+The committed default is `persistence: 'memory'` — nothing is stored in the
+visitor's browser, so no consent banner is needed anywhere in the EU. The cost
+is that every visit looks like a new anonymous visitor, so "unique visitors" and
+returning-visitor figures are not meaningful.
+
+Switching to `'localStorage+cookie'` (PostHog's default) gives real unique
+visitors and return visits, but it stores an identifier in the browser, which
+needs consent under GDPR/ePrivacy for EU visitors — so it has to come with a
+consent banner. Given the audience is largely French, that is a deliberate
+choice rather than a default to drift into.
+
 ## DNS
 
 `CNAME` claims `www.kikouchou.app`. For that to resolve, the domain needs:
@@ -98,6 +131,22 @@ forces one, and an explicit choice is remembered in `localStorage`.
 
 Then enable **Enforce HTTPS** in the repository's Pages settings once the
 certificate has been issued.
+
+## Keeping the copy honest
+
+The page describes the app as it actually behaves, and a few of its claims are
+easy to get wrong:
+
+- **Sharing goes through a server.** Trips sync via a cloud database hosted in
+  Europe. The app's `sharing.p2pDescription` / `p2pNotice` locale strings still
+  describe a serverless QR handoff, but nothing references them any more — do
+  not write copy from them.
+- **Guests need an account.** Creating one is the first step of the invite link.
+  Only the organiser starting a trip alone needs nothing.
+- **Capacity warns, it does not block.** `QuickAssignmentDialog.tsx` shows
+  `rooms.capacityWarning` and still lets the assignment through, so people can
+  share a bed if they want to. The guest-facing room picker does disable a room
+  that is already full.
 
 ## Licence
 
