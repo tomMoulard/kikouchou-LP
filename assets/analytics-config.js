@@ -1,13 +1,25 @@
 /**
- * PostHog credentials for the landing page.
+ * PostHog configuration for the landing page.
  *
- * Both fields must be set or analytics is off entirely — assets/analytics.js
- * loads nothing and captures nothing. That mirrors the app's own contract in
- * `src/lib/posthog.ts`, so a fork, a local checkout or a preview build stays
- * silent instead of writing into the real project.
+ * `key` is deliberately empty here and is filled in at deploy time by the
+ * "Inject the PostHog key" step in .github/workflows/deploy.yml, from the
+ * PUBLIC_POSTHOG_KEY repository secret. Leave it empty in git:
  *
- * The project API key is a publishable client token (`phc_…`), not a secret: it
- * can only write events. The private key never belongs in a static site.
+ *   - a local checkout, a fork and a preview build then stay silent rather than
+ *     writing events into the real project, and
+ *   - the key lives in one place, so rotating it means changing the secret
+ *     rather than landing a commit.
+ *
+ * Both `key` and `host` must be set or analytics is off entirely —
+ * assets/analytics.js loads nothing and captures nothing. That mirrors the
+ * app's own contract in `src/lib/posthog.ts`.
+ *
+ * The key is a publishable client token (`phc_…`), not a credential: it can
+ * only write events, which is why it is fine for it to sit in a public file
+ * once deployed. A personal API key never belongs in a static site.
+ *
+ * Everything other than the key is configured here rather than in CI, so this
+ * file stays the single source of truth for how analytics behaves.
  *
  * `persistence` decides whether visitors are counted across visits:
  *   'memory'            — no cookies, no localStorage. Nothing is stored in the
@@ -21,7 +33,8 @@
  *                         in the EU — so pair it with a consent banner.
  */
 window.KKC_ANALYTICS = {
-  /* Paste the Kikouchou project's API key here to switch analytics on. */
+  /* Injected from the PUBLIC_POSTHOG_KEY secret on deploy. Keep it empty here —
+     the workflow matches this exact line, so do not reformat it. */
   key: '',
   host: 'https://eu.i.posthog.com',
   persistence: 'memory',

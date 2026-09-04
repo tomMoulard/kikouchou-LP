@@ -43,6 +43,49 @@ jobs:
             _site/
           touch _site/.nojekyll
 
+      # The PostHog project key is a publishable client token, so it is fine in
+      # a public file — but it does not belong in git, where a fork would
+      # inherit it and write into this project. It is injected into the staged
+      # copy instead, leaving the committed default empty so a local checkout
+      # stays silent. Everything else about analytics (host, persistence) stays
+      # in assets/analytics-config.js as the single source of truth.
+      - name: Inject the PostHog key
+        env:
+          POSTHOG_KEY: ${{ secrets.PUBLIC_POSTHOG_KEY }}
+        run: |
+          target=_site/assets/analytics-config.js
+
+          if [ -z "${POSTHOG_KEY}" ]; then
+            echo "::warning::PUBLIC_POSTHOG_KEY is not set. Deploying with analytics off."
+            exit 0
+          fi
+
+          # Validated before it reaches sed: the charset below cannot contain a
+          # shell or sed metacharacter, and a mistyped secret is worth a red
+          # build rather than a site that silently stops reporting.
+          if ! printf '%s' "${POSTHOG_KEY}" | grep -qE '^phc_[A-Za-z0-9_-]{10,200}$'; then
+            echo "::error::PUBLIC_POSTHOG_KEY does not look like a PostHog project key (expected phc_ followed by letters, digits, - or _)."
+            exit 1
+          fi
+
+          if ! grep -q "^  key: '',$" "$target"; then
+            echo "::error::could not find the empty key placeholder in analytics-config.js"
+            exit 1
+          fi
+
+          # Write via a temp file rather than `sed -i`, whose in-place flag takes
+          # an argument on BSD sed and none on GNU — this way the step can be run
+          # and tested outside the Linux runner.
+          sed "s|^  key: '',$|  key: '${POSTHOG_KEY}',|" "$target" > "$target.tmp"
+          mv "$target.tmp" "$target"
+
+          if ! grep -q "^  key: 'phc_" "$target"; then
+            echo "::error::the PostHog key was not substituted"
+            exit 1
+          fi
+          node --check "$target"
+          echo "PostHog key injected; analytics is on for this deploy."
+
       # Cheap guard against a broken deploy: every asset the page references
       # must actually exist in the staged output.
       - name: Check referenced assets exist

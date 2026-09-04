@@ -93,8 +93,28 @@ forces one, and an explicit choice is remembered in `localStorage`.
 
 PostHog, configured in `assets/analytics-config.js`. **With no key there,
 nothing loads and nothing is captured** — the same contract the app uses in
-`src/lib/posthog.ts`, so a fork or a local checkout stays silent. Paste the
-project's `phc_…` key in to switch it on.
+`src/lib/posthog.ts`.
+
+The key is not in git. `key` stays empty in the committed file and the
+**`PUBLIC_POSTHOG_KEY`** repository secret is substituted into the staged copy
+by the *Inject the PostHog key* step of the deploy workflow. So a local
+checkout, a fork and a preview build all stay silent, and rotating the key means
+editing the secret rather than landing a commit. Everything else — host,
+persistence — stays in the committed file, which remains the single source of
+truth for how analytics behaves.
+
+The step is deliberately strict, because analytics that silently stops
+reporting is worse than a red build:
+
+| `PUBLIC_POSTHOG_KEY` | result |
+|---|---|
+| unset | warning, deploy continues with analytics off |
+| `phc_…`, valid charset | substituted, `node --check`ed, deploy continues |
+| anything else | build fails with an error naming the expected shape |
+
+Only `phc_` plus `[A-Za-z0-9_-]` is accepted, which is also what makes it safe
+to hand to `sed`. To change the key: **Settings → Secrets and variables →
+Actions → `PUBLIC_POSTHOG_KEY`**, then re-run the workflow.
 
 It also refuses to run on localhost and on LAN addresses unless
 `allowLocalhost: true` is set. The app's PostHog project once accumulated 20
