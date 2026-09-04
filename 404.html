@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — Kikouchou</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/styles.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('kkc-theme');
+      if (t !== 'light' && t !== 'dark') {
+        t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+<style>
+  .nf {
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: var(--gutter);
+  }
+  .nf__code {
+    font-size: clamp(4rem, 3rem + 8vw, 7rem);
+    font-weight: 700;
+    letter-spacing: -.05em;
+    line-height: 1;
+    background: linear-gradient(100deg, var(--teal-600), #4f46e5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+</style>
+</head>
+<body>
+<div class="nf">
+  <div>
+    <img src="/assets/img/logo.svg" width="56" height="56" alt="Kikouchou"
+         style="margin:0 auto 1.75rem;border-radius:14px">
+    <p class="nf__code">404</p>
+    <h1 style="font-size:var(--step-2);margin-top:1rem">This page went on holiday without telling anyone.</h1>
+    <p style="margin-top:1rem;color:var(--text-muted);max-width:32rem;margin-inline:auto">
+      The link may be out of date. The landing page has everything, and the app is one tap away.
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-top:2rem">
+      <a class="btn btn--primary btn--lg" href="/">Back to kikouchou.app</a>
+      <a class="btn btn--ghost btn--lg" href="https://app.kikouchou.app">Open the app</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

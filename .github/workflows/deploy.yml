@@ -26,13 +26,52 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # The site is plain static files, so there is nothing to compile. We still
+      # stage it explicitly rather than uploading the repository root, so that
+      # .git, the workflow itself and the repo README never reach the artifact.
+      - name: Stage the site
+        run: |
+          mkdir -p _site
+          cp -R \
+            index.html \
+            404.html \
+            CNAME \
+            robots.txt \
+            sitemap.xml \
+            site.webmanifest \
+            assets \
+            _site/
+          touch _site/.nojekyll
+
+      # Cheap guard against a broken deploy: every asset the page references
+      # must actually exist in the staged output.
+      - name: Check referenced assets exist
+        run: |
+          missing=0
+          refs=$(
+            {
+              grep -ohE '(href|src)="/[^"]+"' _site/index.html _site/404.html \
+                | sed -E 's/.*"(\/[^"]+)"/\1/'
+              # og:image and friends are absolute URLs; check those files too.
+              grep -ohE 'content="https://www\.kikouchou\.app/[^"]+"' _site/index.html \
+                | sed -E 's|.*https://www\.kikouchou\.app(/[^"]*)"|\1|'
+            } | sed 's/?.*//' | grep -v '^/$' | sort -u
+          )
+          for ref in $refs; do
+            if [ ! -e "_site$ref" ]; then
+              echo "::error::index.html references $ref, which is not in the build"
+              missing=1
+            fi
+          done
+          exit $missing
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
   deploy:
     environment:
