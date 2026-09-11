@@ -311,5 +311,6 @@ window.KKC_I18N.fr = {
   "footer.source": "Code source",
   "footer.issues": "Signaler un problème",
   "footer.licence": "Licence MIT",
+  "footer.instagram": "Instagram",
   "footer.copy": "Kikouchou — gratuit et open source. Fait pour de vraies vacances."
 };
