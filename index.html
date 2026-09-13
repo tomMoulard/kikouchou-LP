@@ -375,7 +375,7 @@
         <ul class="step__detail">
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s1a">Pin the house on a map</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s1b">Rooms, tents, caravans, sofa beds</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s1c">Notes, house rules, your Tricount link</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s1c">Notes, house rules, and the trip’s currency</span></li>
         </ul>
       </li>
 
@@ -387,7 +387,7 @@
         </p>
         <ul class="step__detail">
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s2a">Link or QR code</span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s2b">Each guest signs up once, in a tap</span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s2b">Reading it needs no account at all</span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s2c">Works on any phone browser</span></li>
         </ul>
       </li>
@@ -395,9 +395,9 @@
       <li class="step" data-reveal>
         <h3 data-i18n="how.s3t">Everyone fills in their own part</h3>
         <p data-i18n="how.s3d">
-          A guest opens the link and walks a short wizard: create an account, say which
-          one they are, claim a room, add their travel times and whether they need a
-          lift. Then the calendar is simply correct.
+          A guest opens the link, sees the whole plan straight away, and walks a short
+          wizard: say which one they are, claim a room, add their travel times and whether
+          they need a lift. Then the calendar is simply correct.
         </p>
         <ul class="step__detail">
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="how.s3a">Rooms show live availability</span></li>
@@ -566,16 +566,16 @@
           overwriting the other — no “who has the latest version?”.
         </p>
         <ul class="feature__list">
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3a-b">A guided join.</b> <span data-i18n="feat.f3a-t">Create an account → which one are you → pick your room → your travel details. Four screens, and their part is done.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3a-b">The link opens the trip, not a sign-up form.</b> <span data-i18n="feat.f3a-t">A guest who taps your link sees the whole plan straight away, read-only. Which one are you → pick your room → your travel details, and their part is done.</span></span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3b-b">Presence.</b> <span data-i18n="feat.f3b-t">“3 people online”, “Everyone is up to date” — you can tell whether the plan you are looking at is the current one.</span></span></li>
           <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3c-b">Synced in Europe.</b> <span data-i18n="feat.f3c-t">The shared copy of your trip lives in a database hosted in Europe, under EU data protection rules — not in whichever region happened to be cheapest.</span></span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3d-b">Everyone gets an account.</b> <span data-i18n="feat.f3d-t">That is what makes a guest’s room and travel times follow them between devices and show up live for everyone else. Planning a trip on your own still needs nothing at all.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f3d-b">An account at the first edit, not before.</b> <span data-i18n="feat.f3d-t">Reading a shared trip needs nothing. Signing in is what makes a guest’s room and travel times follow them between devices and show up live for everyone else — with Google or a link sent to your email.</span></span></li>
         </ul>
       </div>
 
       <div class="feature__media" data-reveal>
         <div class="device" role="img" data-i18n-aria="feat.f3alt"
-             aria-label="The join screen a guest sees: create an account, pick which guest you are, claim a room showing spots taken, then add your travel times.">
+             aria-label="The join screen a guest sees: the trip opens read-only, then pick which guest you are, claim a room showing spots taken, and add your travel times.">
           <div class="device__bar">
             <span class="device__dots"><i></i><i></i><i></i></span>
             <span class="device__title" data-i18n="mock.joinTitle">Join · Summer house</span>
@@ -586,10 +586,10 @@
 
             <ul class="flow" style="gap:.5rem">
               <li style="padding:.7rem .8rem">
-                <span class="flow__badge"><svg aria-hidden="true"><use href="#i-lock"/></svg></span>
+                <span class="flow__badge"><svg aria-hidden="true"><use href="#i-share"/></svg></span>
                 <div>
-                  <strong style="font-size:.88rem" data-i18n="mock.j1">Create your account</strong>
-                  <p style="font-size:.8rem" data-i18n="mock.j1d">So your room and your train follow you</p>
+                  <strong style="font-size:.88rem" data-i18n="mock.j1">Have a look around</strong>
+                  <p style="font-size:.8rem" data-i18n="mock.j1d">The whole trip opens — no account asked for</p>
                 </div>
               </li>
               <li style="padding:.7rem .8rem">
@@ -614,6 +614,13 @@
                 </div>
               </li>
             </ul>
+
+            <div class="tl__legend">
+              <span class="chip">
+                <svg aria-hidden="true" style="width:.85rem;height:.85rem"><use href="#i-lock"/></svg>
+                <span data-i18n="mock.joinSignIn">Sign in only to change something</span>
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -922,8 +929,8 @@
       <li>
         <span class="flow__badge"><svg aria-hidden="true"><use href="#i-share"/></svg></span>
         <div>
-          <strong data-i18n="priv.p3t">An account is for sharing, not for using</strong>
-          <p data-i18n="priv.p3d">Plan an entire trip without one. Signing up is what lets the people you invite see your room and your travel times, and edit the plan alongside you.</p>
+          <strong data-i18n="priv.p3t">An account is for editing, not for reading</strong>
+          <p data-i18n="priv.p3d">Plan an entire trip without one, and open somebody’s invite link without one. Signing in is what lets you change a shared plan and have your room and your travel times follow you between devices.</p>
         </div>
       </li>
       <li>
@@ -1002,10 +1009,12 @@
       <details>
         <summary data-i18n="faq.q1">Do my friends need to create an account?</summary>
         <div class="faq__answer" data-i18n="faq.a1">
-          Yes — it is the first step when they open your invite link, and it takes a tap.
-          That account is what keeps their room and their travel times attached to them
-          across devices, and what lets the change show up live on everyone else’s phone.
-          You do not need one to start planning a trip on your own.
+          Not to look. Your invite link opens the whole trip read-only on their phone, and
+          they can already say which guest they are. An account is asked for at the first
+          thing they want to change — claiming a room, adding their train — because that
+          is what keeps their part attached to them across devices and shows it live to
+          everyone else. Signing in takes a tap with Google, or a link sent to their email.
+          You need nothing at all to plan a trip on your own.
         </div>
       </details>
       <details>
@@ -1045,10 +1054,12 @@
       <details>
         <summary data-i18n="faq.q6">Does it split the money, or plan the meals?</summary>
         <div class="faq__answer" data-i18n="faq.a6">
-          Not today — those are on the ideas list, not in the app. For now, paste your
-          Tricount or Splitwise link into the trip description, where everyone will find
-          it. Headcounts and “guests tonight” at least give you the right number of
-          plates.
+          The money, yes. Add what the group paid and Kikouchou splits each line equally,
+          by parts, by the nights each person actually slept there, or by amounts you type
+          yourself — then it gives you the shortest list of repayments that clears
+          everyone. It knows the nights already, because the stays are in the plan. Meals
+          and shopping lists are not in the app: headcounts and “guests tonight” give you
+          the right number of plates, and the cooking is still yours.
         </div>
       </details>
       <details>
@@ -1066,6 +1077,26 @@
           Yes. Start typing a location you have used before and Kikouchou offers to
           import that trip: the rooms, the location and the notes are copied to your new
           dates.
+        </div>
+      </details>
+      <details>
+        <summary data-i18n="faq.q9">Will it notify people, or spam them?</summary>
+        <div class="faq__answer" data-i18n="faq.a9">
+          Reminders are off until someone turns them on for a trip, and then there are
+          exactly three: the evening before the trip starts, before that person’s own
+          arrival, and before a lift they are driving or riding in. No digests, no
+          marketing, nothing else. They need an account, and on an iPhone the app has to
+          be added to the home screen first — that is Apple’s rule for web apps, not ours.
+        </div>
+      </details>
+      <details>
+        <summary data-i18n="faq.q10">Can it sort out the cars, not just the trains?</summary>
+        <div class="faq__answer" data-i18n="faq.a10">
+          Yes. Add the cars the group has — seats, child seats, room for luggage — and a
+          pickup becomes a lift with a driver, a departure time and passengers. Two people
+          landing at the same station get proposed as one run rather than two, the driver
+          gets a “leave now” on their phone, and everyone can push their own runs into
+          their phone’s calendar.
         </div>
       </details>
     </div>
@@ -1097,7 +1128,7 @@
       </a>
     </div>
     <p class="cta__fine" data-i18n="final.fine">
-      Free, open source and offline-first. An account only when you share.
+      Free, open source and offline-first. An account only when you edit together.
     </p>
   </div>
 </section>
