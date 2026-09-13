@@ -177,13 +177,32 @@ easy to get wrong:
 - **Sharing goes through a server.** Trips sync via a cloud database hosted in
   Europe. The app's `sharing.p2pDescription` / `p2pNotice` locale strings still
   describe a serverless QR handoff, but nothing references them any more — do
-  not write copy from them.
-- **Guests need an account.** Creating one is the first step of the invite link.
-  Only the organiser starting a trip alone needs nothing.
+  not write copy from them. The WebRTC peer-to-peer transport was retired in
+  August 2026: never market "peer to peer".
+- **Guests do not need an account to read.** An invite link opens the trip
+  read-only on any device (`src/lib/sync/viewer.ts`, `viewer.description`), and
+  the visitor can already say which guest they are. The account is asked for at
+  the first *edit*. The old "create an account first" wall is gone, so do not
+  put it back into the copy.
 - **Capacity warns, it does not block.** `QuickAssignmentDialog.tsx` shows
   `rooms.capacityWarning` and still lets the assignment through, so people can
   share a bed if they want to. The guest-facing room picker does disable a room
   that is already full.
+- **Money is in the app, meals are not.** `src/features/money/` ships expense
+  lines with four split modes (equally, by parts, by nights, by amount),
+  balances and a minimal settle-up list. Meal planning and shopping lists are
+  still absent — the FAQ says so, keep it that way.
+- **Reminders are three pushes, and they have conditions.** The evening before
+  the trip, before your own arrival, before a lift you are part of
+  (`reminders.description`). They need an account, and on iOS the app must be
+  installed first (`reminders.settingsUnsupported`). The service never states a
+  clock time, because it does not know the house's timezone.
+- **Do not advertise anything flag-gated.** The one-question-at-a-time trip
+  wizard is a live A/B behind the PostHog flag `first-trip-wizard`; sharing a
+  guest's phone number is behind `guest-phone-sharing` and *fails closed*, so on
+  a default build phone numbers never leave the device — the page may say you
+  can store one, never that the group can see it. Passkey sign-in rides a
+  Supabase experimental flag; the copy names Google and email links only.
 
 ## Licence
 
