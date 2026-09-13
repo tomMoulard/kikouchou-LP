@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Kikouchou — Who sleeps where, and who picks up whom</title>
-<meta name="description" content="Kikouchou takes the mental load of a group holiday off one person. Rooms, arrivals, departures and station pickups on one shared plan that every guest fills in themselves. Free, offline-first, open source.">
+<meta name="description" content="Kikouchou takes the mental load of a group holiday off one person. Rooms, arrivals, lifts from the station and the shared money on one plan that every guest fills in themselves. Free, offline-first, open source.">
 
 <link rel="canonical" href="https://www.kikouchou.app/">
 <link rel="alternate" hreflang="en" href="https://www.kikouchou.app/?lang=en">
@@ -20,7 +20,7 @@
 <meta property="og:site_name" content="Kikouchou">
 <meta property="og:url" content="https://www.kikouchou.app/">
 <meta property="og:title" content="Kikouchou — Who sleeps where, and who picks up whom">
-<meta property="og:description" content="Rooms, arrivals, departures and station pickups for a group holiday — so it is not all in one person’s head. Free, offline-first, open source.">
+<meta property="og:description" content="Rooms, arrivals, lifts and the shared money for a group holiday — so it is not all in one person’s head. Free, offline-first, open source.">
 <meta property="og:image" content="https://www.kikouchou.app/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@
 <meta property="og:locale:alternate" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Kikouchou — Who sleeps where, and who picks up whom">
-<meta name="twitter:description" content="Rooms, arrivals, departures and station pickups for a group holiday — so it is not all in one person’s head. Free and offline-first.">
+<meta name="twitter:description" content="Rooms, arrivals, lifts and the shared money for a group holiday — so it is not all in one person’s head. Free and offline-first.">
 <meta name="twitter:image" content="https://www.kikouchou.app/assets/img/og.png">
 
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
@@ -64,7 +64,7 @@
       "url": "https://www.kikouchou.app/",
       "applicationCategory": "TravelApplication",
       "operatingSystem": "Web browser, iOS, Android, Windows, macOS, Linux",
-      "description": "Offline-first app that takes the mental load of a group holiday off one person: room assignments, arrivals and departures, and station pickups on one shared plan every guest fills in themselves.",
+      "description": "Offline-first app that takes the mental load of a group holiday off one person: room assignments, arrivals and departures, lifts from the station and the shared money on one plan every guest fills in themselves.",
       "inLanguage": ["en", "fr"],
       "license": "https://opensource.org/licenses/MIT",
       "isAccessibleForFree": true,
@@ -73,8 +73,14 @@
         "Room assignment with bed capacity",
         "Shared calendar and occupancy timeline",
         "Arrivals, departures and station pickups",
+        "Cars, lifts and driver assignment with departure alerts",
+        "Shared expenses split equally, by parts, by nights or by amount, with settle-up",
         "Activity agenda with sign-ups",
+        "Reusable guest groups",
+        "Trip reminders by push notification",
+        "Printable one-page trip summary",
         "Real-time collaboration and offline sync",
+        "Read-only access from an invite link, no account needed",
         "Shared trips synced through a database hosted in Europe",
         "On-device AI assistant",
         "Installable PWA, works offline"
@@ -119,6 +125,10 @@
   <symbol id="i-party" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5.8 11.3 2 22l10.7-3.8"/><path d="M4 3h.01M22 8h.01M15 2h.01M22 20h.01"/><path d="m22 2-2.2.6a2 2 0 0 0-1.3 2.7l.4.9a2 2 0 0 1-1.6 2.8l-1 .1a2 2 0 0 0-1.5 3l.5.8"/><path d="m11 13 9 9"/><path d="M14.6 6.2a6 6 0 0 1 3.2 3.2"/></symbol>
   <symbol id="i-cloud-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 2 20 20"/><path d="M5.8 5.8A7 7 0 0 0 8 19h9a4 4 0 0 0 1.3-7.8"/><path d="M9.7 4.3A7 7 0 0 1 19 11"/></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3.3-7"/><path d="M21 3v6h-6"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0 0 4h15a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5"/><path d="M17 12h.01"/></symbol>
+  <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17h14"/><path d="M3 13h18"/><path d="m5 13 1.6-4.8A2 2 0 0 1 8.5 7h7a2 2 0 0 1 1.9 1.2L19 13"/><path d="M4 13v4"/><path d="M20 13v4"/><circle cx="7.5" cy="17" r="1.5"/><circle cx="16.5" cy="17" r="1.5"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 6 2 7 2 7H4s2-1 2-7"/><path d="M10.3 20a2 2 0 0 0 3.4 0"/></symbol>
+  <symbol id="i-printer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14" rx="1"/></symbol>
   <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
 </svg>
 
@@ -203,7 +213,7 @@
       </p>
 
       <ul class="trust">
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="hero.trust1">Rooms, travel and pickups in one view</span></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="hero.trust1">Rooms, lifts and the shared money in one view</span></li>
         <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="hero.trust2">One link, everyone fills in their own part</span></li>
         <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="hero.trust3">Works with no signal at the gîte</span></li>
       </ul>
@@ -293,7 +303,7 @@
       <h2 data-i18n="problem.title">A group holiday is a logistics project disguised as a rest.</h2>
       <p data-i18n="problem.lede">
         Everything starts in a group chat, moves to a spreadsheet nobody opens, and ends
-        with someone stranded at the station. These are the four questions that get asked
+        with someone stranded at the station. These are the five questions that get asked
         every single time.
       </p>
     </div>
@@ -336,6 +346,17 @@
           <p data-i18n="problem.a4">
             With staggered arrivals the naive plan makes half the group repack on
             Thursday. A better plan exists — it is just tedious to find by hand.
+          </p>
+        </div>
+      </li>
+      <li>
+        <span class="pain__mark" aria-hidden="true">?</span>
+        <div>
+          <p class="pain__quote" data-i18n="problem.q5">“Who paid for the groceries, and who owes whom?”</p>
+          <p data-i18n="problem.a5">
+            One person fronted the house, another did three supermarket runs, and two
+            arrived on the Thursday. Working out a fair share by hand, a week later, is
+            how holidays end in a spreadsheet nobody agrees with.
           </p>
         </div>
       </li>
@@ -414,10 +435,10 @@
   <div class="container">
     <div class="section-head">
       <p class="eyebrow" data-i18n="feat.eyebrow">What is inside</p>
-      <h2 data-i18n="feat.title">Built for the four things that actually go wrong.</h2>
+      <h2 data-i18n="feat.title">Built for the five things that actually go wrong.</h2>
       <p data-i18n="feat.lede">
-        Beds, travel, coordination and connectivity. Everything else in Kikouchou exists
-        to serve one of those.
+        Beds, travel, money, coordination and connectivity. Everything else in Kikouchou
+        exists to serve one of those.
       </p>
     </div>
 
@@ -488,18 +509,21 @@
     <!-- Feature 2: transport -->
     <div class="feature feature--flip">
       <div class="feature__body" data-reveal>
-        <p class="eyebrow" data-i18n="feat.f2eye">Arrivals, departures &amp; pickups</p>
+        <p class="eyebrow" data-i18n="feat.f2eye">Arrivals, departures &amp; lifts</p>
         <h3 data-i18n="feat.f2t">Nobody gets forgotten at the station.</h3>
         <p data-i18n="feat.f2d">
           Every journey is a record: train, plane, car or bus, with a time, a place and a
           number. Mark it “needs pickup” and it stays on the upcoming-pickups list until
-          somebody’s name is against it.
+          somebody’s name is against it — then the trip’s cars turn that name into a
+          lift with a departure time, seats and passengers.
         </p>
         <ul class="feature__list">
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f2a-b">A driver per pickup.</b> <span data-i18n="feat.f2a-t">Pick who is fetching whom, so “someone should go” becomes a person with a name.</span></span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f2b-b">Pickups needing a driver.</b> <span data-i18n="feat.f2b-t">Counted and surfaced, because an unclaimed pickup is the one that gets missed.</span></span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f2c-b">Map view.</b> <span data-i18n="feat.f2c-t">Stations, airports and the house on one map, with a line from origin to destination for each leg.</span></span></li>
-          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f2d-b">Flight and train numbers.</b> <span data-i18n="feat.f2d-t">TGV 8541, terminal 2F — whatever the driver needs to find the right platform.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f2a-b">A driver per pickup.</b> <span data-i18n="feat.f2a-t">Pick who is fetching whom, or volunteer with “I’ll drive”, so “someone should go” becomes a person with a name.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f2b-b">The cars you actually have.</b> <span data-i18n="feat.f2b-t">Seats including the driver, child seats and boot space, so a lift is planned against a real car rather than a hope.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f2c-b">Two trains, one trip to the station.</b> <span data-i18n="feat.f2c-t">Arrivals landing at the same station get proposed as a single run, and the app works out the ones nobody has claimed.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f2d-b">“Leave now” on the driver’s phone.</b> <span data-i18n="feat.f2d-t">A lift knows how long before the train it has to set off, and tells the driver — and tells them again if the passenger moves their train.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f2e-b">A run sheet, and your own calendar.</b> <span data-i18n="feat.f2e-t">Every arrival and departure day by day, filterable down to just yours — and your lifts export to your phone’s calendar.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f2f-b">Map view.</b> <span data-i18n="feat.f2f-t">Stations, airports and the house on one map, with a line from origin to destination for each leg.</span></span></li>
         </ul>
       </div>
 
@@ -682,6 +706,93 @@
         </div>
       </div>
     </div>
+
+    <!-- Feature 5: money. Reflects src/features/money — expense lines with four
+         split modes, balances and a minimal settle-up list. Meals and shopping
+         lists are still not in the app; do not add them here. -->
+    <div class="feature">
+      <div class="feature__body" data-reveal>
+        <p class="eyebrow" data-i18n="feat.f5eye">The shared money</p>
+        <h3 data-i18n="feat.f5t">Who paid, who owes, and the shortest way to settle.</h3>
+        <p data-i18n="feat.f5d">
+          Add what the group paid — the house, three supermarket runs, the restaurant —
+          and Kikouchou works out who owes whom. It already knows who slept how many
+          nights, so the fairest split is the one it can do without asking you anything.
+        </p>
+        <ul class="feature__list">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f5a-b">Four ways to split a line.</b> <span data-i18n="feat.f5a-t">Equally, by parts, by nights, or by typing each person’s own figure. The house divided by nights slept, the restaurant only between the people who went.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f5b-b">Nights come from the plan.</b> <span data-i18n="feat.f5b-t">Arrivals and departures are already in the trip, so “two of them only came for the weekend” is arithmetic the app does, not an argument you have.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f5c-b">The shortest list of repayments.</b> <span data-i18n="feat.f5c-t">Not everyone paying everyone: the fewest transfers that clear every balance, and a button to mark one as done.</span></span></li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg><span><b data-i18n="feat.f5d-b">Money in, money out.</b> <span data-i18n="feat.f5d-t">The deposit somebody got back, a repayment between two guests, a category on each line, and the trip’s own currency.</span></span></li>
+        </ul>
+      </div>
+
+      <div class="feature__media" data-reveal>
+        <div class="device" role="img" data-i18n-aria="feat.f5alt"
+             aria-label="The money page: three expense lines with who paid and how they are split, then the balances with the two repayments that settle the trip.">
+          <div class="device__bar">
+            <span class="device__dots"><i></i><i></i><i></i></span>
+            <span class="device__title" data-i18n="mock.moneyTitle">Money · Summer house</span>
+          </div>
+          <div class="device__body">
+            <div class="ui-row" style="justify-content:space-between;margin-bottom:.8rem">
+              <span class="chip" data-i18n="mock.moneySpent">€1,462 spent</span>
+              <span class="chip chip--accent">
+                <svg aria-hidden="true" style="width:.85rem;height:.85rem"><use href="#i-wallet"/></svg>
+                <span data-i18n="mock.moneySettle">2 repayments to settle</span>
+              </span>
+            </div>
+
+            <div class="pickup">
+              <div class="pickup__item">
+                <span class="pickup__when"><span data-i18n="mock.m1a">€1,200</span><small data-i18n="mock.m1w">Mon 11</small></span>
+                <div class="pickup__what">
+                  <strong data-i18n="mock.m1n">The house</strong>
+                  <p data-i18n="mock.m1l">Aurélia paid · split by nights</p>
+                </div>
+                <span class="chip" data-i18n="mock.m1c">6 guests</span>
+              </div>
+              <div class="pickup__item">
+                <span class="pickup__when"><span data-i18n="mock.m2a">€184</span><small data-i18n="mock.m2w">Tue 12</small></span>
+                <div class="pickup__what">
+                  <strong data-i18n="mock.m2n">Two trolleys, wine included</strong>
+                  <p data-i18n="mock.m2l">Tom paid · split equally</p>
+                </div>
+                <span class="chip" data-i18n="mock.m2c">Groceries</span>
+              </div>
+              <div class="pickup__item">
+                <span class="pickup__when"><span data-i18n="mock.m3a">€78</span><small data-i18n="mock.m3w">Thu 14</small></span>
+                <div class="pickup__what">
+                  <strong data-i18n="mock.m3n">Dinner in Vannes</strong>
+                  <p data-i18n="mock.m3l">Julie paid · only the four who went</p>
+                </div>
+                <span class="chip" data-i18n="mock.m3c">Restaurant</span>
+              </div>
+            </div>
+
+            <p class="ui-label" style="margin:.9rem 0 .5rem" data-i18n="mock.moneyOwed">Repayments to make</p>
+            <div class="pickup">
+              <div class="pickup__item" style="grid-template-columns:auto 1fr auto">
+                <span class="avatar" data-initial style="background:var(--p2-label)" aria-hidden="true"></span>
+                <div class="pickup__what">
+                  <strong data-i18n="mock.m4n">Tom repays Aurélia</strong>
+                  <p data-i18n="mock.m4l">Clears both of their balances</p>
+                </div>
+                <span class="chip chip--accent" data-i18n="mock.m4a">€146</span>
+              </div>
+              <div class="pickup__item" style="grid-template-columns:auto 1fr auto">
+                <span class="avatar" data-initial style="background:var(--p5-label)" aria-hidden="true"></span>
+                <div class="pickup__what">
+                  <strong data-i18n="mock.m5n">Clémentine repays Aurélia</strong>
+                  <p data-i18n="mock.m5l">Two nights, plus her share of Thursday</p>
+                </div>
+                <span class="chip chip--accent" data-i18n="mock.m5a">€92</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -709,24 +820,27 @@
         <p data-i18n="more.c2d">
           A colour each, their own stay dates, and a headcount — “Alice + Julie” counts as
           two for beds and for dinner. Notes carry the things hosts forget: vegan,
-          allergic to cats, arriving with a dog.
+          allergic to cats, arriving with a dog. Fill a guest straight from your phone’s
+          contacts, and flag the ones who need a child seat.
         </p>
       </li>
       <li class="card" data-reveal>
         <span class="card__icon"><svg aria-hidden="true"><use href="#i-sparkles"/></svg></span>
         <h3 data-i18n="more.c3t">An assistant that runs on your phone</h3>
         <p data-i18n="more.c3d">
-          Ask “who is staying tonight?” or say “add a guest named Margerite” in plain
-          language. The model is downloaded once and runs on your own device — your trip
-          is never sent to an AI provider.
+          Ask “who is staying tonight?”, or say “add a guest named Margerite”, “put the
+          groceries on the trip”, “Tom drives to the station” in plain language. The model
+          is downloaded once and runs on your own device — your trip is never sent to an
+          AI provider. It needs WebGPU, so recent hardware.
         </p>
       </li>
       <li class="card" data-reveal>
         <span class="card__icon"><svg aria-hidden="true"><use href="#i-chart"/></svg></span>
         <h3 data-i18n="more.c4t">Totals at a glance</h3>
         <p data-i18n="more.c4d">
-          People, rooms, assignments, transport legs, and how many pickups still have no
-          driver — per trip or across every trip you have ever organised.
+          People, rooms, assignments, transport legs, how many pickups still have no
+          driver, and what the week has cost so far — per trip, or across every trip you
+          have ever organised, on a map.
         </p>
       </li>
       <li class="card" data-reveal>
@@ -743,6 +857,34 @@
         <p data-i18n="more.c6d">
           Type a location you have used before and Kikouchou offers to import it: same
           rooms, same notes, new dates. The annual trip takes a minute to set up.
+        </p>
+      </li>
+      <li class="card" data-reveal>
+        <span class="card__icon"><svg aria-hidden="true"><use href="#i-bell"/></svg></span>
+        <h3 data-i18n="more.c7t">A nudge before it matters</h3>
+        <p data-i18n="more.c7d">
+          Switch on reminders for a trip and your phone says something three times: the
+          evening before it starts, before your own arrival, and before a lift you are
+          part of. Nothing else, ever. It needs an account, and on an iPhone the app has
+          to be on your home screen first.
+        </p>
+      </li>
+      <li class="card" data-reveal>
+        <span class="card__icon"><svg aria-hidden="true"><use href="#i-users"/></svg></span>
+        <h3 data-i18n="more.c8t">The same crowd, every year</h3>
+        <p data-i18n="more.c8d">
+          Save the people you always invite as a group — the family, the climbing lot —
+          and add the whole group to a new trip in one go, instead of retyping eleven
+          names and their stay dates.
+        </p>
+      </li>
+      <li class="card" data-reveal>
+        <span class="card__icon"><svg aria-hidden="true"><use href="#i-printer"/></svg></span>
+        <h3 data-i18n="more.c9t">One page for the fridge door</h3>
+        <p data-i18n="more.c9d">
+          Who sleeps where, who arrives when, who drives — printed on a single sheet. For
+          the kitchen wall, for the grandparents, and for the moment the house turns out
+          to have no signal at all.
         </p>
       </li>
     </ul>
