@@ -220,77 +220,293 @@
     </div>
 
     <div class="feature__media">
-      <!-- Faithful recreation of the app’s calendar timeline view. Drawn in HTML
-           rather than screenshotted so it stays sharp, themes with the page and
-           translates with the rest of the copy. -->
-      <div class="device hero__device" role="img"
-           aria-label="Kikouchou timeline: seven days across the top, one row per guest, coloured bars showing which room each guest sleeps in and when."
-           data-i18n-aria="hero.mockAlt">
-        <div class="device__bar">
-          <span class="device__dots"><i></i><i></i><i></i></span>
-          <span class="device__title" data-i18n="mock.tlTitle">Summer house · 12–18 August · Timeline</span>
+      <!-- The video sales letter. It is an SVG animation rather than a video:
+           six scenes on one 30-second CSS clock, drawn with the same tokens and
+           the same i18n keys as the rest of the page. That keeps it sharp at any
+           size, themed with the page, translated with the copy, free of a
+           hosting bill, and about 14 kB instead of a few megabytes.
+
+           Timing contract: every element shares `animation-duration: 30s` and is
+           placed in time by its `animation-delay` alone. Scene N starts at N×5s,
+           so a beat inside scene 3 (10s) is written as 10s + its own offset. Keep
+           the keyframe windows short and terminal — they must hold their end
+           state to 100%, because the clock does not restart per scene. -->
+      <figure class="vsl" id="vsl">
+        <div class="device hero__device">
+          <div class="device__bar">
+            <span class="device__dots"><i></i><i></i><i></i></span>
+            <span class="device__title" data-i18n="vsl.title">Why Kikouchou exists · 30 seconds, no sound</span>
+          </div>
+          <div class="device__body vsl__body">
+            <svg class="vsl__stage" viewBox="0 0 640 400" role="img"
+                 aria-label="An animation: a group chat filling with unanswered questions, then the same trip laid out in Kikouchou as rooms, lifts and shared money."
+                 data-i18n-aria="vsl.alt">
+
+              <!-- ========== Scene 1 · 0s — the group chat ========== -->
+              <g class="vsl__scene" style="animation-delay:0s">
+                <text class="vsl__eyebrow" x="28" y="40" data-i18n="vsl.s1eyebrow">Friday, 18:02 · the group chat</text>
+                <text class="vsl__h" x="28" y="90" data-i18n="vsl.s1line1">Eleven people. Six rooms.</text>
+                <text class="vsl__h" x="28" y="126" data-i18n="vsl.s1line2">Four days of arrivals.</text>
+
+                <g class="vsl__fly" style="animation-delay:.9s">
+                  <rect class="vsl__bubble" x="28" y="162" width="392" height="44" rx="16"/>
+                  <text class="vsl__msg" x="48" y="190" data-i18n="vsl.s1msg1">“Which room am I in again?”</text>
+                </g>
+                <g class="vsl__fly" style="animation-delay:1.5s">
+                  <rect class="vsl__bubble" x="220" y="216" width="392" height="44" rx="16"/>
+                  <text class="vsl__msg" x="240" y="244" data-i18n="vsl.s1msg2">“Is anyone getting Clémentine at 22:40?”</text>
+                </g>
+                <g class="vsl__fly" style="animation-delay:2.1s">
+                  <rect class="vsl__bubble" x="28" y="270" width="392" height="44" rx="16"/>
+                  <text class="vsl__msg" x="48" y="298" data-i18n="vsl.s1msg3">“Are we nine or eleven for dinner?”</text>
+                </g>
+                <g class="vsl__fly" style="animation-delay:2.7s">
+                  <rect class="vsl__bubble" x="220" y="324" width="392" height="44" rx="16"/>
+                  <text class="vsl__msg" x="240" y="352" data-i18n="vsl.s1msg4">“Who paid for the wood?”</text>
+                </g>
+                <text class="vsl__meta vsl__rise" x="612" y="392" text-anchor="end"
+                      style="animation-delay:3.3s" data-i18n="vsl.s1count">312 messages · 0 answers</text>
+              </g>
+
+              <!-- ========== Scene 2 · 5s — the mental load ========== -->
+              <g class="vsl__scene" style="animation-delay:5s">
+                <text class="vsl__eyebrow" x="28" y="40" data-i18n="vsl.s2eyebrow">Four days later</text>
+                <text class="vsl__h" x="28" y="90" data-i18n="vsl.s2line1">All of it is in one head.</text>
+                <text class="vsl__sub" x="28" y="124" data-i18n="vsl.s2line2">And that head is meant to be on holiday.</text>
+
+                <circle class="vsl__pop" cx="320" cy="250" r="46" fill="var(--p1-label)" style="animation-delay:5.5s"/>
+                <text class="vsl__initial vsl__pop" x="320" y="262" text-anchor="middle" style="animation-delay:5.5s">A</text>
+                <text class="vsl__meta vsl__pop" x="320" y="326" text-anchor="middle" style="animation-delay:5.5s"
+                      data-i18n="vsl.s2who">Aurélia · the one who booked</text>
+
+                <g class="vsl__pop" style="animation-delay:5.9s">
+                  <circle class="vsl__ask" cx="150" cy="196" r="24"/>
+                  <text class="vsl__ask-mark" x="150" y="205" text-anchor="middle">?</text>
+                </g>
+                <g class="vsl__pop" style="animation-delay:6.1s">
+                  <circle class="vsl__ask" cx="490" cy="200" r="24"/>
+                  <text class="vsl__ask-mark" x="490" y="209" text-anchor="middle">?</text>
+                </g>
+                <g class="vsl__pop" style="animation-delay:6.3s">
+                  <circle class="vsl__ask" cx="132" cy="298" r="24"/>
+                  <text class="vsl__ask-mark" x="132" y="307" text-anchor="middle">?</text>
+                </g>
+                <g class="vsl__pop" style="animation-delay:6.5s">
+                  <circle class="vsl__ask" cx="508" cy="296" r="24"/>
+                  <text class="vsl__ask-mark" x="508" y="305" text-anchor="middle">?</text>
+                </g>
+                <g class="vsl__pop" style="animation-delay:6.7s">
+                  <circle class="vsl__ask" cx="320" cy="164" r="24"/>
+                  <text class="vsl__ask-mark" x="320" y="173" text-anchor="middle">?</text>
+                </g>
+
+                <g class="vsl__rise" style="animation-delay:7.2s">
+                  <rect class="vsl__chip vsl__chip--warn" x="150" y="344" width="340" height="40" rx="14"/>
+                  <text class="vsl__chip-text vsl__chip-text--warn" x="320" y="369" text-anchor="middle"
+                        data-i18n="vsl.s2chip">22:40 — Clémentine is still at the station.</text>
+                </g>
+              </g>
+
+              <!-- ========== Scene 3 · 10s — one link ========== -->
+              <g class="vsl__scene" style="animation-delay:10s">
+                <text class="vsl__eyebrow" x="28" y="40" data-i18n="vsl.s3eyebrow">The whole trick</text>
+                <text class="vsl__h" x="28" y="90" data-i18n="vsl.s3line1">You send one link.</text>
+                <text class="vsl__sub" x="28" y="124" data-i18n="vsl.s3line2">Everyone fills in their own part.</text>
+
+                <g class="vsl__pop" style="animation-delay:10.6s">
+                  <rect class="vsl__link" x="96" y="168" width="448" height="60" rx="18"/>
+                  <use class="vsl__icon" href="#i-share" x="122" y="188" width="20" height="20"/>
+                  <text class="vsl__link-text" x="158" y="205">app.kikouchou.app/t/summer-house</text>
+                </g>
+
+                <g class="vsl__pop" style="animation-delay:11.3s">
+                  <circle cx="176" cy="292" r="28" fill="var(--p1-label)"/>
+                </g>
+                <g class="vsl__pop" style="animation-delay:11.7s">
+                  <circle cx="197" cy="272" r="13" fill="var(--accent-solid)"/>
+                  <use class="vsl__check" href="#i-check" x="190" y="265" width="14" height="14"/>
+                </g>
+                <g class="vsl__pop" style="animation-delay:11.6s">
+                  <circle cx="272" cy="292" r="28" fill="var(--p2-label)"/>
+                </g>
+                <g class="vsl__pop" style="animation-delay:11.9s">
+                  <circle cx="293" cy="272" r="13" fill="var(--accent-solid)"/>
+                  <use class="vsl__check" href="#i-check" x="286" y="265" width="14" height="14"/>
+                </g>
+                <g class="vsl__pop" style="animation-delay:11.9s">
+                  <circle cx="368" cy="292" r="28" fill="var(--p3-label)"/>
+                </g>
+                <g class="vsl__pop" style="animation-delay:12.2s">
+                  <circle cx="389" cy="272" r="13" fill="var(--accent-solid)"/>
+                  <use class="vsl__check" href="#i-check" x="382" y="265" width="14" height="14"/>
+                </g>
+                <g class="vsl__pop" style="animation-delay:12.2s">
+                  <circle cx="464" cy="292" r="28" fill="var(--p5-label)"/>
+                </g>
+                <g class="vsl__pop" style="animation-delay:12.5s">
+                  <circle cx="485" cy="272" r="13" fill="var(--accent-solid)"/>
+                  <use class="vsl__check" href="#i-check" x="478" y="265" width="14" height="14"/>
+                </g>
+                <text class="vsl__meta vsl__rise" x="320" y="366" text-anchor="middle"
+                      style="animation-delay:12.9s" data-i18n="vsl.s3meta">No account asked for, and nothing to install.</text>
+              </g>
+
+              <!-- ========== Scene 4 · 15s — the plan draws itself ========== -->
+              <g class="vsl__scene vsl__scene--still" style="animation-delay:15s">
+                <text class="vsl__eyebrow" x="28" y="36" data-i18n="vsl.s4eyebrow">Two minutes later</text>
+                <text class="vsl__h vsl__h--sm" x="28" y="78" data-i18n="vsl.s4line1">Who sleeps where: settled.</text>
+
+                <rect class="vsl__card" x="28" y="96" width="584" height="284" rx="18"/>
+                <text class="vsl__meta vsl__tl-title" x="48" y="124" data-i18n="mock.tlTitle">Summer house · 12–18 August · Timeline</text>
+                <g class="vsl__rise vsl__chip-extra" style="animation-delay:15.35s">
+                  <rect class="vsl__chip vsl__chip--accent" x="306" y="106" width="134" height="26" rx="13"/>
+                  <text class="vsl__chip-text vsl__chip-text--sm vsl__chip-text--accent" x="373" y="124" text-anchor="middle"
+                        data-i18n="mock.tonight">9 guests tonight</text>
+                  <rect class="vsl__chip" x="448" y="106" width="148" height="26" rx="13"/>
+                  <text class="vsl__chip-text vsl__chip-text--sm" x="522" y="124" text-anchor="middle"
+                        data-i18n="mock.online">3 people online</text>
+                </g>
+
+                <text class="vsl__day" x="217" y="150" text-anchor="middle" data-i18n="mock.d1">Tue 12</text>
+                <text class="vsl__day" x="275" y="150" text-anchor="middle" data-i18n="mock.d2">Wed 13</text>
+                <text class="vsl__day" x="333" y="150" text-anchor="middle" data-i18n="mock.d3">Thu 14</text>
+                <text class="vsl__day" x="391" y="150" text-anchor="middle" data-i18n="mock.d4">Fri 15</text>
+                <text class="vsl__day" x="449" y="150" text-anchor="middle" data-i18n="mock.d5">Sat 16</text>
+                <text class="vsl__day" x="507" y="150" text-anchor="middle" data-i18n="mock.d6">Sun 17</text>
+                <text class="vsl__day" x="565" y="150" text-anchor="middle" data-i18n="mock.d7">Mon 18</text>
+
+                <g>
+                  <text class="vsl__row-name" x="48" y="179" data-i18n="mock.n1">Aurélia</text>
+                  <rect class="vsl__cell" x="188" y="162" width="406" height="24" rx="6"/>
+                  <rect class="vsl__bar vsl__grow" x="190" y="162" width="402" height="24" rx="6"
+                        fill="var(--p1-label)" style="animation-delay:15.55s"/>
+                  <text class="vsl__bar-label vsl__rise" x="200" y="178" style="animation-delay:15.80s" data-i18n="mock.roomMaster">Master bedroom</text>
+                </g>
+                <g>
+                  <text class="vsl__row-name" x="48" y="214" data-i18n="mock.n2">Tom</text>
+                  <rect class="vsl__cell" x="188" y="197" width="406" height="24" rx="6"/>
+                  <rect class="vsl__bar vsl__grow" x="190" y="197" width="228" height="24" rx="6"
+                        fill="var(--p2-label)" style="animation-delay:15.71s"/>
+                  <text class="vsl__bar-label vsl__rise" x="200" y="213" style="animation-delay:15.96s" data-i18n="mock.roomAttic">Attic</text>
+                </g>
+                <g>
+                  <text class="vsl__row-name" x="48" y="249" data-i18n="mock.n3">Alice + Julie</text>
+                  <rect class="vsl__cell" x="188" y="232" width="406" height="24" rx="6"/>
+                  <rect class="vsl__bar vsl__grow" x="248" y="232" width="344" height="24" rx="6"
+                        fill="var(--p3-label)" style="animation-delay:15.87s"/>
+                  <text class="vsl__bar-label vsl__rise" x="258" y="248" style="animation-delay:16.12s" data-i18n="mock.roomGarden">Garden room · 2 people</text>
+                </g>
+                <g>
+                  <text class="vsl__row-name" x="48" y="284" data-i18n="mock.n4">Guillaume</text>
+                  <rect class="vsl__cell" x="188" y="267" width="406" height="24" rx="6"/>
+                  <rect class="vsl__bar vsl__grow" x="306" y="267" width="170" height="24" rx="6"
+                        fill="var(--p4-label)" style="animation-delay:16.03s"/>
+                  <text class="vsl__bar-label vsl__rise" x="316" y="283" style="animation-delay:16.28s" data-i18n="mock.roomBunk">Bunk room</text>
+                </g>
+                <g>
+                  <text class="vsl__row-name" x="48" y="319" data-i18n="mock.n5">Clémentine</text>
+                  <rect class="vsl__cell" x="188" y="302" width="406" height="24" rx="6"/>
+                  <rect class="vsl__bar vsl__grow" x="364" y="302" width="228" height="24" rx="6"
+                        fill="var(--p5-label)" style="animation-delay:16.19s"/>
+                  <text class="vsl__bar-label vsl__rise" x="374" y="318" style="animation-delay:16.44s" data-i18n="mock.roomBlue">Blue room</text>
+                </g>
+                <g>
+                  <text class="vsl__row-name" x="48" y="354" data-i18n="mock.n6">Hippolyte</text>
+                  <rect class="vsl__cell" x="188" y="337" width="406" height="24" rx="6"/>
+                  <rect class="vsl__bar vsl__grow" x="248" y="337" width="112" height="24" rx="6"
+                        fill="var(--p6-label)" style="animation-delay:16.35s"/>
+                  <text class="vsl__bar-label vsl__rise" x="258" y="353" style="animation-delay:16.60s" data-i18n="mock.roomSofa">Sofa bed</text>
+                </g>
+              </g>
+
+              <!-- ========== Scene 5 · 20s — lifts, money, no signal ========== -->
+              <g class="vsl__scene" style="animation-delay:20s">
+                <text class="vsl__eyebrow" x="28" y="36" data-i18n="vsl.s5eyebrow">And the rest of the load</text>
+                <text class="vsl__h vsl__h--sm" x="28" y="78" data-i18n="vsl.s5line1">Lifts, money, and no signal.</text>
+
+                <g class="vsl__rise" style="animation-delay:20.5s">
+                  <rect class="vsl__card" x="28" y="100" width="584" height="84" rx="16"/>
+                  <use class="vsl__icon" href="#i-train" x="52" y="130" width="22" height="22"/>
+                  <text class="vsl__card-title" x="90" y="134" data-i18n="mock.legendTrain">Thu 14 · 22:40 · Clémentine, TGV 8541 — Vannes</text>
+                  <text class="vsl__card-meta" x="90" y="160" data-i18n="vsl.s5pickup">Guillaume is driving. He leaves at 22:10.</text>
+                  <g class="vsl__chip-extra">
+                    <rect class="vsl__chip vsl__chip--warn" x="424" y="148" width="164" height="26" rx="13"/>
+                    <text class="vsl__chip-text vsl__chip-text--sm vsl__chip-text--warn" x="506" y="166" text-anchor="middle"
+                          data-i18n="mock.legendPickup">Needs pickup</text>
+                  </g>
+                </g>
+
+                <g class="vsl__rise" style="animation-delay:20.9s">
+                  <rect class="vsl__card" x="28" y="196" width="584" height="84" rx="16"/>
+                  <use class="vsl__icon" href="#i-wallet" x="52" y="226" width="22" height="22"/>
+                  <text class="vsl__card-title" x="90" y="230" data-i18n="vsl.s5money">Wood, groceries and the deposit: 248 €</text>
+                  <text class="vsl__card-meta" x="90" y="256" data-i18n="vsl.s5moneyMeta">Split by nights. Tom gets 31 € back from Alice.</text>
+                </g>
+
+                <g class="vsl__rise" style="animation-delay:21.3s">
+                  <rect class="vsl__card" x="28" y="292" width="584" height="84" rx="16"/>
+                  <use class="vsl__icon" href="#i-wifi-off" x="52" y="322" width="22" height="22"/>
+                  <text class="vsl__card-title" x="90" y="326" data-i18n="vsl.s5offline">No signal at the gîte</text>
+                  <text class="vsl__card-meta" x="90" y="352" data-i18n="vsl.s5offlineMeta">The plan still opens. It syncs when you are back.</text>
+                </g>
+              </g>
+
+              <!-- ========== Scene 6 · 25s — the ask ========== -->
+              <g class="vsl__scene" style="animation-delay:25s">
+                <text class="vsl__eyebrow" x="320" y="112" text-anchor="middle" data-i18n="vsl.s6eyebrow">Kikouchou</text>
+                <text class="vsl__h" x="320" y="164" text-anchor="middle" data-i18n="vsl.s6line1">Stop being the group’s spreadsheet.</text>
+                <text class="vsl__sub" x="320" y="200" text-anchor="middle" data-i18n="vsl.s6line2">Your next holiday, planned by everyone in it.</text>
+
+                <g class="vsl__pop" style="animation-delay:25.7s">
+                  <rect class="vsl__cta-glow" x="126" y="230" width="388" height="84" rx="26"/>
+                  <rect class="vsl__cta" x="140" y="240" width="360" height="64" rx="20"/>
+                  <text class="vsl__cta-text" x="296" y="279" text-anchor="middle" data-i18n="cta.openFree">Open the app — it’s free</text>
+                  <use class="vsl__cta-arrow" href="#i-arrow-right" x="452" y="260" width="24" height="24"/>
+                </g>
+
+                <text class="vsl__meta vsl__rise" x="320" y="348" text-anchor="middle"
+                      style="animation-delay:26.2s" data-i18n="vsl.s6meta">Free · open source · works offline · no account to start</text>
+              </g>
+            </svg>
+
+            <!-- Player chrome. The progress bar is the same 30-second clock as the
+                 scenes, so it cannot drift out of step with them, and the button
+                 only toggles a class that pauses every animation at once. -->
+            <div class="vsl__controls">
+              <button type="button" class="vsl__play" id="vsl-play">
+                <svg class="vsl__play-icon" aria-hidden="true" viewBox="0 0 24 24">
+                  <path class="vsl__glyph-pause" d="M9 5v14M15 5v14" fill="none" stroke="currentColor"
+                        stroke-width="2.4" stroke-linecap="round"/>
+                  <path class="vsl__glyph-play" d="m8 5 12 7-12 7z" fill="currentColor"/>
+                </svg>
+                <!-- The button's accessible name is whichever of these two is
+                     rendered, so the label follows the state without any
+                     JavaScript and stays translatable like the rest of the page. -->
+                <span class="sr-only vsl__label vsl__label--pause" data-i18n="vsl.pause">Pause the animation</span>
+                <span class="sr-only vsl__label vsl__label--play" data-i18n="vsl.play">Play the animation</span>
+              </button>
+              <div class="vsl__progress" aria-hidden="true">
+                <i class="vsl__progress-fill"></i>
+                <span style="left:16.666%"></span><span style="left:33.333%"></span>
+                <span style="left:50%"></span><span style="left:66.666%"></span>
+                <span style="left:83.333%"></span>
+              </div>
+              <span class="vsl__clock" aria-hidden="true">0:30</span>
+            </div>
+          </div>
         </div>
-        <div class="device__body">
-          <div class="ui-row" style="justify-content:space-between;margin-bottom:.75rem">
-            <span class="chip chip--accent">
-              <svg aria-hidden="true" style="width:.85rem;height:.85rem"><use href="#i-users"/></svg>
-              <span data-i18n="mock.tonight">9 guests tonight</span>
-            </span>
-            <span class="chip" data-i18n="mock.online">3 people online</span>
-          </div>
 
-          <div class="tl">
-            <div class="tl__head" aria-hidden="true">
-              <span></span>
-              <span data-i18n="mock.d1">Tue 12</span><span data-i18n="mock.d2">Wed 13</span>
-              <span data-i18n="mock.d3">Thu 14</span><span data-i18n="mock.d4">Fri 15</span>
-              <span data-i18n="mock.d5">Sat 16</span><span data-i18n="mock.d6">Sun 17</span>
-              <span data-i18n="mock.d7">Mon 18</span>
-            </div>
-
-            <!-- Columns 2–8 are Tue 12 … Mon 18; every row fills all seven. -->
-            <div class="tl__row">
-              <span class="tl__name"><i style="background:var(--p1-label)"></i><span data-i18n="mock.n1">Aurélia</span></span>
-              <div class="tl__bar" data-c="1" style="grid-column:2 / 9;animation-delay:.05s" data-i18n="mock.roomMaster">Master bedroom</div>
-            </div>
-            <div class="tl__row">
-              <span class="tl__name"><i style="background:var(--p2-label)"></i><span data-i18n="mock.n2">Tom</span></span>
-              <div class="tl__bar" data-c="2" style="grid-column:2 / 6;animation-delay:.12s" data-i18n="mock.roomAttic">Attic</div>
-              <div class="tl__cell"></div><div class="tl__cell"></div><div class="tl__cell"></div>
-            </div>
-            <div class="tl__row">
-              <span class="tl__name"><i style="background:var(--p3-label)"></i><span data-i18n="mock.n3">Alice + Julie</span></span>
-              <div class="tl__cell"></div>
-              <div class="tl__bar" data-c="3" style="grid-column:3 / 9;animation-delay:.19s" data-i18n="mock.roomGarden">Garden room · 2 people</div>
-            </div>
-            <div class="tl__row">
-              <span class="tl__name"><i style="background:var(--p4-label)"></i><span data-i18n="mock.n4">Guillaume</span></span>
-              <div class="tl__cell"></div><div class="tl__cell"></div>
-              <div class="tl__bar" data-c="4" style="grid-column:4 / 7;animation-delay:.26s" data-i18n="mock.roomBunk">Bunk room</div>
-              <div class="tl__cell"></div><div class="tl__cell"></div>
-            </div>
-            <div class="tl__row">
-              <span class="tl__name"><i style="background:var(--p5-label)"></i><span data-i18n="mock.n5">Clémentine</span></span>
-              <div class="tl__cell"></div><div class="tl__cell"></div><div class="tl__cell"></div>
-              <div class="tl__bar" data-c="5" style="grid-column:5 / 9;animation-delay:.33s" data-i18n="mock.roomBlue">Blue room</div>
-            </div>
-            <div class="tl__row">
-              <span class="tl__name"><i style="background:var(--p6-label)"></i><span data-i18n="mock.n6">Hippolyte</span></span>
-              <div class="tl__cell"></div>
-              <div class="tl__bar" data-c="6" style="grid-column:3 / 5;animation-delay:.4s" data-i18n="mock.roomSofa">Sofa bed</div>
-              <div class="tl__cell"></div><div class="tl__cell"></div><div class="tl__cell"></div><div class="tl__cell"></div>
-            </div>
-          </div>
-
-          <div class="tl__legend">
-            <span class="chip">
-              <svg aria-hidden="true" style="width:.85rem;height:.85rem"><use href="#i-train"/></svg>
-              <span data-i18n="mock.legendTrain">Thu 14 · 22:40 · Clémentine, TGV 8541 — Vannes</span>
-            </span>
-            <span class="chip chip--warn" data-i18n="mock.legendPickup">Needs pickup</span>
-          </div>
-        </div>
-      </div>
+        <!-- The letter itself, for screen readers, for a visitor who never
+             watches an animation, and for search engines. -->
+        <figcaption class="sr-only" data-i18n="vsl.transcript">
+          Eleven people, six rooms, four days of arrivals — and one person holding
+          all of it in their head while three hundred messages go unanswered. Kikouchou
+          turns that into one link. Everyone opens it and fills in their own part:
+          the rooms, the arrival times, the lifts from the station and the shared
+          money. Nothing to install, no account to start, and it still opens when
+          the gîte has no signal. Open the app, it is free and open source.
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>

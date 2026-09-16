@@ -41,6 +41,37 @@ python3 -m http.server 4173
 # then open http://localhost:4173
 ```
 
+## The hero's video sales letter
+
+The hero plays a thirty-second sales letter: the group chat, the mental load,
+the one link, the plan that settles it, the lifts and the money, then the ask.
+It is an inline SVG animated with CSS, not a video. That keeps it sharp at any
+size, themed with the page, translated with the rest of the copy by the same
+`data-i18n` keys, and under 20 kB of the HTML rather than a hosted file.
+
+Three rules keep it maintainable:
+
+- **One clock.** Every animated node runs `animation-duration: 30s` and is
+  placed in time by its `animation-delay` alone. Scene N starts at N×5s, so a
+  beat inside scene 3 is written as `10s` plus its own offset, and the progress
+  bar cannot drift away from the scene it claims to be showing.
+- **Terminal keyframes.** The clock never restarts between scenes, so every
+  keyframe holds its end state through `100%`. A keyframe that returns to its
+  start state plays backwards on screen later in the loop.
+- **Nothing illegible.** A drawing cannot reflow. Below a 400px stage the day
+  heads, the room names inside the bars and the chips beside a card's own line
+  of text are dropped by a container query rather than shown at 6px.
+
+`assets/app.js` only starts and stops that clock: the button toggles
+`is-paused` on the figure, and the letter also pauses while it is off screen.
+Visitors who ask for reduced motion get one still frame — the timeline scene —
+and no controls at all, because the global reduced-motion rule collapses every
+duration and would otherwise leave all six scenes stacked on their end state.
+
+The written letter lives in the `<figcaption>`, hidden with `.sr-only`, so a
+screen reader, a visitor who never watches an animation and a crawler all get
+the pitch as text.
+
 ## Editing the copy
 
 English is written directly in `index.html`. Every translatable node carries a
@@ -51,6 +82,10 @@ key:
 | `data-i18n`        | replaces the element's text (markup is allowed) |
 | `data-i18n-html`   | same, for nodes whose English contains markup   |
 | `data-i18n-aria`   | replaces the element's `aria-label`             |
+
+The hero animation carries the same keys on its SVG `<text>` nodes, so a scene
+is translated exactly like a paragraph is. Its lines are drawn, not laid out:
+they cannot wrap, so keep a translation close to the length of the English.
 
 `assets/i18n/fr.js` holds the French value for each of those keys. English needs
 no dictionary: `app.js` snapshots the markup on load and restores it when you

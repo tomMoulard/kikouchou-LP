@@ -568,6 +568,238 @@ a { color: inherit; }
 }
 .trust svg { width: 1.05rem; height: 1.05rem; color: var(--accent); flex: none; }
 
+/* --- Video sales letter -------------------------------------------------- */
+/* The hero's pitch, drawn rather than filmed. Six scenes ride one 30-second
+   clock: every animated node shares `--vsl-dur` and is placed in time by its
+   own `animation-delay`, so nothing can drift out of step — not the scenes
+   against each other, and not the progress bar against the scenes.
+
+   Keyframe windows are therefore written as a percentage of the whole 30s
+   (1s = 3.333%) and every one of them holds its end state through 100%: the
+   clock does not restart between scenes, so a keyframe that returns to its
+   start state would replay backwards on screen. */
+.vsl {
+  --vsl-dur: 30s;
+  margin: 0;
+}
+.vsl__stage {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: inherit;
+}
+
+/* Every animated node runs the same clock, forever, hidden until its delay. */
+.vsl__scene,
+.vsl__rise,
+.vsl__pop,
+.vsl__fly,
+.vsl__grow {
+  animation-duration: var(--vsl-dur);
+  animation-iteration-count: infinite;
+  animation-fill-mode: backwards;
+  animation-timing-function: cubic-bezier(.22, .68, .3, 1);
+}
+.vsl__scene { animation-name: vsl-scene; animation-timing-function: ease; }
+.vsl__rise  { animation-name: vsl-rise; }
+.vsl__pop   { animation-name: vsl-pop; }
+.vsl__fly   { animation-name: vsl-fly; }
+.vsl__grow  { animation-name: vsl-grow; transform-origin: left center; }
+
+/* SVG transforms need a box to resolve `transform-origin` against; without
+   this they rotate and scale around the origin of the whole viewBox. */
+.vsl__rise, .vsl__pop, .vsl__fly, .vsl__grow { transform-box: fill-box; }
+.vsl__rise, .vsl__pop, .vsl__fly { transform-origin: center; }
+
+@keyframes vsl-scene {
+  0%    { opacity: 0; }
+  1.7%  { opacity: 1; }
+  15%   { opacity: 1; }
+  16.6% { opacity: 0; }
+  100%  { opacity: 0; }
+}
+@keyframes vsl-rise {
+  0%   { opacity: 0; transform: translateY(10px); }
+  2.5% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes vsl-pop {
+  0%   { opacity: 0; transform: scale(.82); }
+  1.6% { opacity: 1; transform: scale(1.06); }
+  2.6% { opacity: 1; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes vsl-fly {
+  0%   { opacity: 0; transform: translate(22px, 10px); }
+  2.2% { opacity: 1; transform: translate(0, 0); }
+  100% { opacity: 1; transform: translate(0, 0); }
+}
+@keyframes vsl-grow {
+  0%   { transform: scaleX(0); }
+  3%   { transform: scaleX(1); }
+  100% { transform: scaleX(1); }
+}
+
+/* Type scale, in viewBox units: the SVG is ~0.8 of its 640 units on a desktop
+   hero, so 29 units reads as roughly 23px. */
+.vsl__eyebrow {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  fill: var(--accent);
+}
+.vsl__h {
+  font-size: 29px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  fill: var(--text);
+}
+.vsl__h--sm { font-size: 25px; }
+.vsl__sub { font-size: 18.5px; fill: var(--text-muted); }
+.vsl__msg { font-size: 17.5px; fill: var(--text); }
+.vsl__meta { font-size: 15px; fill: var(--text-faint); }
+.vsl__day {
+  font-size: 13.5px;
+  font-weight: 640;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  fill: var(--text-faint);
+}
+.vsl__tl-title { font-size: 12.5px; }
+.vsl__row-name { font-size: 15.5px; font-weight: 600; fill: var(--text); }
+.vsl__bar-label { font-size: 13.5px; font-weight: 600; fill: var(--label-fg); }
+.vsl__card-title { font-size: 16.5px; font-weight: 600; fill: var(--text); }
+.vsl__card-meta { font-size: 15px; fill: var(--text-muted); }
+.vsl__initial { font-size: 20px; font-weight: 700; fill: var(--label-fg); }
+.vsl__link-text { font-size: 18px; font-weight: 600; fill: var(--text); }
+.vsl__ask-mark { font-size: 22px; font-weight: 700; fill: var(--text-faint); }
+
+/* Surfaces */
+.vsl__bubble,
+.vsl__card,
+.vsl__link {
+  fill: var(--surface);
+  stroke: var(--border);
+  stroke-width: 1;
+}
+.vsl__bubble { fill: var(--surface-2); }
+.vsl__link { fill: var(--accent-tint); stroke: var(--accent); }
+.vsl__cell { fill: var(--surface-2); }
+.vsl__ask { fill: var(--surface-2); stroke: var(--border); stroke-width: 1; }
+.vsl__icon { color: var(--accent); }
+.vsl__check { color: var(--accent-on); }
+
+.vsl__chip { fill: var(--surface-2); stroke: var(--border); stroke-width: 1; }
+.vsl__chip--warn { fill: var(--warn-bg); stroke: none; }
+.vsl__chip-text { font-size: 16px; font-weight: 600; fill: var(--text); }
+.vsl__chip-text--warn { fill: var(--warn-fg); }
+.vsl__chip-text--sm { font-size: 13.5px; }
+.vsl__chip--accent { fill: var(--accent-tint); stroke: none; }
+.vsl__chip-text--accent { fill: var(--accent-strong); }
+
+.vsl__cta { fill: var(--accent-solid); }
+.vsl__cta-glow { fill: var(--accent); opacity: .25; animation: vsl-halo 2.4s ease-in-out infinite; }
+.vsl__cta-text { font-size: 20px; font-weight: 650; fill: var(--accent-on); }
+.vsl__cta-arrow { color: var(--accent-on); }
+@keyframes vsl-halo {
+  0%, 100% { opacity: .1; transform: scale(1); }
+  50%      { opacity: .3; transform: scale(1.035); }
+}
+.vsl__cta-glow { transform-box: fill-box; transform-origin: center; }
+
+.vsl__body { container-type: inline-size; }
+
+@container (max-width: 400px) {
+  /* A drawing cannot reflow. On a phone the stage is about half the width it
+     has in the hero, so the day heads, the room names written inside the bars
+     and the chips that sit beside a card's own line of text stop being
+     readable — they are dropped rather than shown as grey noise. The bars
+     still say who is in the house and for how long. */
+  .vsl__day, .vsl__bar-label, .vsl__chip-extra { display: none; }
+}
+
+/* Player chrome ---------------------------------------------------------- */
+.vsl__controls {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  margin-top: .85rem;
+  padding-top: .75rem;
+  border-top: 1px solid var(--border);
+}
+.vsl__play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  flex: none;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.vsl__play:hover { color: var(--accent); border-color: var(--accent); }
+.vsl__play-icon { width: .9rem; height: .9rem; }
+.vsl__glyph-play { display: none; }
+.vsl__label--play { display: none; }
+.vsl.is-paused .vsl__label--play { display: block; }
+.vsl.is-paused .vsl__label--pause { display: none; }
+.vsl.is-paused .vsl__glyph-play { display: block; }
+.vsl.is-paused .vsl__glyph-pause { display: none; }
+
+.vsl__progress {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.vsl__progress-fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--accent);
+  transform-origin: left center;
+  animation: vsl-progress var(--vsl-dur) linear infinite;
+}
+.vsl__progress span {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: var(--bg);
+}
+@keyframes vsl-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+.vsl__clock {
+  font-size: .72rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-faint);
+}
+
+/* One class stops the whole clock: scenes, beats and progress bar alike. */
+.vsl.is-paused * { animation-play-state: paused; }
+
+/* Reduced motion gets the payoff scene as a still frame. The global rule in
+   the reset collapses every duration to nothing, which would otherwise leave
+   all six scenes stacked on their end state — invisible. */
+@media (prefers-reduced-motion: reduce) {
+  .vsl__scene { display: none; }
+  .vsl__scene--still { display: block; }
+  .vsl__stage * {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .vsl__controls { display: none; }
+}
+
 /* --- Product mockups ---------------------------------------------------- */
 .device {
   position: relative;

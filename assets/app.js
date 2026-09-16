@@ -10,6 +10,7 @@
  *   2. theme     — light/dark with a system default
  *   3. nav       — mobile sheet, sticky-header shadow
  *   4. reveal    — scroll-in animation, skipped for reduced-motion users
+ *   5. vsl       — play/pause for the hero's animated sales letter
  */
 (function () {
   'use strict';
@@ -227,5 +228,38 @@
       el.style.transitionDelay = (i % 3) * 70 + 'ms';
       io.observe(el);
     });
+  }
+
+  /* ====================================================================
+     5. Video sales letter
+     ====================================================================
+     The hero letter is pure CSS running on one 30-second clock, so the only
+     thing left for JavaScript is to stop and start that clock. It pauses while
+     the letter is off screen — a visitor reading the FAQ should not pay for six
+     scenes nobody can see — and an explicit pause outranks scrolling back to
+     it. Reduced-motion visitors get a still frame from the stylesheet and no
+     controls at all, so nothing is wired up for them. */
+  var vsl = doc.getElementById('vsl'),
+      vslPlay = doc.getElementById('vsl-play');
+
+  if (vsl && vslPlay && !reduced) {
+    var vslPausedByUser = false,
+        vslOnScreen = true;
+
+    var renderVsl = function () {
+      vsl.classList.toggle('is-paused', vslPausedByUser || !vslOnScreen);
+    };
+
+    vslPlay.addEventListener('click', function () {
+      vslPausedByUser = !vslPausedByUser;
+      renderVsl();
+    });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        vslOnScreen = entries[0].isIntersecting;
+        renderVsl();
+      }, { threshold: 0.12 }).observe(vsl);
+    }
   }
 })();
