@@ -1355,6 +1355,11 @@ kbd {
   align-items: start;
 }
 @media (min-width: 760px) { .footer__grid { grid-template-columns: 1.4fr repeat(2, 1fr); } }
+@media (min-width: 1040px) { .footer__grid { grid-template-columns: 1.3fr .8fr .8fr 1.3fr; } }
+/* The folded privacy, install and FAQ lines: prose, not a link list, so
+   they get the muted colour and a readable measure rather than the
+   tighter rhythm of the nav columns above. */
+.footer__notes li { color: var(--text-muted); font-size: .9rem; line-height: 1.5; max-width: 24rem; }
 .footer h2 {
   font-size: .74rem;
   font-weight: 680;
@@ -1407,3 +1412,34 @@ kbd {
   white-space: nowrap;
   border: 0;
 }
+
+
+/* --- Section CTA -------------------------------------------------------- */
+/* The feedback that produced the four-block page asked for more buttons, so
+   every block below the hero ends on one. Centred under a full-width block,
+   left-aligned when it sits in a `.feature__body` column. */
+.section-cta { margin-top: 2.5rem; display: flex; justify-content: center; }
+.section-cta--left { margin-top: 1.75rem; justify-content: flex-start; }
+
+/* `.feature__body` used to head its blocks with an h3 under a section h2.
+   With one feature to a section the heading is the h2 itself, and it keeps
+   the same size the h3 had. */
+.feature__body h2 { font-size: var(--step-2); }
+.feature__body > h2 + p { margin-top: .9rem; font-size: var(--step-1); color: var(--text-muted); }
+
+/* --- Reviews ------------------------------------------------------------ */
+/* Deliberately thin. Most readers never reach it; it is there for the ones
+   who read everything, so it costs one screen at most. */
+.reviews { padding-block: clamp(2.5rem, 1.5rem + 3vw, 4rem); border-block: 1px solid var(--border); }
+.reviews__list { display: grid; gap: 1.25rem; }
+@media (min-width: 820px) { .reviews__list { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
+.review p:first-child { font-size: .98rem; line-height: 1.55; text-wrap: pretty; }
+.review__who {
+  margin-top: .75rem;
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .84rem;
+  color: var(--text-faint);
+}
+.review__who .avatar { width: 1.5rem; height: 1.5rem; font-size: .7rem; }
