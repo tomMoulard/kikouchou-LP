@@ -10,6 +10,64 @@
 
   gtag('config', 'AW-18455477906');
 </script>
+
+<!-- Event snippet for the Google Ads "Sign-up" conversion.
+     Every call to action on this page is a plain <a> to app.kikouchou.app, so
+     instead of an inline onclick on each one, the click is caught once below by
+     delegation. That keeps the markup free of analytics and means a CTA added
+     later is counted without anyone remembering to wire it. -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-18455477906/KKbVCKuNgfocEJL9oOBE',
+      'value': 1.0,
+      'currency': 'EUR',
+      'event_callback': callback
+  });
+  return false;
+}
+
+(function () {
+  'use strict';
+
+  /* The app, and only the app: the GitHub and anchor links on the page are not
+     conversions. `?install=1` counts, it opens the same app with the install
+     banner primed. */
+  var APP = /^https?:\/\/app\.kikouchou\.app(?:[\/?#]|$)/;
+
+  document.addEventListener('click', function (e) {
+    var link = e.target && e.target.closest ? e.target.closest('a[href]') : null;
+    if (!link || !APP.test(link.href)) return;
+
+    /* A middle click, a modifier click or target="_blank" leaves this page
+       open, and something else may already have cancelled the navigation. In
+       those cases report the conversion and let the browser do its own thing —
+       taking over window.location here would break the new tab. */
+    var keepsPage =
+      e.defaultPrevented || e.button !== 0 ||
+      e.metaKey || e.ctrlKey || e.shiftKey || e.altKey ||
+      link.target === '_blank';
+    if (keepsPage) {
+      gtag_report_conversion();
+      return;
+    }
+
+    /* Hold the navigation so the beacon leaves before the page unloads, then
+       let event_callback send us on. The timer is the fallback for a blocked or
+       slow tag, where the callback never runs: whichever fires first wins, and
+       the other assignment to the same URL is a no-op. */
+    e.preventDefault();
+    var url = link.href;
+    setTimeout(function () { window.location = url; }, 800);
+    gtag_report_conversion(url);
+  });
+})();
+</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
