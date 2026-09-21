@@ -1,8 +1,21 @@
 <!doctype html>
 <html lang="en" data-theme="light">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18455477906"></script>
+<!-- Google tag (gtag.js).
+
+     `crossorigin` is not decoration. A cross-origin <script> without it is
+     opaque to `window.onerror` by specification: anything it throws arrives as
+     the literal "Script error." with the filename, line, column and stack
+     blanked, which is an error nobody can read or attribute. With the
+     attribute the browser fetches the file as a CORS request and keeps the
+     real message and stack.
+
+     Safe because googletagmanager.com answers a CORS request by reflecting the
+     requesting origin back in `access-control-allow-origin`. Were that header
+     ever absent the browser would refuse the script outright rather than merely
+     report its errors badly, so this is worth re-checking if the tag ever
+     stops loading. -->
+<script async crossorigin="anonymous" src="https://www.googletagmanager.com/gtag/js?id=AW-18455477906"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
