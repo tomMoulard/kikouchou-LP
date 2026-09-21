@@ -903,5 +903,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="/assets/app.js" defer></script>
 <script src="/assets/analytics-config.js" defer></script>
 <script src="/assets/analytics.js" defer></script>
+<!-- Meta Pixel. `defer` and the bottom of the page rather than the <head>
+     Events Manager asks for: it reads the config above, and a PageView reported
+     a few hundred milliseconds later is the same PageView. See
+     assets/meta-pixel.js for why it is a file and not the pasted snippet.
+
+     No <noscript> beacon beside it, deliberately. That form of the pixel is an
+     <img> the browser fetches before any script can decide whether it should,
+     so it would report a local checkout with JavaScript off to the live ad
+     account — and it measures only visitors who ran no JavaScript, who are not
+     an audience this page can convert anyway. -->
+<script src="/assets/meta-pixel.js" defer></script>
 </body>
 </html>

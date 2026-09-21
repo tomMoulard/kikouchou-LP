@@ -38,4 +38,23 @@ window.KKC_ANALYTICS = {
   key: '',
   host: 'https://eu.i.posthog.com',
   persistence: 'memory',
+
+  /* Meta Pixel, read by assets/meta-pixel.js. The id from Events Manager and
+     nothing else.
+
+     Committed rather than injected on deploy, which is the opposite of the
+     PostHog key above, and the difference is what each one is. `phc_…` writes
+     into an analytics project a fork would pollute invisibly; a pixel id is
+     public by construction — Meta's own instructions put it in the page source
+     — and Events Manager can be told which domains it accepts. Empty turns the
+     pixel off entirely.
+
+     The app carries the same id in `src/lib/meta-pixel.ts`, so a visitor who
+     clicks through and installs is one person to Meta rather than two. */
+  metaPixel: {
+    id: '2066436523976108',
+    /* Load the pixel on a local server. Leave this false: traffic from your
+       machine is real traffic in a real ad account. */
+    allowLocalhost: false,
+  },
 };

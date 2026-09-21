@@ -94,5 +94,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 </div>
+<!-- The pixel runs here too. Meta asks for the base code on every page, and an
+     ad click that lands on a 404 is the one pageview most worth seeing. PostHog
+     is deliberately absent from this page; see assets/meta-pixel.js. -->
+<script src="/assets/analytics-config.js" defer></script>
+<script src="/assets/meta-pixel.js" defer></script>
 </body>
 </html>
