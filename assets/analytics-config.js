@@ -39,6 +39,26 @@ window.KKC_ANALYTICS = {
   host: 'https://eu.i.posthog.com',
   persistence: 'memory',
 
+  /* Session recording — PostHog replays what a visitor did on the page.
+     Click maps, rageclick maps and scroll depth do not depend on this: they
+     come from autocapture, which is on in assets/analytics.js either way.
+
+     Two things to know before leaving this on.
+
+     A recording is personal data under GDPR whatever `persistence` says. The
+     'memory' setting above keeps recording out of the cookie-consent question,
+     because nothing is written to the visitor's browser, but the recording
+     itself still needs a lawful basis and a line in the privacy notice.
+
+     'memory' also cuts the recordings up. The session id lives in memory only,
+     so it goes when the page unloads: one visitor who reads the page, leaves
+     and comes back is two short recordings rather than one journey. Whole
+     journeys need 'localStorage+cookie' above, and that needs a consent
+     banner.
+
+     Masking is set in assets/analytics.js, not here. */
+  sessionRecording: true,
+
   /* Meta Pixel, read by assets/meta-pixel.js. The id from Events Manager and
      nothing else.
 

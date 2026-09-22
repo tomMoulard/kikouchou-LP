@@ -7,7 +7,8 @@
  *
  * What it captures: one pageview, autocaptured clicks (so click maps and
  * heatmaps work), two named events — a click on any call to action, and a
- * language switch — and unhandled errors. Session recording is off. There is
+ * language switch — and unhandled errors. Session recording follows
+ * `sessionRecording` in the config file and is off when it is absent. There is
  * not a single input on this page, so nothing a visitor types can be captured.
  *
  * ## Why so much of this file is about cross-origin scripts
@@ -233,8 +234,38 @@
       /* Click and rageclick maps are most of the value on a landing page. */
       autocapture: true,
       capture_heatmaps: true,
-      disable_session_recording: true,
       respect_dnt: true,
+
+      /**
+       * Session recording, off unless analytics-config.js turns it on.
+       *
+       * The default is off, so an unset or malformed config records nothing.
+       * See `sessionRecording` in analytics-config.js for what recording costs
+       * and what `persistence: 'memory'` does to it.
+       */
+      disable_session_recording: cfg.sessionRecording !== true,
+
+      /**
+       * What a recording is allowed to keep.
+       *
+       * This page has no input of any kind, so `maskAllInputs` masks nothing
+       * today. It is stated anyway: the first form somebody adds — an email
+       * field on a waitlist, a search box — must not start shipping keystrokes
+       * to PostHog because nobody remembered to come back here.
+       *
+       * `maskTextSelector` masks the elements marked `data-private` in the
+       * HTML, which is the one lever available to a future block that shows
+       * something a visitor should not find in a replay.
+       */
+      session_recording: {
+        maskAllInputs: true,
+        maskTextSelector: '[data-private]',
+        /* Request and response bodies are never recorded. The default already
+           records only timing, but this page's calls go to the app's API, so
+           it is worth being explicit. */
+        recordHeaders: false,
+        recordBody: false
+      },
 
       /**
        * Stated here rather than left to the project's server-side setting.

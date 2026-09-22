@@ -159,9 +159,25 @@ invent a visitor.
 
 Captured: one pageview, autocaptured clicks (so click maps and heatmaps work),
 `landing_cta_clicked` (with which of the five CTAs it was — `header`, `hero`,
-`cta-band`, `install`, `footer`), and `landing_language_switched`. Session
-recording is off, and the page has no input fields at all, so there is nothing a
-visitor can type that could be captured.
+`cta-band`, `install`, `footer`), and `landing_language_switched`.
+
+### Session recording
+
+`sessionRecording: true` in `assets/analytics-config.js` turns recording on.
+Delete the line to turn it off. Click maps, rageclick maps and scroll depth do
+not depend on it. They come from autocapture, which is on either way.
+
+`assets/analytics.js` sets the masking. It masks every input, and it masks the
+text of any element marked `data-private` in the HTML. This page has no input
+field today, so a visitor types nothing that PostHog can record. The
+masking is there for the first form somebody adds.
+
+Two things follow from `persistence: 'memory'` below. First, a recording is
+personal data under GDPR, whatever the persistence setting is, so it needs a
+lawful basis and a line in the privacy notice. Second, the browser drops the
+session id when the page unloads. One visitor who reads the page, leaves and
+comes back becomes two short recordings rather than one journey. Whole journeys
+need `'localStorage+cookie'`, and that setting needs a consent banner.
 
 ### Cookies and consent
 
