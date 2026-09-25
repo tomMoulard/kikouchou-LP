@@ -106,8 +106,8 @@ function gtag_report_conversion(url) {
 <link rel="alternate" hreflang="fr" href="https://www.kikouchou.app/?lang=fr">
 <link rel="alternate" hreflang="x-default" href="https://www.kikouchou.app/">
 
-<meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171412" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f0e4" media="(prefers-color-scheme: light)">
 <meta name="color-scheme" content="light dark">
 
 <meta property="og:type" content="website">
@@ -305,9 +305,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </p>
 
       <ul class="trust">
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="hero.trust1">Rooms, lifts and the shared money in one view</span></li>
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="hero.trust2">One link, everyone fills in their own part</span></li>
-        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="hero.trust3">Works with no signal at the gîte</span></li>
+        <li><span data-i18n="hero.trust1">Rooms, lifts and the shared money in one view</span></li>
+        <li><span data-i18n="hero.trust2">One link, everyone fills in their own part</span></li>
+        <li><span data-i18n="hero.trust3">Works with no signal at the gîte</span></li>
       </ul>
     </div>
 
@@ -324,11 +324,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            the keyframe windows short and terminal: they must hold their end
            state to 100%, because the clock does not restart per scene. -->
       <figure class="vsl" id="vsl">
+        <p class="note" aria-hidden="true">
+          <span data-i18n="vsl.title">Why Kikouchou exists · 30 seconds, no sound</span>
+          <svg viewBox="0 0 44 40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6c14-2 26 6 30 26"/><path d="m25 27 8 6 4-10"/></svg>
+        </p>
         <div class="device hero__device">
-          <div class="device__bar">
-            <span class="device__dots"><i></i><i></i><i></i></span>
-            <span class="device__title" data-i18n="vsl.title">Why Kikouchou exists · 30 seconds, no sound</span>
-          </div>
           <div class="device__body vsl__body">
             <svg class="vsl__stage" viewBox="0 0 640 400" role="img"
                  aria-label="An animation: a group chat filling with unanswered questions, then the same trip laid out in Kikouchou as rooms, lifts and shared money."
@@ -626,10 +626,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <p class="split__who" data-i18n="how.crowdWho">Everyone else, on their own phone</p>
         <h3 data-i18n="how.crowdT">They fill in their own part</h3>
         <ul class="split__list">
-          <li><svg aria-hidden="true"><use href="#i-bed"/></svg><span data-i18n-html="how.c1"><strong>Claim a bed</strong> for the nights they are there.</span></li>
-          <li><svg aria-hidden="true"><use href="#i-train"/></svg><span data-i18n-html="how.c2"><strong>Add their train</strong> or the time they drive in.</span></li>
-          <li><svg aria-hidden="true"><use href="#i-car"/></svg><span data-i18n-html="how.c3"><strong>Ask for a lift</strong> from the station, or offer one.</span></li>
-          <li><svg aria-hidden="true"><use href="#i-wallet"/></svg><span data-i18n-html="how.c4"><strong>Log what they paid</strong> for the groceries or the wood.</span></li>
+          <li><span class="avatar" style="background:var(--p6-label)" aria-hidden="true">J</span><span data-i18n-html="how.c1"><strong>Claim a bed</strong> for the nights they are there.</span></li>
+          <li><span class="avatar" style="background:var(--p3-label)" aria-hidden="true">A</span><span data-i18n-html="how.c2"><strong>Add their train</strong> or the time they drive in.</span></li>
+          <li><span class="avatar" style="background:var(--p5-label)" aria-hidden="true">J</span><span data-i18n-html="how.c3"><strong>Ask for a lift</strong> from the station, or offer one.</span></li>
+          <li><span class="avatar" style="background:var(--p2-label)" aria-hidden="true">T</span><span data-i18n-html="how.c4"><strong>Log what they paid</strong> for the groceries or the wood.</span></li>
         </ul>
       </div>
     </div>
@@ -662,11 +662,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </p>
       </div>
 
-      <div class="feature__media" data-reveal>
+      <div class="feature__media taped" data-reveal>
                 <div class="device" role="img" data-i18n-aria="feat.f1alt"
                      aria-label="The rooms board: three room columns with bed counts, guests assigned into slots, one room marked full and one bed still free.">
                   <div class="device__bar">
-                    <span class="device__dots"><i></i><i></i><i></i></span>
                     <span class="device__title" data-i18n="mock.roomsTitle">Rooms · 6 rooms · 11 beds</span>
                   </div>
                   <div class="device__body">
@@ -728,11 +727,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </p>
       </div>
 
-      <div class="feature__media" data-reveal>
+      <div class="feature__media taped taped--right" data-reveal>
                 <div class="device" role="img" data-i18n-aria="feat.f5alt"
                      aria-label="The money page: three expense lines with who paid and how they are split, then the balances with the two repayments that settle the trip.">
                   <div class="device__bar">
-                    <span class="device__dots"><i></i><i></i><i></i></span>
                     <span class="device__title" data-i18n="mock.moneyTitle">Money · Summer house</span>
                   </div>
                   <div class="device__body">
@@ -818,14 +816,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- ================================ CTA ============================= -->
 <section class="cta">
   <div class="container">
+    <svg class="cta__house" viewBox="0 0 120 96" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M8 44 60 6l52 38"/><path d="M20 36v54h80V36"/><path d="M52 90V66h16v24"/><path d="M82 22V10h9v19"/>
+      <rect x="30" y="46" width="16" height="13" rx="2"/><rect x="74" y="46" width="16" height="13" rx="2"/>
+      <circle cx="36" cy="52.5" r="2.6" fill="#f87171" stroke="none"/><circle cx="41" cy="52.5" r="2.6" fill="#60a5fa" stroke="none"/>
+      <circle cx="80" cy="52.5" r="2.6" fill="#4ade80" stroke="none"/><circle cx="85" cy="52.5" r="2.6" fill="#fbbf24" stroke="none"/>
+    </svg>
     <h2 data-i18n="final.title">Your next trip is already a spreadsheet. Make it a plan.</h2>
     <p data-i18n="final.lede">
       Create the trip, share the link, and let everyone sort out their own bed and their
       own train. Two minutes, and it stops being one person’s problem.
     </p>
     <div class="cta__actions">
-      <a class="btn btn--lg" href="https://app.kikouchou.app" data-cta="cta-band"
-         style="--btn-bg:#f8fafc;--btn-fg:#0f172a">
+      <a class="btn btn--light btn--lg" href="https://app.kikouchou.app" data-cta="cta-band">
         <span data-i18n="cta.openFree">Open the app, it’s free</span>
         <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
       </a>

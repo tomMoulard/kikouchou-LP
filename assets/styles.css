@@ -24,6 +24,16 @@
   font-display: swap;
 }
 
+/* Caveat writes the few notes in the margin, the way the organiser would
+   scribble on a printed plan. It is decorative, so it is not preloaded. */
+@font-face {
+  font-family: "Caveat";
+  src: url("/assets/fonts/caveat.woff2") format("woff2");
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* --- Tokens ------------------------------------------------------------- */
 :root {
   color-scheme: light;
@@ -59,36 +69,49 @@
   --p6: #ec4899;  --p6-label: #be185d;
   --label-fg: #ffffff;
 
-  --bg: #ffffff;
-  --bg-sunken: var(--slate-50);
-  --surface: #ffffff;
-  --surface-2: var(--slate-50);
-  --border: var(--slate-200);
-  --border-strong: var(--slate-300);
-  --text: var(--slate-900);
-  --text-muted: #55637a;
-  --text-faint: var(--slate-500);
-  --accent: var(--teal-600);          /* teal as text: 4.55:1 on white */
-  --accent-hover: var(--teal-700);
+  /* Paper and ink. The page is the plan the group pins to the fridge, not a
+     dashboard: a warm sheet, dark teal ink taken from the app's primary
+     (oklch(.25 .04 185)), and the guest colours as the felt pens. */
+  --paper: #f6f0e4;
+  --ink: #16302f;
+  --marker: rgba(255, 205, 64, .55);   /* highlighter swipe behind a word */
+  --note: #fdeea0;                      /* the organiser's sticky note */
+  --note-fg: #3b3317;
+  --tape: rgba(94, 234, 212, .38);
+
+  --bg: var(--paper);
+  --bg-sunken: #efe6d4;
+  --surface: #fffcf5;
+  --surface-2: #f4ede0;
+  --border: #e3d7c2;
+  --border-strong: #cdbd9f;
+  --text: var(--ink);
+  --text-muted: #4d5957;
+  --text-faint: #646a66;
+  --accent: var(--teal-700);          /* teal as text: 4.8:1 on paper */
+  --accent-hover: #115e59;
   --accent-solid: var(--teal-700);    /* teal under white text: 5.5:1 */
   --accent-solid-hover: #115e59;
-  --accent-strong: var(--teal-700);   /* teal as text on a teal tint */
+  --accent-edge: #0b4743;             /* the pressed-down lip under a button */
+  --accent-strong: #0f5f58;           /* teal as text on a teal tint */
   --accent-on: #ffffff;
-  --accent-tint: rgba(20, 184, 166, .1);
+  --accent-tint: rgba(20, 184, 166, .12);
   --warn-fg: #9a4a05;
   --warn-bg: rgba(249, 115, 22, .16);
   --danger-fg: #b42318;
   --ring: var(--teal-600);
 
-  --shadow-sm: 0 1px 2px rgba(15, 23, 42, .06), 0 1px 1px rgba(15, 23, 42, .04);
-  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, .07), 0 2px 4px -2px rgba(15, 23, 42, .06);
-  --shadow-lg: 0 18px 40px -12px rgba(15, 23, 42, .18), 0 4px 12px -4px rgba(15, 23, 42, .08);
-  --shadow-xl: 0 40px 80px -24px rgba(15, 23, 42, .28), 0 8px 24px -8px rgba(15, 23, 42, .12);
+  /* Paper lying on a table: a short contact shadow and a soft drop, both
+     tinted brown rather than slate. */
+  --shadow-sm: 0 1px 0 rgba(70, 48, 16, .08);
+  --shadow-md: 0 1px 0 rgba(70, 48, 16, .08), 0 8px 18px -12px rgba(70, 48, 16, .35);
+  --shadow-lg: 0 1px 0 rgba(70, 48, 16, .08), 0 18px 34px -18px rgba(70, 48, 16, .45);
+  --shadow-xl: 0 2px 0 rgba(70, 48, 16, .07), 0 30px 50px -26px rgba(70, 48, 16, .55);
 
-  --radius-sm: 8px;
-  --radius: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
 
   --step-0: clamp(1rem, .96rem + .2vw, 1.0625rem);
   --step-1: clamp(1.125rem, 1.06rem + .3vw, 1.25rem);
@@ -103,24 +126,33 @@
   --font: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   --font-display: "Bricolage Grotesque", var(--font);
+  --font-hand: "Caveat", "Bradley Hand", "Segoe Print", cursive;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #080d18;
-  --bg-sunken: #050a13;
-  --surface: #101827;
-  --surface-2: #16202f;
-  --border: #23304a;
-  --border-strong: #33415c;
-  --text: #eef2f9;
-  --text-muted: #a3b0c6;
-  --text-faint: #7d8ba3;
+  /* The same house after dinner: warm dark wood rather than a slate console. */
+  --paper: #171412;
+  --ink: #f3ece0;
+  --marker: rgba(214, 160, 40, .45);
+  --note: #3d3622;
+  --note-fg: #f6e9b8;
+  --tape: rgba(45, 212, 191, .22);
+  --bg: var(--paper);
+  --bg-sunken: #120f0d;
+  --surface: #221d19;
+  --surface-2: #2a241f;
+  --border: #3a322b;
+  --border-strong: #4d4339;
+  --text: var(--ink);
+  --text-muted: #c4b8a6;
+  --text-faint: #a09483;
   --accent: var(--teal-400);
   --accent-hover: var(--teal-300);
   --accent-solid: var(--teal-400);    /* dark text on bright teal: 9.7:1 */
   --accent-solid-hover: var(--teal-300);
+  --accent-edge: var(--teal-700);
   --accent-strong: var(--teal-300);
   --accent-on: #04201d;
   --accent-tint: rgba(45, 212, 191, .13);
@@ -133,12 +165,12 @@
   --p4-label: #fbbf24;
   --p5-label: #a78bfa;
   --p6-label: #f472b6;
-  --label-fg: #0b1220;
+  --label-fg: #1a1410;
   --ring: var(--teal-400);
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .5);
-  --shadow-md: 0 4px 10px rgba(0, 0, 0, .45);
-  --shadow-lg: 0 20px 44px -14px rgba(0, 0, 0, .7);
-  --shadow-xl: 0 44px 90px -28px rgba(0, 0, 0, .8);
+  --shadow-sm: 0 1px 0 rgba(0, 0, 0, .4);
+  --shadow-md: 0 1px 0 rgba(0, 0, 0, .4), 0 8px 18px -10px rgba(0, 0, 0, .6);
+  --shadow-lg: 0 1px 0 rgba(0, 0, 0, .4), 0 18px 34px -16px rgba(0, 0, 0, .7);
+  --shadow-xl: 0 2px 0 rgba(0, 0, 0, .4), 0 30px 50px -24px rgba(0, 0, 0, .8);
 }
 
 /* --- Reset -------------------------------------------------------------- */
@@ -221,23 +253,17 @@ a { color: inherit; }
 }
 .skip-link:focus { translate: -50% 0; }
 
+/* Section labels are written by hand in the margin, in the ink of the guest
+   who would say them, rather than set as letter-spaced capitals. */
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  font-size: .78rem;
-  font-weight: 660;
-  letter-spacing: .1em;
-  text-transform: uppercase;
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1;
   color: var(--accent-strong);
-}
-.eyebrow::before {
-  content: "";
-  width: 1.6rem;
-  height: 2px;
-  border-radius: 2px;
-  background: currentColor;
-  opacity: .55;
+  rotate: -1.5deg;
+  transform-origin: left center;
 }
 
 .section-head { max-width: 46rem; margin-bottom: clamp(2.5rem, 2rem + 2vw, 4rem); }
@@ -250,7 +276,7 @@ a { color: inherit; }
   max-width: 42rem;
 }
 .section-head--center { margin-inline: auto; text-align: center; }
-.section-head--center > .eyebrow::before { display: none; }
+.section-head--center > .eyebrow { transform-origin: center; }
 .section-head--center p:not(.eyebrow) { margin-inline: auto; }
 
 /* --- Buttons ------------------------------------------------------------ */
@@ -264,7 +290,7 @@ a { color: inherit; }
   padding: .8rem 1.35rem;
   min-height: 2.95rem;
   border: 1px solid transparent;
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: var(--btn-bg);
   color: var(--btn-fg);
   font: inherit;
@@ -276,10 +302,12 @@ a { color: inherit; }
     box-shadow .18s ease, color .18s ease;
 }
 .btn:hover { background: var(--accent-solid-hover); transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
+.btn:active { transform: translateY(1px); }
 .btn svg { width: 1.15em; height: 1.15em; flex: none; }
 
-.btn--primary { box-shadow: 0 10px 26px -10px color-mix(in oklab, var(--accent-solid) 75%, transparent); }
+.btn--primary { box-shadow: 0 3px 0 var(--accent-edge); }
+.btn--primary:hover { box-shadow: 0 4px 0 var(--accent-edge); }
+.btn--primary:active { box-shadow: 0 1px 0 var(--accent-edge); }
 .btn--lg {
   padding: .95rem 1.7rem;
   min-height: 3.35rem;
@@ -294,6 +322,7 @@ a { color: inherit; }
   --btn-bg: transparent;
   --btn-fg: var(--text);
   border-color: var(--border-strong);
+  border-width: 1.5px;
 }
 .btn--ghost:hover {
   --btn-bg: var(--surface-2);
@@ -315,15 +344,11 @@ a { color: inherit; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in oklab, var(--bg) 82%, transparent);
-  backdrop-filter: saturate(1.6) blur(14px);
+  background: var(--bg);
   border-bottom: 1px solid transparent;
   transition: border-color .2s ease, background-color .2s ease;
 }
-.header[data-stuck="true"] {
-  border-bottom-color: var(--border);
-  background: color-mix(in oklab, var(--bg) 94%, transparent);
-}
+.header[data-stuck="true"] { border-bottom-color: var(--border); }
 .header__inner {
   display: flex;
   align-items: center;
@@ -336,9 +361,10 @@ a { color: inherit; }
   display: inline-flex;
   align-items: center;
   gap: .6rem;
-  font-weight: 700;
-  letter-spacing: -.02em;
-  font-size: 1.06rem;
+  font-family: var(--font-display);
+  font-weight: 760;
+  letter-spacing: -.025em;
+  font-size: 1.15rem;
   text-decoration: none;
   margin-right: auto;
 }
@@ -465,21 +491,6 @@ a { color: inherit; }
   overflow: hidden;
   isolation: isolate;
 }
-.hero::before {
-  content: "";
-  position: absolute;
-  z-index: -2;
-  inset: -30% -10% auto;
-  height: 70rem;
-  background:
-    radial-gradient(46% 40% at 22% 12%, color-mix(in oklab, var(--teal-500) 22%, transparent), transparent 70%),
-    radial-gradient(40% 36% at 82% 4%, color-mix(in oklab, #6366f1 16%, transparent), transparent 72%);
-  filter: blur(4px);
-}
-@media (max-width: 700px) {
-  .hero::before { height: 44rem; }
-}
-
 .hero__grid {
   display: grid;
   gap: clamp(2.5rem, 2rem + 3vw, 4.5rem);
@@ -495,17 +506,16 @@ a { color: inherit; }
   font-weight: 700;
   letter-spacing: -.032em;
 }
+/* The organiser went over the part that matters with a highlighter. The swipe
+   is a skewed band under the lower two thirds of the line, and it clones onto
+   every line the phrase wraps to. */
 .hero h1 em {
   font-style: normal;
-  background: linear-gradient(100deg, var(--teal-600), #4f46e5 90%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-:root[data-theme="dark"] .hero h1 em {
-  background: linear-gradient(100deg, var(--teal-300), #a5b4fc 92%);
-  -webkit-background-clip: text;
-  background-clip: text;
+  padding-inline: .08em;
+  margin-inline: -.08em;
+  background: linear-gradient(-1.5deg, transparent 38%, var(--marker) 38% 88%, transparent 88%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 .hero__lede {
   margin-top: 1.3rem;
@@ -530,12 +540,11 @@ a { color: inherit; }
 }
 
 .trust {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .5rem 1.4rem;
+  display: grid;
+  gap: .45rem;
   margin-top: 2.25rem;
-  padding-top: 1.75rem;
-  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  border-top: 1.5px dashed var(--border-strong);
 }
 .trust li {
   display: flex;
@@ -545,7 +554,16 @@ a { color: inherit; }
   font-weight: 540;
   color: var(--text-muted);
 }
-.trust svg { width: 1.05rem; height: 1.05rem; color: var(--accent); flex: none; }
+.trust li::before {
+  content: "";
+  width: .6rem;
+  height: .6rem;
+  border-radius: 50%;
+  flex: none;
+  background: var(--p1-label);
+}
+.trust li:nth-child(2)::before { background: var(--p2-label); }
+.trust li:nth-child(3)::before { background: var(--p3-label); }
 
 /* --- Video sales letter -------------------------------------------------- */
 /* The hero's pitch, drawn rather than filmed. Six scenes ride one 30-second
@@ -788,27 +806,61 @@ a { color: inherit; }
   box-shadow: var(--shadow-xl);
   overflow: hidden;
 }
+/* The mockups are sheets of the plan, not browser windows: a heading ruled
+   off from the body, and no traffic-light dots. */
 .device__bar {
   display: flex;
   align-items: center;
   gap: .4rem;
-  padding: .7rem .9rem;
-  border-bottom: 1px solid var(--border);
-  background: var(--surface-2);
+  padding: .75rem 1rem .6rem;
+  border-bottom: 1.5px solid var(--border);
 }
-.device__dots { display: flex; gap: .3rem; }
-.device__dots i { width: .55rem; height: .55rem; border-radius: 50%; background: var(--border-strong); }
 .device__title {
-  margin-left: .5rem;
-  font-size: .76rem;
-  font-weight: 600;
-  color: var(--text-faint);
-  letter-spacing: .01em;
+  font-family: var(--font-display);
+  font-size: .86rem;
+  font-weight: 640;
+  color: var(--text-muted);
 }
 .device__body { padding: 1rem; }
 
 .hero__device { rotate: -.6deg; }
 @media (min-width: 1000px) { .hero__device { rotate: -1.1deg; } }
+
+/* A strip of tape holds a sheet to the page. `overflow: hidden` on the sheet
+   would cut it off, so the tape sits on the wrapper around the sheet. */
+.taped { position: relative; }
+.taped::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: -.8rem;
+  left: 50%;
+  width: 7.5rem;
+  height: 1.7rem;
+  translate: -50% 0;
+  rotate: -3deg;
+  background: var(--tape);
+  box-shadow: 0 1px 2px rgba(70, 48, 16, .12);
+  pointer-events: none;
+}
+.taped--right::before { left: auto; right: 1.5rem; translate: none; rotate: 4deg; }
+.taped > .device { rotate: .7deg; }
+.taped--right > .device { rotate: -.7deg; }
+
+/* A handwritten note beside a drawing, with an arrow drawn by the same pen. */
+.note {
+  display: flex;
+  align-items: flex-end;
+  gap: .35rem;
+  margin: 0 0 .6rem 1.25rem;
+  font-family: var(--font-hand);
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.05;
+  color: var(--text-muted);
+  rotate: -2deg;
+}
+.note svg { width: 2.2rem; height: 2rem; flex: none; color: var(--accent); translate: 0 .5rem; }
 
 /* Fake UI atoms shared by every mockup */
 .ui-row { display: flex; align-items: center; gap: .5rem; }
@@ -1046,26 +1098,48 @@ a { color: inherit; }
 @media (min-width: 860px) {
   .split { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 1.5rem; align-items: stretch; }
 }
+/* The organiser's part is a sticky note. The group's part is a page of a
+   French school notebook, with its red margin, and each line is written by a
+   different guest in their own colour. */
 .split__side {
-  padding: 1.5rem;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  background: var(--surface);
+  position: relative;
+  padding: 1.75rem 1.5rem 1.6rem;
+  border-radius: 3px;
+  background: var(--note);
+  color: var(--note-fg);
+  box-shadow: var(--shadow-lg);
+}
+@media (min-width: 860px) {
+  .split__side:not(.split__side--crowd) { rotate: -1.6deg; align-self: start; margin-top: 1rem; }
 }
 .split__side--crowd {
-  border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
-  background: var(--accent-tint);
+  padding-left: clamp(2.25rem, 1.5rem + 3vw, 3.5rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background:
+    linear-gradient(90deg, transparent calc(clamp(2.25rem, 1.5rem + 3vw, 3.5rem) - .9rem),
+      color-mix(in oklab, var(--p1-label) 60%, transparent) 0 calc(clamp(2.25rem, 1.5rem + 3vw, 3.5rem) - .75rem),
+      transparent 0),
+    var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-md);
 }
 .split__who {
-  font-size: .82rem;
-  font-weight: 640;
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  font-weight: 600;
+  line-height: 1.1;
   color: var(--accent-strong);
 }
+.split__side:not(.split__side--crowd) .split__who { color: inherit; opacity: .8; }
 .split__side h3 { margin-top: .35rem; font-size: var(--step-2); }
 .split__list { margin-top: 1.1rem; display: grid; gap: .8rem; }
-.split__list li { display: flex; gap: .6rem; color: var(--text-muted); }
-.split__list svg { width: 1.1rem; height: 1.1rem; color: var(--accent); flex: none; margin-top: .3rem; }
-.split__list strong { color: var(--text); font-weight: 620; }
+.split__list li { display: flex; gap: .7rem; color: var(--text-muted); }
+.split__side:not(.split__side--crowd) .split__list li { color: inherit; }
+.split__list svg { width: 1.1rem; height: 1.1rem; color: currentColor; flex: none; margin-top: .3rem; opacity: .75; }
+.split__list .avatar { margin-top: .1rem; }
+.split__list strong { color: inherit; font-weight: 660; }
+.split__side--crowd .split__list strong { color: var(--text); }
 .step__detail {
   margin-top: .9rem;
   padding-top: .9rem;
@@ -1296,30 +1370,27 @@ kbd {
   isolation: isolate;
   padding-block: clamp(4rem, 3rem + 5vw, 6.5rem);
   text-align: center;
-  color: #f8fafc;
-  background: linear-gradient(160deg, var(--slate-900), #0b2b31 60%, #0b4f4a);
+  color: #f6f0e4;
+  background: #16302f;
 }
-.cta::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(40% 55% at 78% 12%, rgba(45, 212, 191, .3), transparent 70%),
-    radial-gradient(46% 50% at 12% 88%, rgba(99, 102, 241, .26), transparent 70%);
-}
+:root[data-theme="dark"] .cta { background: #0e2422; }
+/* The house from the logo, drawn in chalk, with a light on in each window
+   in a guest's colour. */
+.cta__house { width: 7.5rem; height: auto; margin: 0 auto 1.75rem; color: #f6f0e4; }
+.btn--light { --btn-bg: #f6f0e4; --btn-fg: #16302f; box-shadow: 0 3px 0 #8fa39d; }
+.btn--light:hover { background: #fffcf5; }
 .cta h2 { font-size: var(--step-3); }
 .cta p {
   margin: 1.1rem auto 0;
   max-width: 34rem;
   font-size: var(--step-1);
-  color: #c9d6e4;
+  color: #d6dcd4;
 }
 .cta__actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; margin-top: 2.25rem; }
 .cta .btn--ghost { --btn-fg: #f8fafc; border-color: rgba(248, 250, 252, .35); }
 .cta .btn--ghost:hover { --btn-bg: rgba(248, 250, 252, .1); border-color: rgba(248, 250, 252, .6); }
 /* `.cta p` is more specific, so this needs the parent to win the colour. */
-.cta .cta__fine { margin-top: 1.4rem; font-size: .85rem; color: var(--slate-200); }
+.cta .cta__fine { margin-top: 1.4rem; font-size: .85rem; color: #e4e0d4; }
 
 /* --- Footer ------------------------------------------------------------- */
 .footer {
@@ -1409,21 +1480,30 @@ kbd {
 /* --- Reviews ------------------------------------------------------------ */
 /* Deliberately thin. Most readers never reach it; it is there for the ones
    who read everything, so it costs one screen at most. */
-.reviews { padding-block: clamp(2.5rem, 1.5rem + 3vw, 4rem); border-block: 1px solid var(--border); }
+.reviews { padding-block: clamp(3rem, 2rem + 3vw, 5rem); border-block: 1px solid var(--border); }
 .reviews__list { display: grid; gap: 1.25rem 2.5rem; }
 @media (min-width: 820px) {
   .reviews__list { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; }
   .review--lead { grid-row: span 2; }
 }
 .review p:first-child { font-size: .98rem; line-height: 1.55; text-wrap: pretty; }
-.review--lead p:first-child {
-  font-family: var(--font-display);
-  font-size: var(--step-2);
-  font-weight: 560;
-  line-height: 1.25;
-  letter-spacing: -.015em;
+.review--lead {
+  padding: 1.75rem 1.75rem 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  box-shadow: var(--shadow-lg);
+  rotate: -1deg;
 }
-.review:not(.review--lead) { padding-left: 1rem; border-left: 2px solid var(--border); }
+.review--lead p:first-child {
+  font-family: var(--font-hand);
+  font-size: clamp(1.9rem, 1.5rem + 1.4vw, 2.6rem);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--text);
+}
+.review:not(.review--lead) { padding-left: 1rem; border-left: 3px solid var(--p4-label); }
+.review:nth-child(3) { border-left-color: var(--p5-label); }
 .review__who {
   margin-top: .75rem;
   display: flex;

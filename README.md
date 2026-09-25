@@ -24,14 +24,18 @@ assets/i18n/fr.js            French copy (English lives in index.html)
 assets/analytics-config.js   PostHog key + persistence choice
 assets/analytics.js          PostHog loader
 assets/img/                  logo, favicon, icons, Open Graph image
-assets/fonts/                Bricolage Grotesque + Instrument Sans (self-hosted)
+assets/fonts/                Bricolage Grotesque, Instrument Sans, Caveat (self-hosted)
 CNAME                        www.kikouchou.app
 site.webmanifest             icon + name metadata for the browser
 sitemap.xml robots.txt
 ```
 
-Design tokens (teal `#14b8a6` on slate `#0f172a`, the guest colour palette) are
-taken from the app itself so the site and the product look like one thing.
+The design reads as the paper plan a group pins to the fridge: warm paper
+(`#f6f0e4`), dark teal ink (`#16302f`, the app's primary), a highlighter swipe,
+sheets held on with tape, and a few notes written by hand in Caveat. The teal
+accent and the guest colour palette are taken from the app itself, so the site
+and the product look like one thing. Dark mode is the same house after dinner:
+warm dark wood, not slate.
 
 ### Working on it locally
 
