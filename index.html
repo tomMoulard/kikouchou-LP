@@ -73,7 +73,7 @@ function gtag_report_conversion(url) {
 
     /* A middle click, a modifier click or target="_blank" leaves this page
        open, and something else may already have cancelled the navigation. In
-       those cases report the conversion and let the browser do its own thing —
+       those cases report the conversion and let the browser do its own thing:
        taking over window.location here would break the new tab. */
     var keepsPage =
       e.defaultPrevented || e.button !== 0 ||
@@ -98,7 +98,7 @@ function gtag_report_conversion(url) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Kikouchou — Who sleeps where, and who picks up whom</title>
+<title>Kikouchou: who sleeps where, and who picks up whom</title>
 <meta name="description" content="Plan a group holiday together: who sleeps in which room, who arrives when, who picks up whom at the station, and who owes what. Free and open source.">
 
 <link rel="canonical" href="https://www.kikouchou.app/">
@@ -113,8 +113,8 @@ function gtag_report_conversion(url) {
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kikouchou">
 <meta property="og:url" content="https://www.kikouchou.app/">
-<meta property="og:title" content="Kikouchou — Who sleeps where, and who picks up whom">
-<meta property="og:description" content="Rooms, arrivals, lifts and the shared money for a group holiday — so it is not all in one person’s head. Free, offline-first, open source.">
+<meta property="og:title" content="Kikouchou: who sleeps where, and who picks up whom">
+<meta property="og:description" content="Rooms, arrivals, lifts and the shared money for a group holiday, on one plan instead of in one person’s head. It costs nothing to use.">
 <meta property="og:image" content="https://www.kikouchou.app/assets/img/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -122,8 +122,8 @@ function gtag_report_conversion(url) {
 <meta property="og:locale" content="en_GB">
 <meta property="og:locale:alternate" content="fr_FR">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Kikouchou — Who sleeps where, and who picks up whom">
-<meta name="twitter:description" content="Rooms, arrivals, lifts and the shared money for a group holiday — so it is not all in one person’s head. Free and offline-first.">
+<meta name="twitter:title" content="Kikouchou: who sleeps where, and who picks up whom">
+<meta name="twitter:description" content="Rooms, arrivals, lifts and the shared money for a group holiday, on one plan instead of in one person’s head. It costs nothing to use.">
 <meta name="twitter:image" content="https://www.kikouchou.app/assets/img/og.png">
 
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
@@ -133,6 +133,8 @@ function gtag_report_conversion(url) {
 <!-- Warms the TLS connection to the app before the visitor clicks through.
      No `crossorigin`: this is a navigation target, not a CORS fetch. -->
 <link rel="preconnect" href="https://app.kikouchou.app">
+<link rel="preload" href="/assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/styles.css">
 
 <script>
@@ -232,7 +234,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <header class="header" id="header">
   <div class="container header__inner">
-    <a class="brand" href="/" aria-label="Kikouchou — home">
+    <a class="brand" href="/" aria-label="Kikouchou home page">
       <img src="/assets/img/logo.svg" width="32" height="32" alt="">
       <span>Kikouchou</span>
     </a>
@@ -279,23 +281,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="hero">
   <div class="container hero__grid">
     <div>
-      <p class="pill">
-        <b data-i18n="hero.badge">Free</b>
-        <span data-i18n="hero.badgeText">Open source · Works offline · No account to start</span>
-      </p>
-
       <h1 data-i18n-html="hero.title">Who sleeps where, and <em>who picks up whom</em>.</h1>
 
       <p class="hero__lede" data-i18n="hero.lede">
         You have rented a house with friends. Eleven people, six rooms, arrivals spread
         over four days and three trains to meet at the station. Kikouchou gets all of
-        that out of one person’s head and onto a plan everyone can see — and fill in
+        that out of one person’s head and onto a plan everyone can see and fill in
         themselves.
       </p>
 
       <div class="hero__cta">
         <a class="btn btn--primary btn--lg" href="https://app.kikouchou.app" data-cta="hero">
-          <span data-i18n="cta.openFree">Open the app — it’s free</span>
+          <span data-i18n="cta.openFree">Open the app, it’s free</span>
           <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
         </a>
         <a class="btn btn--ghost btn--lg" href="#how">
@@ -324,7 +321,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            Timing contract: every element shares `animation-duration: 30s` and is
            placed in time by its `animation-delay` alone. Scene N starts at N×5s,
            so a beat inside scene 3 (10s) is written as 10s + its own offset. Keep
-           the keyframe windows short and terminal — they must hold their end
+           the keyframe windows short and terminal: they must hold their end
            state to 100%, because the clock does not restart per scene. -->
       <figure class="vsl" id="vsl">
         <div class="device hero__device">
@@ -337,7 +334,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                  aria-label="An animation: a group chat filling with unanswered questions, then the same trip laid out in Kikouchou as rooms, lifts and shared money."
                  data-i18n-aria="vsl.alt">
 
-              <!-- ========== Scene 1 · 0s — the group chat ========== -->
+              <!-- ========== Scene 1 · 0s · the group chat ========== -->
               <g class="vsl__scene" style="animation-delay:0s">
                 <text class="vsl__eyebrow" x="28" y="40" data-i18n="vsl.s1eyebrow">Friday, 18:02 · the group chat</text>
                 <text class="vsl__h" x="28" y="90" data-i18n="vsl.s1line1">Eleven people. Six rooms.</text>
@@ -363,7 +360,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                       style="animation-delay:3.3s" data-i18n="vsl.s1count">312 messages · 0 answers</text>
               </g>
 
-              <!-- ========== Scene 2 · 5s — the mental load ========== -->
+              <!-- ========== Scene 2 · 5s · the mental load ========== -->
               <g class="vsl__scene" style="animation-delay:5s">
                 <text class="vsl__eyebrow" x="28" y="40" data-i18n="vsl.s2eyebrow">Four days later</text>
                 <text class="vsl__h" x="28" y="90" data-i18n="vsl.s2line1">All of it is in one head.</text>
@@ -398,11 +395,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <g class="vsl__rise" style="animation-delay:7.2s">
                   <rect class="vsl__chip vsl__chip--warn" x="150" y="344" width="340" height="40" rx="14"/>
                   <text class="vsl__chip-text vsl__chip-text--warn" x="320" y="369" text-anchor="middle"
-                        data-i18n="vsl.s2chip">22:40 — Clémentine is still at the station.</text>
+                        data-i18n="vsl.s2chip">22:40. Clémentine is still at the station.</text>
                 </g>
               </g>
 
-              <!-- ========== Scene 3 · 10s — one link ========== -->
+              <!-- ========== Scene 3 · 10s · one link ========== -->
               <g class="vsl__scene" style="animation-delay:10s">
                 <text class="vsl__eyebrow" x="28" y="40" data-i18n="vsl.s3eyebrow">The whole trick</text>
                 <text class="vsl__h" x="28" y="90" data-i18n="vsl.s3line1">You send one link.</text>
@@ -446,7 +443,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                       style="animation-delay:12.9s" data-i18n="vsl.s3meta">No account asked for, and nothing to install.</text>
               </g>
 
-              <!-- ========== Scene 4 · 15s — the plan draws itself ========== -->
+              <!-- ========== Scene 4 · 15s · the plan draws itself ========== -->
               <g class="vsl__scene vsl__scene--still" style="animation-delay:15s">
                 <text class="vsl__eyebrow" x="28" y="36" data-i18n="vsl.s4eyebrow">Two minutes later</text>
                 <text class="vsl__h vsl__h--sm" x="28" y="78" data-i18n="vsl.s4line1">Who sleeps where: settled.</text>
@@ -514,7 +511,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </g>
               </g>
 
-              <!-- ========== Scene 5 · 20s — lifts, money, no signal ========== -->
+              <!-- ========== Scene 5 · 20s · lifts, money, no signal ========== -->
               <g class="vsl__scene" style="animation-delay:20s">
                 <text class="vsl__eyebrow" x="28" y="36" data-i18n="vsl.s5eyebrow">And the rest of the load</text>
                 <text class="vsl__h vsl__h--sm" x="28" y="78" data-i18n="vsl.s5line1">Lifts, money, and no signal.</text>
@@ -522,7 +519,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <g class="vsl__rise" style="animation-delay:20.5s">
                   <rect class="vsl__card" x="28" y="100" width="584" height="84" rx="16"/>
                   <use class="vsl__icon" href="#i-train" x="52" y="130" width="22" height="22"/>
-                  <text class="vsl__card-title" x="90" y="134" data-i18n="mock.legendTrain">Thu 14 · 22:40 · Clémentine, TGV 8541 — Vannes</text>
+                  <text class="vsl__card-title" x="90" y="134" data-i18n="mock.legendTrain">Thu 14 · 22:40 · Clémentine, TGV 8541 to Vannes</text>
                   <text class="vsl__card-meta" x="90" y="160" data-i18n="vsl.s5pickup">Guillaume is driving. He leaves at 22:10.</text>
                   <g class="vsl__chip-extra">
                     <rect class="vsl__chip vsl__chip--warn" x="424" y="148" width="164" height="26" rx="13"/>
@@ -546,7 +543,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </g>
               </g>
 
-              <!-- ========== Scene 6 · 25s — the ask ========== -->
+              <!-- ========== Scene 6 · 25s · the ask ========== -->
               <g class="vsl__scene" style="animation-delay:25s">
                 <text class="vsl__eyebrow" x="320" y="112" text-anchor="middle" data-i18n="vsl.s6eyebrow">Kikouchou</text>
                 <text class="vsl__h" x="320" y="164" text-anchor="middle" data-i18n="vsl.s6line1">Stop being the group’s spreadsheet.</text>
@@ -555,12 +552,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <g class="vsl__pop" style="animation-delay:25.7s">
                   <rect class="vsl__cta-glow" x="126" y="230" width="388" height="84" rx="26"/>
                   <rect class="vsl__cta" x="140" y="240" width="360" height="64" rx="20"/>
-                  <text class="vsl__cta-text" x="296" y="279" text-anchor="middle" data-i18n="cta.openFree">Open the app — it’s free</text>
+                  <text class="vsl__cta-text" x="296" y="279" text-anchor="middle" data-i18n="cta.openFree">Open the app, it’s free</text>
                   <use class="vsl__cta-arrow" href="#i-arrow-right" x="452" y="260" width="24" height="24"/>
                 </g>
 
                 <text class="vsl__meta vsl__rise" x="320" y="348" text-anchor="middle"
-                      style="animation-delay:26.2s" data-i18n="vsl.s6meta">Free · open source · works offline · no account to start</text>
+                      style="animation-delay:26.2s" data-i18n="vsl.s6meta">No account to start, and the code is on GitHub</text>
               </g>
             </svg>
 
@@ -594,12 +591,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <!-- The letter itself, for screen readers, for a visitor who never
              watches an animation, and for search engines. -->
         <figcaption class="sr-only" data-i18n="vsl.transcript">
-          Eleven people, six rooms, four days of arrivals — and one person holding
+          Eleven people, six rooms, four days of arrivals, and one person holding
           all of it in their head while three hundred messages go unanswered. Kikouchou
           turns that into one link. Everyone opens it and fills in their own part:
           the rooms, the arrival times, the lifts from the station and the shared
           money. Nothing to install, no account to start, and it still opens when
-          the gîte has no signal. Open the app, it is free and open source.
+          the gîte has no signal. Open the app. It costs nothing.
         </figcaption>
       </figure>
     </div>
@@ -610,29 +607,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="section-head section-head--center">
       <p class="eyebrow" data-i18n="how.eyebrow">How it works</p>
-      <h2 data-i18n="how.title">Three steps, and the organiser stops being a switchboard.</h2>
+      <h2 data-i18n="how.title">You spend two minutes on it. The group does the rest.</h2>
     </div>
 
-    <ol class="steps">
-      <li class="step" data-reveal>
-        <h3 data-i18n="how.s1t">Create the trip</h3>
-        <p data-i18n="how.s1d">Name, dates, and the rooms with their beds. Two minutes.</p>
-      </li>
+    <!-- Two unequal halves, not numbered steps: the organiser's part is short
+         on purpose, and the layout says so before anyone reads it. -->
+    <div class="split">
+      <div class="split__side" data-reveal>
+        <p class="split__who" data-i18n="how.youWho">You, the organiser</p>
+        <h3 data-i18n="how.youT">Set it up once</h3>
+        <ul class="split__list">
+          <li><svg aria-hidden="true"><use href="#i-bed"/></svg><span data-i18n-html="how.you1"><strong>Create the trip.</strong> Name, dates, and the rooms with their beds.</span></li>
+          <li><svg aria-hidden="true"><use href="#i-share"/></svg><span data-i18n-html="how.you2"><strong>Paste the link in the group chat.</strong> That is your last logistics message.</span></li>
+        </ul>
+      </div>
 
-      <li class="step" data-reveal>
-        <h3 data-i18n="how.s2t">Share one link</h3>
-        <p data-i18n="how.s2d">Drop it in the group chat. That is your last logistics message.</p>
-      </li>
-
-      <li class="step" data-reveal>
-        <h3 data-i18n="how.s3t">Everyone fills in their own part</h3>
-        <p data-i18n="how.s3d">They claim a bed, add their train, and say if they need a lift.</p>
-      </li>
-    </ol>
+      <div class="split__side split__side--crowd" data-reveal>
+        <p class="split__who" data-i18n="how.crowdWho">Everyone else, on their own phone</p>
+        <h3 data-i18n="how.crowdT">They fill in their own part</h3>
+        <ul class="split__list">
+          <li><svg aria-hidden="true"><use href="#i-bed"/></svg><span data-i18n-html="how.c1"><strong>Claim a bed</strong> for the nights they are there.</span></li>
+          <li><svg aria-hidden="true"><use href="#i-train"/></svg><span data-i18n-html="how.c2"><strong>Add their train</strong> or the time they drive in.</span></li>
+          <li><svg aria-hidden="true"><use href="#i-car"/></svg><span data-i18n-html="how.c3"><strong>Ask for a lift</strong> from the station, or offer one.</span></li>
+          <li><svg aria-hidden="true"><use href="#i-wallet"/></svg><span data-i18n-html="how.c4"><strong>Log what they paid</strong> for the groceries or the wood.</span></li>
+        </ul>
+      </div>
+    </div>
 
     <p class="section-cta">
       <a class="btn btn--primary btn--lg" href="https://app.kikouchou.app" data-cta="how">
-        <span data-i18n="cta.start">Create your trip — it’s free</span>
+        <span data-i18n="cta.start">Create your trip, it’s free</span>
         <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
       </a>
     </p>
@@ -796,7 +800,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="reviews">
   <div class="container">
     <ul class="reviews__list">
-      <li class="review" data-reveal>
+      <li class="review review--lead" data-reveal>
         <p data-i18n="rev.q1">“Eleven of us in the Morbihan. Nobody asked me who was sleeping where. Once.”</p>
         <p class="review__who"><span class="avatar" data-initial style="background:var(--p2-label)" aria-hidden="true"></span><span data-i18n="rev.a1">Aurélia · summer house</span></p>
       </li>
@@ -822,12 +826,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="cta__actions">
       <a class="btn btn--lg" href="https://app.kikouchou.app" data-cta="cta-band"
          style="--btn-bg:#f8fafc;--btn-fg:#0f172a">
-        <span data-i18n="cta.openFree">Open the app — it’s free</span>
+        <span data-i18n="cta.openFree">Open the app, it’s free</span>
         <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
       </a>
       <!-- Straight into the app with the install banner primed, rather than back
            up to the steps: on Chromium the app can offer the real install
-           prompt, and on Safari and Firefox — where no prompt exists — it shows
+           prompt, and on Safari and Firefox (where no prompt exists) it shows
            the steps for that browser itself. The nav's "Install" link still
            reaches the section above for anyone who wants to read first. -->
       <a class="btn btn--ghost btn--lg" href="https://app.kikouchou.app/?install=1" data-cta="install">
@@ -836,7 +840,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </a>
     </div>
     <p class="cta__fine" data-i18n="final.fine">
-      Free, open source and offline-first. An account only when you edit together.
+      The plan opens with no signal. You need an account only to edit it with others.
     </p>
   </div>
 </section>
@@ -848,13 +852,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="container">
     <div class="footer__grid">
       <div class="footer__about">
-        <a class="brand" href="/" aria-label="Kikouchou — home">
+        <a class="brand" href="/" aria-label="Kikouchou home page">
           <img src="/assets/img/logo.svg" width="32" height="32" alt="">
           <span>Kikouchou</span>
         </a>
         <p data-i18n="footer.about">
-          A small, free, offline-first app for the least restful part of a group holiday:
-          who sleeps where, and who is picking up whom — so it is not all in one
+          A small app for the least restful part of a group holiday:
+          who sleeps where, and who is picking up whom. Then it is not all in one
           person’s head.
         </p>
       </div>
@@ -876,7 +880,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <h2 data-i18n="footer.good">Good to know</h2>
         <ul class="footer__notes">
           <li data-i18n="footer.privacy">Your trip is stored on your own device. An account only when you edit together, on European servers.</li>
-          <li><a href="https://app.kikouchou.app/?install=1" data-cta="footer-install" data-i18n="footer.install">Install it on your home screen — iPhone, Android or desktop</a></li>
+          <li><a href="https://app.kikouchou.app/?install=1" data-cta="footer-install" data-i18n="footer.install">Install it on the home screen of your iPhone, Android phone or computer</a></li>
           <li data-i18n="footer.free">Free, open source, no ads and no tracking of what is in your trip.</li>
           <li><a href="https://github.com/tomMoulard/kikoushou/issues" rel="noopener" data-i18n="footer.ask">A question? Ask it on GitHub.</a></li>
         </ul>
@@ -894,7 +898,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
 
     <div class="footer__bottom">
-      <p data-i18n="footer.copy">Kikouchou — free and open source. Built for real holidays.</p>
+      <p data-i18n="footer.copy">Kikouchou, built for real holidays.</p>
       <p><a href="https://github.com/tomMoulard" rel="noopener">tomMoulard</a></p>
     </div>
   </div>
@@ -911,7 +915,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
      No <noscript> beacon beside it, deliberately. That form of the pixel is an
      <img> the browser fetches before any script can decide whether it should,
      so it would report a local checkout with JavaScript off to the live ad
-     account — and it measures only visitors who ran no JavaScript, who are not
+     account, and it measures only visitors who ran no JavaScript, who are not
      an audience this page can convert anyway. -->
 <script src="/assets/meta-pixel.js" defer></script>
 </body>

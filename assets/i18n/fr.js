@@ -14,7 +14,7 @@
 window.KKC_I18N = window.KKC_I18N || {};
 window.KKC_I18N.fr = {
   "html.lang": "fr",
-  "html.title": "Kikouchou — Qui dort où, et qui va chercher qui",
+  "html.title": "Kikouchou : qui dort où, et qui va chercher qui",
   "html.description": "Kikouchou enlève la charge mentale des vacances en groupe à la personne qui organise : chambres, arrivées, trajets en voiture et argent du groupe sur un seul plan partagé que chacun remplit lui-même. Gratuit, hors ligne, open source.",
 
   "nav.skip": "Aller au contenu",
@@ -28,12 +28,10 @@ window.KKC_I18N.fr = {
 
   "a11y.menu": "Menu",
 
-  "hero.badge": "Gratuit",
-  "hero.badgeText": "Open source · Fonctionne hors ligne · Sans compte pour commencer",
   "hero.title": "Qui dort où, et <em>qui va chercher qui</em>.",
-  "hero.lede": "Vous avez loué une maison entre amis. Onze personnes, six chambres, des arrivées étalées sur quatre jours et trois trains à aller chercher à la gare. Kikouchou sort tout ça de la tête d’une seule personne et le pose sur un plan que tout le monde voit — et remplit lui-même.",
+  "hero.lede": "Vous avez loué une maison entre amis. Onze personnes, six chambres, des arrivées étalées sur quatre jours et trois trains à aller chercher à la gare. Kikouchou sort tout ça de la tête d’une seule personne et le pose sur un plan que tout le monde voit et remplit lui-même.",
 
-  "cta.openFree": "Ouvrir l’app — c’est gratuit",
+  "cta.openFree": "Ouvrir l’app, c’est gratuit",
   "cta.see": "Voir comment ça marche",
 
   "hero.note": "Rien à installer, rien à payer. Créez un voyage : il est déjà enregistré sur votre appareil.",
@@ -42,7 +40,7 @@ window.KKC_I18N.fr = {
   "hero.trust3": "Fonctionne sans réseau au fond du gîte",
 
   "vsl.title": "Pourquoi Kikouchou existe · 30 secondes, sans son",
-  "vsl.alt": "Une animation : une conversation de groupe qui se remplit de questions sans réponse, puis le même voyage posé dans Kikouchou — chambres, trajets et argent du groupe.",
+  "vsl.alt": "Une animation : une conversation de groupe qui se remplit de questions sans réponse, puis le même voyage posé dans Kikouchou avec les chambres, les trajets et l’argent du groupe.",
   "vsl.s1eyebrow": "Vendredi, 18h02 · la conversation de groupe",
   "vsl.s1line1": "Onze personnes. Six chambres.",
   "vsl.s1line2": "Quatre jours d’arrivées.",
@@ -55,7 +53,7 @@ window.KKC_I18N.fr = {
   "vsl.s2line1": "Tout tient dans une seule tête.",
   "vsl.s2line2": "Et cette tête est censée être en vacances.",
   "vsl.s2who": "Aurélia · celle qui a réservé",
-  "vsl.s2chip": "22h40 — Zoé attend toujours à la gare.",
+  "vsl.s2chip": "22h40. Zoé attend toujours à la gare.",
   "vsl.s3eyebrow": "Toute l’astuce",
   "vsl.s3line1": "Vous envoyez un seul lien.",
   "vsl.s3line2": "Chacun remplit sa propre partie.",
@@ -89,7 +87,7 @@ window.KKC_I18N.fr = {
   "vsl.s5eyebrow": "Et le reste de la charge",
   "vsl.s5line1": "Trajets, argent, sans réseau.",
 
-  "mock.legendTrain": "Jeu 14 · 22h40 · Zoé, TGV 8541 — Vannes",
+  "mock.legendTrain": "Jeu 14 · 22h40 · Zoé, TGV 8541 pour Vannes",
 
   "vsl.s5pickup": "Martin conduit. Il part à 22h10.",
 
@@ -102,21 +100,25 @@ window.KKC_I18N.fr = {
   "vsl.s6eyebrow": "Kikouchou",
   "vsl.s6line1": "Arrêtez d’être le tableur du groupe.",
   "vsl.s6line2": "Vos prochaines vacances, remplies par tout le monde.",
-  "vsl.s6meta": "Gratuit · open source · hors ligne · sans compte pour commencer",
+  "vsl.s6meta": "Sans compte pour commencer, et le code est sur GitHub",
   "vsl.pause": "Mettre l’animation en pause",
   "vsl.play": "Lancer l’animation",
-  "vsl.transcript": "Onze personnes, six chambres, quatre jours d’arrivées — et une seule personne qui garde tout ça en tête pendant que trois cents messages restent sans réponse. Kikouchou transforme ça en un seul lien. Chacun l’ouvre et remplit sa propre partie : les chambres, les heures d’arrivée, les trajets depuis la gare et l’argent du groupe. Rien à installer, pas de compte pour commencer, et ça s’ouvre même quand le gîte n’a pas de réseau. Ouvrez l’app : c’est gratuit et open source.",
+  "vsl.transcript": "Onze personnes, six chambres, quatre jours d’arrivées, et une seule personne qui garde tout ça en tête pendant que trois cents messages restent sans réponse. Kikouchou transforme ça en un seul lien. Chacun l’ouvre et remplit sa propre partie : les chambres, les heures d’arrivée, les trajets depuis la gare et l’argent du groupe. Rien à installer, pas de compte pour commencer, et ça s’ouvre même quand le gîte n’a pas de réseau. Ouvrez l’app. Elle ne coûte rien.",
 
   "how.eyebrow": "Comment ça marche",
-  "how.title": "Trois étapes, et l’organisateur cesse d’être un standard téléphonique.",
-  "how.s1t": "Créez le voyage",
-  "how.s1d": "Nom, dates, et les chambres avec leurs lits. Deux minutes.",
-  "how.s2t": "Partagez un lien",
-  "how.s2d": "Envoyez-le dans la conversation de groupe. C’est votre dernier message de logistique.",
-  "how.s3t": "Chacun remplit sa partie",
-  "how.s3d": "Chacun réserve son lit, ajoute son train, et dit s’il a besoin qu’on vienne le chercher.",
+  "how.title": "Vous y passez deux minutes. Le groupe fait le reste.",
+  "how.youWho": "Vous, l’organisateur",
+  "how.youT": "Vous préparez le voyage une fois",
+  "how.you1": "<strong>Créez le voyage.</strong> Nom, dates, et les chambres avec leurs lits.",
+  "how.you2": "<strong>Collez le lien dans la conversation de groupe.</strong> C’est votre dernier message de logistique.",
+  "how.crowdWho": "Tous les autres, chacun sur son téléphone",
+  "how.crowdT": "Chacun remplit sa partie",
+  "how.c1": "<strong>Il réserve un lit</strong> pour les nuits où il est là.",
+  "how.c2": "<strong>Il ajoute son train</strong> ou son heure d’arrivée en voiture.",
+  "how.c3": "<strong>Il demande qu’on vienne le chercher</strong> à la gare, ou propose de le faire.",
+  "how.c4": "<strong>Il note ce qu’il a payé</strong> pour les courses ou le bois.",
 
-  "cta.start": "Créer votre voyage — c’est gratuit",
+  "cta.start": "Créer votre voyage, c’est gratuit",
 
   "rooms.eyebrow": "Chambres et lits",
   "rooms.title": "Chaque lit, chaque nuit, sur un seul tableau.",
@@ -190,13 +192,13 @@ window.KKC_I18N.fr = {
 
   "cta.install": "Installer sur votre téléphone",
 
-  "final.fine": "Gratuit, open source et hors ligne d’abord. Un compte seulement pour modifier à plusieurs.",
+  "final.fine": "Le plan s’ouvre sans réseau. Un compte ne sert qu’à le modifier à plusieurs.",
 
-  "footer.about": "Une petite app gratuite et hors ligne pour la partie la moins reposante des vacances en groupe : qui dort où, et qui va chercher qui — pour que tout ne repose pas sur une seule tête.",
+  "footer.about": "Une petite app pour la partie la moins reposante des vacances en groupe : qui dort où, et qui va chercher qui. Comme ça, tout ne repose pas sur une seule tête.",
   "footer.product": "Produit",
   "footer.good": "Bon à savoir",
   "footer.privacy": "Votre voyage est enregistré sur votre appareil. Un compte seulement quand vous éditez à plusieurs, sur des serveurs européens.",
-  "footer.install": "Installez-le sur votre écran d’accueil — iPhone, Android ou ordinateur",
+  "footer.install": "Installez-le sur l’écran d’accueil de votre iPhone, de votre Android ou de votre ordinateur",
   "footer.free": "Gratuit, open source, sans publicité et sans pistage de ce qu’il y a dans votre voyage.",
   "footer.ask": "Une question ? Posez-la sur GitHub.",
   "footer.project": "Projet",
@@ -204,5 +206,5 @@ window.KKC_I18N.fr = {
   "footer.issues": "Signaler un problème",
   "footer.licence": "Licence MIT",
   "footer.instagram": "Instagram",
-  "footer.copy": "Kikouchou — gratuit et open source. Fait pour de vraies vacances.",
+  "footer.copy": "Kikouchou, fait pour de vraies vacances.",
 };

@@ -24,6 +24,7 @@ assets/i18n/fr.js            French copy (English lives in index.html)
 assets/analytics-config.js   PostHog key + persistence choice
 assets/analytics.js          PostHog loader
 assets/img/                  logo, favicon, icons, Open Graph image
+assets/fonts/                Bricolage Grotesque + Instrument Sans (self-hosted)
 CNAME                        www.kikouchou.app
 site.webmanifest             icon + name metadata for the browser
 sitemap.xml robots.txt

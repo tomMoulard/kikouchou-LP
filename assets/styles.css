@@ -1,9 +1,28 @@
 /* ==========================================================================
-   Kikouchou — landing page
+   Kikouchou landing page
    Design tokens are derived from the app itself: teal #14b8a6 on slate #0f172a
    (see the PWA icon and `--primary: oklch(.25 .04 185)` in the app's index.css),
    so the site and the product read as one thing.
    ========================================================================== */
+
+/* --- Fonts -------------------------------------------------------------- */
+/* Self-hosted, Latin subset (it holds the French accents, œ and €). Bricolage
+   Grotesque sets the headings, Instrument Sans the running text. Both are
+   variable fonts under the SIL Open Font License. */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/bricolage-grotesque.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Instrument Sans";
+  src: url("/assets/fonts/instrument-sans.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* --- Tokens ------------------------------------------------------------- */
 :root {
@@ -29,7 +48,7 @@
   /* Guest colours, from the app's person palette. `--pN` is the neat hue, used
      for tints. `--pN-label` is the shade that actually carries a label, and it
      flips with the theme: deep hues under white text on a light card, bright
-     hues under dark text on a dark one. One fixed palette cannot do both — a
+     hues under dark text on a dark one. One fixed palette cannot do both: a
      shade dark enough for white text disappears against a dark card, and a
      bright one fails under white text (#22c55e + white is only 2.3:1). */
   --p1: #ef4444;  --p1-label: #c62828;
@@ -81,8 +100,9 @@
   --gutter: clamp(1.25rem, 1rem + 2vw, 2.5rem);
   --section-y: clamp(4.5rem, 3rem + 7vw, 8rem);
 
-  --font: "Inter var", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  --font: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --font-display: "Bricolage Grotesque", var(--font);
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 }
 
@@ -144,6 +164,7 @@ body {
 
 h1, h2, h3, h4 {
   margin: 0;
+  font-family: var(--font-display);
   line-height: 1.12;
   letter-spacing: -.022em;
   font-weight: 680;
@@ -263,7 +284,7 @@ a { color: inherit; }
   padding: .95rem 1.7rem;
   min-height: 3.35rem;
   font-size: var(--step-1);
-  /* The big CTAs carry a whole sentence ("Ouvrir l'app — c'est gratuit"), whose
+  /* The big CTAs carry a whole sentence ("Ouvrir l'app, c'est gratuit"), whose
      min-content width would otherwise widen the hero grid on a 320px screen. */
   white-space: normal;
   text-align: center;
@@ -455,24 +476,7 @@ a { color: inherit; }
     radial-gradient(40% 36% at 82% 4%, color-mix(in oklab, #6366f1 16%, transparent), transparent 72%);
   filter: blur(4px);
 }
-.hero::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, color-mix(in oklab, var(--text) 6%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklab, var(--text) 6%, transparent) 1px, transparent 1px);
-  background-size: 64px 64px;
-  mask-image: radial-gradient(120% 80% at 50% 0%, #000 20%, transparent 72%);
-}
-/* On a narrow, tall viewport the same mask reaches far down the copy, so pull
-   the grid back to a header flourish. */
 @media (max-width: 700px) {
-  .hero::after {
-    background-size: 40px 40px;
-    mask-image: radial-gradient(130% 42% at 50% 0%, #000 8%, transparent 62%);
-  }
   .hero::before { height: 44rem; }
 }
 
@@ -525,31 +529,6 @@ a { color: inherit; }
   color: var(--text-faint);
 }
 
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
-  padding: .4rem .85rem .4rem .55rem;
-  margin-bottom: 1.5rem;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  font-size: .84rem;
-  font-weight: 560;
-  color: var(--text-muted);
-}
-.pill b {
-  padding: .1rem .5rem;
-  border-radius: 999px;
-  background: var(--accent-tint);
-  color: var(--accent-strong);
-  font-size: .74rem;
-  font-weight: 680;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-}
-
 .trust {
   display: flex;
   flex-wrap: wrap;
@@ -571,8 +550,8 @@ a { color: inherit; }
 /* --- Video sales letter -------------------------------------------------- */
 /* The hero's pitch, drawn rather than filmed. Six scenes ride one 30-second
    clock: every animated node shares `--vsl-dur` and is placed in time by its
-   own `animation-delay`, so nothing can drift out of step — not the scenes
-   against each other, and not the progress bar against the scenes.
+   own `animation-delay`, so nothing can drift out of step: neither the scenes
+   against each other, nor the progress bar against the scenes.
 
    Keyframe windows are therefore written as a percentage of the whole 30s
    (1s = 3.333%) and every one of them holds its end state through 100%: the
@@ -714,7 +693,7 @@ a { color: inherit; }
   /* A drawing cannot reflow. On a phone the stage is about half the width it
      has in the hero, so the day heads, the room names written inside the bars
      and the chips that sit beside a card's own line of text stop being
-     readable — they are dropped rather than shown as grey noise. The bars
+     readable, so they are dropped rather than shown as grey noise. The bars
      still say who is in the house and for how long. */
   .vsl__day, .vsl__bar-label, .vsl__chip-extra { display: none; }
 }
@@ -788,7 +767,7 @@ a { color: inherit; }
 
 /* Reduced motion gets the payoff scene as a still frame. The global rule in
    the reset collapses every duration to nothing, which would otherwise leave
-   all six scenes stacked on their end state — invisible. */
+   all six scenes stacked on their end state, which is invisible. */
 @media (prefers-reduced-motion: reduce) {
   .vsl__scene { display: none; }
   .vsl__scene--still { display: block; }
@@ -1060,33 +1039,33 @@ a { color: inherit; }
 .answer p { font-size: var(--step-1); font-weight: 560; }
 
 /* --- Steps -------------------------------------------------------------- */
-.steps { display: grid; gap: 1.5rem; counter-reset: step; }
-@media (min-width: 860px) { .steps { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; } }
-.step {
-  position: relative;
+/* Two unequal halves rather than numbered cards: a narrow column for the
+   organiser's two minutes, a wide one for what everyone else does. The
+   imbalance is the point of the section. */
+.split { display: grid; gap: 1.25rem; }
+@media (min-width: 860px) {
+  .split { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 1.5rem; align-items: stretch; }
+}
+.split__side {
   padding: 1.5rem;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
-  box-shadow: var(--shadow-sm);
 }
-.step::before {
-  counter-increment: step;
-  content: counter(step);
-  display: grid;
-  place-items: center;
-  width: 2.3rem;
-  height: 2.3rem;
-  margin-bottom: 1rem;
-  border-radius: 50%;
-  background: var(--slate-900);
-  color: #fff;
-  font-weight: 700;
-  font-size: .95rem;
+.split__side--crowd {
+  border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
+  background: var(--accent-tint);
 }
-:root[data-theme="dark"] .step::before { background: var(--accent); color: var(--accent-on); }
-.step h3 { font-size: var(--step-1); }
-.step p { margin-top: .5rem; font-size: .94rem; color: var(--text-muted); }
+.split__who {
+  font-size: .82rem;
+  font-weight: 640;
+  color: var(--accent-strong);
+}
+.split__side h3 { margin-top: .35rem; font-size: var(--step-2); }
+.split__list { margin-top: 1.1rem; display: grid; gap: .8rem; }
+.split__list li { display: flex; gap: .6rem; color: var(--text-muted); }
+.split__list svg { width: 1.1rem; height: 1.1rem; color: var(--accent); flex: none; margin-top: .3rem; }
+.split__list strong { color: var(--text); font-weight: 620; }
 .step__detail {
   margin-top: .9rem;
   padding-top: .9rem;
@@ -1431,9 +1410,20 @@ kbd {
 /* Deliberately thin. Most readers never reach it; it is there for the ones
    who read everything, so it costs one screen at most. */
 .reviews { padding-block: clamp(2.5rem, 1.5rem + 3vw, 4rem); border-block: 1px solid var(--border); }
-.reviews__list { display: grid; gap: 1.25rem; }
-@media (min-width: 820px) { .reviews__list { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
+.reviews__list { display: grid; gap: 1.25rem 2.5rem; }
+@media (min-width: 820px) {
+  .reviews__list { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); align-items: center; }
+  .review--lead { grid-row: span 2; }
+}
 .review p:first-child { font-size: .98rem; line-height: 1.55; text-wrap: pretty; }
+.review--lead p:first-child {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 560;
+  line-height: 1.25;
+  letter-spacing: -.015em;
+}
+.review:not(.review--lead) { padding-left: 1rem; border-left: 2px solid var(--border); }
 .review__who {
   margin-top: .75rem;
   display: flex;
