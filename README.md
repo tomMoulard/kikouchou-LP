@@ -30,12 +30,14 @@ site.webmanifest             icon + name metadata for the browser
 sitemap.xml robots.txt
 ```
 
-The design reads as the paper plan a group pins to the fridge: warm paper
-(`#f6f0e4`), dark teal ink (`#16302f`, the app's primary), a highlighter swipe,
-sheets held on with tape, and a few notes written by hand in Caveat. The teal
-accent and the guest colour palette are taken from the app itself, so the site
-and the product look like one thing. Dark mode is the same house after dinner:
-warm dark wood, not slate.
+The design reads as the paper plan a group pins to the fridge: Creme paper
+(`#f6f0e4`), Encre ink (`#2a1d36`), a highlighter swipe, sheets held on with
+tape, and a few notes written by hand in Caveat. The colours come from the
+Kikouchou brand kit, "Soleil couchant". The logo is a house of four rooms in
+Soleil, Corail, Framboise and Prune, and Prune is the accent for links and
+buttons. Dark mode puts the brighter value of each hue on Nuit (`#0f172a`). The
+guest colours in the mockups are taken from the app itself. The tokens are at
+the top of `assets/styles.css`.
 
 ### Working on it locally
 

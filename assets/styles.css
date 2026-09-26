@@ -1,8 +1,9 @@
 /* ==========================================================================
    Kikouchou landing page
-   Design tokens are derived from the app itself: teal #14b8a6 on slate #0f172a
-   (see the PWA icon and `--primary: oklch(.25 .04 185)` in the app's index.css),
-   so the site and the product read as one thing.
+   Colours follow the Kikouchou brand kit, "Soleil couchant": the four rooms of
+   the logo (Soleil, Corail, Framboise, Prune), Encre ink on Creme paper, and
+   Nuit for the dark theme. Each hue has a light value for light backgrounds
+   and a brighter one for dark backgrounds.
    ========================================================================== */
 
 /* --- Fonts -------------------------------------------------------------- */
@@ -38,22 +39,17 @@
 :root {
   color-scheme: light;
 
-  --teal-300: #5eead4;
-  --teal-400: #2dd4bf;
-  --teal-500: #14b8a6;
-  --teal-600: #0d9488;
-  --teal-700: #0f766e;
-
-  --slate-950: #020617;
-  --slate-900: #0f172a;
-  --slate-800: #1e293b;
-  --slate-700: #334155;
-  --slate-500: #64748b;
-  --slate-400: #94a3b8;
-  --slate-300: #cbd5e1;
-  --slate-200: #e2e8f0;
-  --slate-100: #f1f5f9;
-  --slate-50:  #f8fafc;
+  /* Brand palette. The four hues are the rooms of the logo, in this order:
+     roof, tall room, top-right room, bottom-right room. On Creme, only Prune
+     and Encre are dark enough for body text. Soleil and Corail are for shapes
+     and fills. */
+  --kk-soleil: #f09a36;
+  --kk-corail: #e25e4a;
+  --kk-framboise: #c4436b;
+  --kk-prune: #7a3786;
+  --kk-encre: #2a1d36;
+  --kk-creme: #f6f0e4;
+  --kk-nuit: #0f172a;
 
   /* Guest colours, from the app's person palette. `--pN` is the neat hue, used
      for tints. `--pN-label` is the shade that actually carries a label, and it
@@ -70,14 +66,14 @@
   --label-fg: #ffffff;
 
   /* Paper and ink. The page is the plan the group pins to the fridge, not a
-     dashboard: a warm sheet, dark teal ink taken from the app's primary
-     (oklch(.25 .04 185)), and the guest colours as the felt pens. */
-  --paper: #f6f0e4;
-  --ink: #16302f;
-  --marker: rgba(255, 205, 64, .55);   /* highlighter swipe behind a word */
-  --note: #fdeea0;                      /* the organiser's sticky note */
-  --note-fg: #3b3317;
-  --tape: rgba(94, 234, 212, .38);
+     dashboard: a Creme sheet, Encre ink, and the guest colours as the felt
+     pens. */
+  --paper: var(--kk-creme);
+  --ink: var(--kk-encre);
+  --marker: rgba(240, 154, 54, .42);   /* Soleil highlighter swipe behind a word */
+  --note: #fbe3bd;                      /* the organiser's sticky note */
+  --note-fg: #3d2a14;
+  --tape: rgba(196, 67, 107, .24);      /* Framboise tape */
 
   --bg: var(--paper);
   --bg-sunken: #efe6d4;
@@ -86,20 +82,20 @@
   --border: #e3d7c2;
   --border-strong: #cdbd9f;
   --text: var(--ink);
-  --text-muted: #4d5957;
-  --text-faint: #646a66;
-  --accent: var(--teal-700);          /* teal as text: 4.8:1 on paper */
-  --accent-hover: #115e59;
-  --accent-solid: var(--teal-700);    /* teal under white text: 5.5:1 */
-  --accent-solid-hover: #115e59;
-  --accent-edge: #0b4743;             /* the pressed-down lip under a button */
-  --accent-strong: #0f5f58;           /* teal as text on a teal tint */
+  --text-muted: #554a5e;
+  --text-faint: #645a6b;
+  --accent: var(--kk-prune);          /* Prune as text: 6.8:1 on paper */
+  --accent-hover: #62296d;
+  --accent-solid: var(--kk-prune);    /* Prune under white text: 7.7:1 */
+  --accent-solid-hover: #62296d;
+  --accent-edge: #4f1f59;             /* the pressed-down lip under a button */
+  --accent-strong: #62296d;           /* Prune as text on a Prune tint */
   --accent-on: #ffffff;
-  --accent-tint: rgba(20, 184, 166, .12);
+  --accent-tint: rgba(122, 55, 134, .11);
   --warn-fg: #9a4a05;
   --warn-bg: rgba(249, 115, 22, .16);
   --danger-fg: #b42318;
-  --ring: var(--teal-600);
+  --ring: var(--kk-framboise);        /* 4.2:1 on paper */
 
   /* Paper lying on a table: a short contact shadow and a soft drop, both
      tinted brown rather than slate. */
@@ -132,30 +128,35 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  /* The same house after dinner: warm dark wood rather than a slate console. */
-  --paper: #171412;
-  --ink: #f3ece0;
-  --marker: rgba(214, 160, 40, .45);
-  --note: #3d3622;
-  --note-fg: #f6e9b8;
-  --tape: rgba(45, 212, 191, .22);
+  /* The same house at night: Nuit paper, Creme ink, and the brighter values
+     of the four brand hues. */
+  --kk-soleil: #ffb85a;
+  --kk-corail: #ff7c66;
+  --kk-framboise: #f0628f;
+  --kk-prune: #b46cd6;
+  --paper: var(--kk-nuit);
+  --ink: var(--kk-creme);
+  --marker: rgba(240, 98, 143, .4);    /* Framboise: Soleil turns brown on Nuit */
+  --note: #33283f;                      /* Encre, lifted off the Nuit paper */
+  --note-fg: #fbe3bd;
+  --tape: rgba(255, 184, 90, .3);
   --bg: var(--paper);
-  --bg-sunken: #120f0d;
-  --surface: #221d19;
-  --surface-2: #2a241f;
-  --border: #3a322b;
-  --border-strong: #4d4339;
+  --bg-sunken: #0b1222;
+  --surface: #18223a;
+  --surface-2: #1f2a44;
+  --border: #2c3854;
+  --border-strong: #3d4a68;
   --text: var(--ink);
-  --text-muted: #c4b8a6;
-  --text-faint: #a09483;
-  --accent: var(--teal-400);
-  --accent-hover: var(--teal-300);
-  --accent-solid: var(--teal-400);    /* dark text on bright teal: 9.7:1 */
-  --accent-solid-hover: var(--teal-300);
-  --accent-edge: var(--teal-700);
-  --accent-strong: var(--teal-300);
-  --accent-on: #04201d;
-  --accent-tint: rgba(45, 212, 191, .13);
+  --text-muted: #c9c3cf;
+  --text-faint: #a8a3b3;
+  --accent: #c98ae3;                  /* Prune, one step lighter: 5.6:1 on every surface */
+  --accent-hover: #d7a9ec;
+  --accent-solid: var(--kk-prune);    /* Nuit text on Prune: 5.2:1 */
+  --accent-solid-hover: #c98ae3;
+  --accent-edge: #7a3786;
+  --accent-strong: #d7a9ec;
+  --accent-on: var(--kk-nuit);
+  --accent-tint: rgba(180, 108, 214, .15);
   --warn-fg: #fdba74;
   --warn-bg: rgba(249, 115, 22, .18);
   --danger-fg: #fda29b;
@@ -165,8 +166,8 @@
   --p4-label: #fbbf24;
   --p5-label: #a78bfa;
   --p6-label: #f472b6;
-  --label-fg: #1a1410;
-  --ring: var(--teal-400);
+  --label-fg: var(--kk-nuit);
+  --ring: var(--kk-framboise);
   --shadow-sm: 0 1px 0 rgba(0, 0, 0, .4);
   --shadow-md: 0 1px 0 rgba(0, 0, 0, .4), 0 8px 18px -10px rgba(0, 0, 0, .6);
   --shadow-lg: 0 1px 0 rgba(0, 0, 0, .4), 0 18px 34px -16px rgba(0, 0, 0, .7);
@@ -362,13 +363,21 @@ a { color: inherit; }
   align-items: center;
   gap: .6rem;
   font-family: var(--font-display);
-  font-weight: 760;
-  letter-spacing: -.025em;
+  font-weight: 750;
+  letter-spacing: -.012em;             /* the wordmark's tracking */
   font-size: 1.15rem;
   text-decoration: none;
   margin-right: auto;
 }
-.brand img { width: 2rem; height: 2rem; border-radius: 8px; }
+.brand .kk-mark { width: 2rem; height: 2rem; }
+
+/* The logo mark. Inline, so that it follows the theme toggle and not only the
+   system theme. Do not recolour single rooms outside the palette. */
+.kk-mark { display: block; flex: none; }
+.kk-mark .kk-roof { fill: var(--kk-soleil); }
+.kk-mark .kk-tall { fill: var(--kk-corail); }
+.kk-mark .kk-top { fill: var(--kk-framboise); }
+.kk-mark .kk-bottom { fill: var(--kk-prune); }
 
 .nav { display: flex; align-items: center; gap: .1rem; }
 .nav a {
@@ -1370,27 +1379,26 @@ kbd {
   isolation: isolate;
   padding-block: clamp(4rem, 3rem + 5vw, 6.5rem);
   text-align: center;
-  color: #f6f0e4;
-  background: #16302f;
+  color: var(--kk-creme);
+  background: var(--kk-encre);
 }
-:root[data-theme="dark"] .cta { background: #0e2422; }
 /* The house from the logo, drawn in chalk, with a light on in each window
    in a guest's colour. */
-.cta__house { width: 7.5rem; height: auto; margin: 0 auto 1.75rem; color: #f6f0e4; }
-.btn--light { --btn-bg: #f6f0e4; --btn-fg: #16302f; box-shadow: 0 3px 0 #8fa39d; }
+.cta__house { width: 7.5rem; height: auto; margin: 0 auto 1.75rem; color: var(--kk-creme); }
+.btn--light { --btn-bg: var(--kk-creme); --btn-fg: var(--kk-encre); box-shadow: 0 3px 0 #a795ad; }
 .btn--light:hover { background: #fffcf5; }
 .cta h2 { font-size: var(--step-3); }
 .cta p {
   margin: 1.1rem auto 0;
   max-width: 34rem;
   font-size: var(--step-1);
-  color: #d6dcd4;
+  color: #ddd3de;
 }
 .cta__actions { display: flex; flex-wrap: wrap; gap: .75rem; justify-content: center; margin-top: 2.25rem; }
-.cta .btn--ghost { --btn-fg: #f8fafc; border-color: rgba(248, 250, 252, .35); }
-.cta .btn--ghost:hover { --btn-bg: rgba(248, 250, 252, .1); border-color: rgba(248, 250, 252, .6); }
+.cta .btn--ghost { --btn-fg: var(--kk-creme); border-color: rgba(246, 240, 228, .35); }
+.cta .btn--ghost:hover { --btn-bg: rgba(246, 240, 228, .1); border-color: rgba(246, 240, 228, .6); }
 /* `.cta p` is more specific, so this needs the parent to win the colour. */
-.cta .cta__fine { margin-top: 1.4rem; font-size: .85rem; color: #e4e0d4; }
+.cta .cta__fine { margin-top: 1.4rem; font-size: .85rem; color: #e8e0e8; }
 
 /* --- Footer ------------------------------------------------------------- */
 .footer {
