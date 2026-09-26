@@ -191,6 +191,13 @@
       if (e.target.closest('a')) closeNav();
     });
 
+    /* A tap outside the open sheet dismisses it, as Escape does on a keyboard. */
+    doc.addEventListener('click', function (e) {
+      if (nav.dataset.open !== 'true') return;
+      if (nav.contains(e.target) || navToggle.contains(e.target)) return;
+      closeNav();
+    });
+
     doc.addEventListener('keydown', function (e) {
       if (e.key === 'Escape') closeNav();
     });
