@@ -18,6 +18,8 @@ there is no toolchain to keep alive between trips.
 ```
 index.html                   the entire page
 404.html                     not-found page
+privacy.html                 the privacy policy, English and French on one page
+delete-account.html          how to delete an account (Google Play asks for this URL)
 assets/styles.css            design tokens + every component
 assets/app.js                language, theme, nav, scroll reveal
 assets/i18n/fr.js            French copy (English lives in index.html)

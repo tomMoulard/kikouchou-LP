@@ -218,6 +218,8 @@ window.KKC_I18N.fr = {
   "footer.source": "Code source",
   "footer.issues": "Signaler un problème",
   "footer.licence": "Licence MIT",
+  "footer.privacyPolicy": "Confidentialité",
+  "footer.deleteAccount": "Supprimer votre compte",
   "footer.instagram": "Instagram",
   "footer.copy": "Kikouchou, fait pour de vraies vacances.",
 };

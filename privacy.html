@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy · Kikouchou</title>
+<meta name="description" content="How Kikouchou handles your data: trips stay on your device, and an account only when you share.">
+<link rel="canonical" href="https://www.kikouchou.app/privacy.html">
+<meta name="theme-color" content="#0F172A" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F6F0E4" media="(prefers-color-scheme: light)">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/assets/img/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css">
+<script>
+  (function () {
+    try {
+      var t = localStorage.getItem('kkc-theme');
+      if (t !== 'light' && t !== 'dark') {
+        t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      document.documentElement.dataset.theme = t;
+    } catch (e) {}
+  })();
+</script>
+<!-- No analytics and no ad tag on this page: a person reading how their data
+     is handled is not a visitor to measure. Both languages are on the page,
+     so it needs no script to translate. -->
+<style>
+  .legal { max-width: 44rem; margin-inline: auto; padding: clamp(2.5rem, 2rem + 3vw, 5rem) var(--gutter); }
+  .legal__brand { display: inline-flex; align-items: center; gap: .6rem; font-weight: 700; color: var(--text); text-decoration: none; }
+  .legal__langs { margin-top: 1.5rem; display: flex; gap: 1rem; }
+  .legal h1 { font-size: var(--step-3); margin-top: 2rem; }
+  .legal h2 { font-size: var(--step-1); margin-top: 2.25rem; }
+  .legal p, .legal li { margin-top: .75rem; color: var(--text); line-height: 1.6; }
+  .legal ul, .legal ol { padding-left: 1.25rem; }
+  .legal ul { list-style: disc; }
+  .legal ol { list-style: decimal; }
+  .legal .legal__meta { color: var(--text-muted); margin-top: .5rem; }
+  .legal section + section { margin-top: 4rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<main class="legal">
+  <a class="legal__brand" href="/">
+    <svg class="kk-mark" viewBox="0 0 64 64" width="32" height="32" aria-hidden="true" focusable="false"><path class="kk-roof" d="M10.76 28Q4 28 9.13 23.6L30.37 5.39Q32 4 33.63 5.39L54.87 23.6Q60 28 53.24 28L10.76 28Z"/><rect class="kk-tall" x="8" y="32" width="20" height="28" rx="2.5"/><rect class="kk-top" x="32" y="32" width="24" height="12" rx="2.5"/><rect class="kk-bottom" x="32" y="48" width="24" height="12" rx="2.5"/></svg>
+    <span>Kikouchou</span>
+  </a>
+  <p class="legal__langs"><a href="#en" hreflang="en">English</a><a href="#fr" hreflang="fr" lang="fr">Français</a></p>
+  <section id="en" lang="en">
+    <h1>Privacy</h1>
+    <p class="legal__meta">Last updated 27 September 2026. This page covers the website at app.kikouchou.app and the Kikouchou apps for iPhone, iPad and Android.</p>
+
+    <h2>Your trips stay on your device</h2>
+    <p>A trip, its rooms, its guests, its rides and its money are saved on the device you use, in the storage of the browser or of the app. Nothing about a trip leaves the device until you share it. You can use Kikouchou without an account.</p>
+
+    <h2>An account, when you share</h2>
+    <p>To share a trip and edit it with other people, you sign in. Kikouchou then keeps your email address, the name your sign-in provider gives, and an account number. The account and the shared trips are stored with Supabase, on European servers.</p>
+    <p>A shared trip is stored on the server so that every member sees the same plan: the guests' names, the stay dates, the rooms, the rides, the pickup places and the shared money. Anybody who has an invite link can read the trip it opens, so share the link only with the group.</p>
+
+    <h2>Trip reminders</h2>
+    <p>If you turn reminders on, Kikouchou keeps the address your browser or phone gives for notifications, and the trip it is for. The reminders go through the push service of your browser, of Apple or of Google. A reminder names a place and a time until the event. It never names a guest.</p>
+
+    <h2>How the app is used</h2>
+    <p>Kikouchou measures how the app is used with PostHog, hosted in the European Union. It records what you do in the app, such as creating a trip or adding a room, with the type of device and browser. Invite links and the keys of shared trips are removed from these records. When you use the assistant, the question you type is recorded too, to learn whether the assistant answers it.</p>
+    <p>On the website only, the Meta pixel and Google's tags measure the ad campaigns that bring people to Kikouchou. They do not run in the iPhone, iPad and Android apps.</p>
+
+    <h2>Services the app talks to</h2>
+    <ul>
+      <li>Maps come from OpenStreetMap and CARTO. A place you search for is sent to Nominatim, the OpenStreetMap search service.</li>
+      <li>The assistant runs on your device. Its model is downloaded from Hugging Face the first time you use it. Your questions are not sent to a model on a server.</li>
+      <li>A shared link shows a preview card, drawn by share.kikouchou.app, with the trip's name, its dates and the guests' initials.</li>
+    </ul>
+
+    <h2>Deleting your data</h2>
+    <p>You can delete your account in the app: Settings, then Account, then Delete my account. A trip you share with other people stays with them. A trip nobody else is on is deleted from the server. The trips on your device stay there until you delete them with Settings, then Clear All Data, or remove the app. <a href="/delete-account.html">How to delete your account</a> has the details.</p>
+
+    <h2>Your rights</h2>
+    <p>You can ask to see, correct, export or delete the personal data Kikouchou holds about you. Write to admin@kikouchou.app. If you think your data is not handled correctly, you can complain to the CNIL, the French data protection authority.</p>
+    <p>Kikouchou is made by Tom Moulard. The source code is public on <a href="https://github.com/tomMoulard/kikouchou" rel="noopener">GitHub</a>.</p>
+  </section>
+  <section id="fr" lang="fr">
+    <h1>Confidentialité</h1>
+    <p class="legal__meta">Mis à jour le 27 septembre 2026. Cette page concerne le site app.kikouchou.app et les apps Kikouchou pour iPhone, iPad et Android.</p>
+
+    <h2>Vos voyages restent sur votre appareil</h2>
+    <p>Un voyage, ses chambres, ses invités, ses trajets et son argent sont enregistrés sur l'appareil que vous utilisez, dans le stockage du navigateur ou de l'app. Rien d'un voyage ne quitte l'appareil tant que vous ne le partagez pas. Kikouchou s'utilise sans compte.</p>
+
+    <h2>Un compte, pour partager</h2>
+    <p>Pour partager un voyage et le modifier à plusieurs, vous vous connectez. Kikouchou garde alors votre adresse e-mail, le nom que donne votre service de connexion et un numéro de compte. Le compte et les voyages partagés sont hébergés chez Supabase, sur des serveurs européens.</p>
+    <p>Un voyage partagé est enregistré sur le serveur pour que chaque membre voie le même plan : les noms des invités, les dates de séjour, les chambres, les trajets, les lieux de rendez-vous et l'argent du groupe. Toute personne qui a un lien d'invitation peut lire le voyage qu'il ouvre : ne partagez ce lien qu'avec le groupe.</p>
+
+    <h2>Les rappels de voyage</h2>
+    <p>Si vous activez les rappels, Kikouchou garde l'adresse de notification que donne votre navigateur ou votre téléphone, et le voyage concerné. Les rappels passent par le service de notification de votre navigateur, d'Apple ou de Google. Un rappel indique un lieu et un délai. Il ne nomme jamais un invité.</p>
+
+    <h2>Comment l'app est utilisée</h2>
+    <p>Kikouchou mesure l'usage de l'app avec PostHog, hébergé dans l'Union européenne. Il enregistre ce que vous faites dans l'app, comme créer un voyage ou ajouter une chambre, avec le type d'appareil et de navigateur. Les liens d'invitation et les clés des voyages partagés sont retirés de ces enregistrements. Quand vous utilisez l'assistant, la question que vous tapez est aussi enregistrée, pour savoir si l'assistant y répond.</p>
+    <p>Sur le site seulement, le pixel Meta et les balises Google mesurent les campagnes publicitaires qui amènent des personnes sur Kikouchou. Ils ne fonctionnent pas dans les apps iPhone, iPad et Android.</p>
+
+    <h2>Les services que l'app contacte</h2>
+    <ul>
+      <li>Les cartes viennent d'OpenStreetMap et de CARTO. Un lieu que vous recherchez est envoyé à Nominatim, le service de recherche d'OpenStreetMap.</li>
+      <li>L'assistant fonctionne sur votre appareil. Son modèle est téléchargé depuis Hugging Face la première fois. Vos questions ne sont pas envoyées à un modèle sur un serveur.</li>
+      <li>Un lien partagé affiche un aperçu, dessiné par share.kikouchou.app, avec le nom du voyage, ses dates et les initiales des invités.</li>
+    </ul>
+
+    <h2>Supprimer vos données</h2>
+    <p>Vous pouvez supprimer votre compte dans l'app : Paramètres, puis Compte, puis Supprimer mon compte. Un voyage que vous partagez avec d'autres personnes leur reste. Un voyage où vous êtes seul est supprimé du serveur. Les voyages de votre appareil y restent jusqu'à ce que vous les supprimiez avec Paramètres, puis Supprimer toutes les données, ou que vous supprimiez l'app. La page <a href="/delete-account.html#fr">Supprimer votre compte</a> donne le détail.</p>
+
+    <h2>Vos droits</h2>
+    <p>Vous pouvez demander à consulter, corriger, exporter ou supprimer les données personnelles que Kikouchou détient sur vous. Écrivez à admin@kikouchou.app. Si vous pensez que vos données ne sont pas traitées correctement, vous pouvez saisir la CNIL.</p>
+    <p>Kikouchou est fait par Tom Moulard. Le code source est public sur <a href="https://github.com/tomMoulard/kikouchou" rel="noopener">GitHub</a>.</p>
+  </section>
+</main>
+</body>
+</html>

@@ -35,6 +35,8 @@ jobs:
           cp -R \
             index.html \
             404.html \
+            privacy.html \
+            delete-account.html \
             CNAME \
             robots.txt \
             sitemap.xml \
@@ -93,7 +95,7 @@ jobs:
           missing=0
           refs=$(
             {
-              grep -ohE '(href|src)="/[^"]+"' _site/index.html _site/404.html \
+              grep -ohE '(href|src)="/[^"]+"' _site/index.html _site/404.html _site/privacy.html _site/delete-account.html \
                 | sed -E 's/.*"(\/[^"]+)"/\1/'
               # og:image and friends are absolute URLs; check those files too.
               grep -ohE 'content="https://www\.kikouchou\.app/[^"]+"' _site/index.html \

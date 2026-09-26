@@ -9,4 +9,14 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.kikouchou.app/?lang=fr"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.kikouchou.app/"/>
   </url>
+  <url>
+    <loc>https://www.kikouchou.app/privacy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://www.kikouchou.app/delete-account.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>
