@@ -161,6 +161,119 @@
     return origins;
   }
 
+  /**
+   * The functions Meta's in-app browser injects to report page timings.
+   *
+   * "Error invoking postMessage: Java object is gone" is thrown by these, with
+   * no file, when the native side of the Facebook or Instagram webview is
+   * already gone. Kept in step with `src/lib/posthog.ts` in the app.
+   */
+  var META_BRIDGE_FUNCTIONS = ['sendDataToNative', 'sendJsBlockingTimeMessage', 'sendINPMessage'];
+
+  /** When the page was last hidden with `pagehide`, on the performance clock. */
+  var pageHiddenAt = null;
+  window.addEventListener('pagehide', function () {
+    pageHiddenAt = performance.now();
+  });
+  window.addEventListener('pageshow', function () {
+    pageHiddenAt = null;
+  });
+
+  /**
+   * Which native APIs no longer read as the browser's own code.
+   *
+   * Not console, fetch, XHR or history: posthog-js wraps those itself, so they
+   * always read as patched. A wrapper that forges its `toString` still hides.
+   */
+  function patchedGlobals() {
+    var watched = [
+      ['navigator.serviceWorker.register', function () {
+        return navigator.serviceWorker && navigator.serviceWorker.register;
+      }],
+      ['postMessage', function () { return window.postMessage; }],
+      ['EventTarget.prototype.addEventListener', function () {
+        return EventTarget.prototype.addEventListener;
+      }]
+    ];
+    var patched = [];
+    for (var i = 0; i < watched.length; i++) {
+      try {
+        var value = watched[i][1]();
+        if (typeof value === 'function' &&
+            Function.prototype.toString.call(value).indexOf('[native code]') === -1) {
+          patched.push(watched[i][0]);
+        }
+      } catch (e) {
+        /* A getter that throws is as good as absent. */
+      }
+    }
+    return patched;
+  }
+
+  /** The last five cross-origin scripts the page fetched, origin and path only. */
+  function recentForeignScripts() {
+    var scripts = [];
+    if (!window.performance || typeof performance.getEntriesByType !== 'function') return scripts;
+    var entries = performance.getEntriesByType('resource');
+    for (var i = 0; i < entries.length; i++) {
+      if (entries[i].initiatorType !== 'script') continue;
+      try {
+        var url = new URL(entries[i].name);
+        if (url.origin === location.origin) continue;
+        scripts.push(url.origin + url.pathname);
+      } catch (e) {
+        /* A name that is not a URL says nothing. */
+      }
+    }
+    return scripts.slice(-5);
+  }
+
+  /** `meta_iab` when the frames are Meta's bridge, `android_webview` for another. */
+  function injectedBridge(list) {
+    var sawJavaBridge = false;
+    for (var i = 0; i < list.length; i++) {
+      var entry = list[i];
+      if (!entry || typeof entry !== 'object') continue;
+      if (typeof entry.value === 'string' && /Java object is gone/i.test(entry.value)) {
+        sawJavaBridge = true;
+      }
+      var frames = entry.stacktrace && entry.stacktrace.frames;
+      if (!frames || !frames.length) continue;
+      var fileless = true;
+      var named = false;
+      for (var j = 0; j < frames.length; j++) {
+        var frame = frames[j] || {};
+        /* posthog-js writes `<anonymous>` for a frame with no URL. */
+        if (frame.filename && frame.filename !== '<anonymous>') fileless = false;
+        if (META_BRIDGE_FUNCTIONS.indexOf(String(frame['function'])) !== -1) named = true;
+      }
+      if (fileless && named) return 'meta_iab';
+    }
+    return sawJavaBridge ? 'android_webview' : null;
+  }
+
+  /**
+   * What the page was doing when an exception was captured: counts, flags and
+   * enum values only. The same properties as the app, so one insight covers
+   * both surfaces. Never throws.
+   */
+  function exceptionDebugContext(list) {
+    var context = {};
+    try {
+      context.page_visibility = document.visibilityState;
+      var now = performance.now();
+      context.page_age_ms = Math.round(now);
+      context.ms_since_pagehide = pageHiddenAt === null ? null : Math.round(now - pageHiddenAt);
+      context.patched_globals = patchedGlobals();
+      context.recent_foreign_scripts = recentForeignScripts();
+      context.meta_pixel_loaded = typeof window.fbq === 'function';
+      context.injected_bridge = list && list.length ? injectedBridge(list) : null;
+    } catch (e) {
+      /* Best effort. The exception is worth more than its context. */
+    }
+    return context;
+  }
+
   /** Whether one entry of `$exception_list` carries nothing anybody could act on. */
   function isOpaque(entry) {
     if (!entry || typeof entry !== 'object') return false;
@@ -205,6 +318,12 @@
       event.properties.foreign_script_origins = foreignScriptOrigins();
 
       var list = event.properties['$exception_list'];
+      var context = exceptionDebugContext(list);
+      for (var key in context) {
+        if (Object.prototype.hasOwnProperty.call(context, key)) {
+          event.properties[key] = context[key];
+        }
+      }
       if (!list || !list.length) return event;
       for (var i = 0; i < list.length; i++) {
         if (!isOpaque(list[i])) return event;
