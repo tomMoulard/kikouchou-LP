@@ -41,3 +41,5 @@ tool. Do not add them again, in English or in French.
    and in French, at desktop width and at phone width.
 4. Do not write facts about the product or its author that are not in the
    repository.
+
+Also, the app repository is located in /Users/tommoulard/workspace/kikoushou
