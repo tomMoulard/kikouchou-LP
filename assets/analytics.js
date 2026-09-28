@@ -10,6 +10,8 @@
  * language switch — and unhandled errors. Session recording follows
  * `sessionRecording` in the config file and is off when it is absent. There is
  * not a single input on this page, so nothing a visitor types can be captured.
+ * Every link into the app carries the visitor's PostHog ids, so the app can
+ * continue the same person and session: see `handOff`.
  *
  * ## Why so much of this file is about cross-origin scripts
  *
@@ -312,7 +314,63 @@
        same way. */
     ph.register({ site: 'landing' });
 
+    handOff(ph);
     wire(ph);
+  }
+
+  // ==========================================================================
+  // Identity hand-off to the app
+  // ==========================================================================
+
+  /* The links that open the app, and the names the app reads back.
+     `src/lib/analytics/landing-handoff.ts` in the app holds the other half of
+     this contract, and the rules it applies: change a name here and it must
+     change there. */
+  var APP_LINK = 'a[href^="https://app.kikouchou.app"]';
+  var HANDOFF_PARAMS = ['ph_distinct_id', 'ph_session_id', 'ph_handoff_at'];
+
+  /**
+   * Puts this visitor's PostHog ids on every link into the app.
+   *
+   * `persistence: 'memory'` keeps this page out of the cookie question, and it
+   * also means the page has no identifier the app could read: the two sites
+   * would count one visitor as two people, with the landing visit that led to
+   * the sign-up on neither. The app bootstraps posthog-js from these
+   * parameters on a first visit, so the pageviews and the recording here join
+   * the person the app later identifies. Nothing is stored in the browser.
+   *
+   * The ids go on the href itself, before the click, rather than in a click
+   * handler. The Google Ads snippet in index.html reads `link.href` in its own
+   * click listener, which was registered first, and a middle click or a copied
+   * link never fires a click here at all. The session id rotates after half an
+   * hour idle, so the links are refreshed on pointer down and on focus, which
+   * both come before the click they lead to.
+   */
+  function handOff(ph) {
+    var decorate = function (link) {
+      if (!link.dataset.appHref) link.dataset.appHref = link.getAttribute('href');
+      var url;
+      try {
+        url = new URL(link.dataset.appHref);
+      } catch (err) {
+        return;
+      }
+      url.searchParams.set(HANDOFF_PARAMS[0], ph.get_distinct_id());
+      url.searchParams.set(HANDOFF_PARAMS[1], ph.get_session_id());
+      /* The app ignores a link more than ten minutes old, so a copied link
+         sent to a friend does not make the friend the same person. */
+      url.searchParams.set(HANDOFF_PARAMS[2], String(Date.now()));
+      link.setAttribute('href', url.toString());
+    };
+
+    Array.prototype.forEach.call(document.querySelectorAll(APP_LINK), decorate);
+
+    var refresh = function (e) {
+      var link = e.target && e.target.closest ? e.target.closest(APP_LINK) : null;
+      if (link) decorate(link);
+    };
+    document.addEventListener('pointerdown', refresh, true);
+    document.addEventListener('focusin', refresh, true);
   }
 
   function wire(ph) {
@@ -329,7 +387,8 @@
       if (!cta) return;
       var props = context();
       props.location = cta.dataset.cta;
-      props.href = cta.getAttribute('href');
+      /* The href as written in the HTML, without the ids `handOff` adds. */
+      props.href = cta.dataset.appHref || cta.getAttribute('href');
       props.label = cta.textContent.trim().slice(0, 80);
       ph.capture('landing_cta_clicked', props);
     });
