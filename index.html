@@ -326,7 +326,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
            state to 100%, because the clock does not restart per scene. -->
       <figure class="vsl" id="vsl">
         <p class="note" aria-hidden="true">
-          <span data-i18n="vsl.title">Why Kikouchou exists · 30 seconds, no sound</span>
+          <span class="vsl__title--play" data-i18n="vsl.title">Why Kikouchou exists · 30 seconds, no sound</span>
+          <span class="vsl__title--step" data-i18n="vsl.titleStep">Why Kikouchou exists · six scenes, at your pace</span>
           <svg viewBox="0 0 44 40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6c14-2 26 6 30 26"/><path d="m25 27 8 6 4-10"/></svg>
         </p>
         <div class="device hero__device">
@@ -564,8 +565,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <!-- Player chrome. The progress bar is the same 30-second clock as the
                  scenes, so it cannot drift out of step with them, and the button
-                 only toggles a class that pauses every animation at once. -->
+                 only toggles a class that pauses every animation at once.
+
+                 With reduced motion the clock is gone, so app.js swaps the play
+                 button for the two step buttons and the visitor turns the scenes
+                 like pages. Without JavaScript the controls stay hidden and the
+                 stage shows its still scene. -->
             <div class="vsl__controls">
+              <button type="button" class="vsl__play vsl__step" id="vsl-prev">
+                <svg class="vsl__play-icon vsl__step-icon--prev" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                <span class="sr-only" data-i18n="vsl.prev">Previous scene</span>
+              </button>
               <button type="button" class="vsl__play" id="vsl-play">
                 <svg class="vsl__play-icon" aria-hidden="true" viewBox="0 0 24 24">
                   <path class="vsl__glyph-pause" d="M9 5v14M15 5v14" fill="none" stroke="currentColor"
@@ -585,6 +595,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <span style="left:83.333%"></span>
               </div>
               <span class="vsl__clock" aria-hidden="true">0:30</span>
+              <span class="vsl__clock vsl__count" id="vsl-count" aria-hidden="true">1 / 6</span>
+              <button type="button" class="vsl__play vsl__step" id="vsl-next">
+                <svg class="vsl__play-icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+                <span class="sr-only" data-i18n="vsl.next">Next scene</span>
+              </button>
             </div>
           </div>
         </div>

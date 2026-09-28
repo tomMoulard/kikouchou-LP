@@ -792,9 +792,18 @@ a { color: inherit; }
 /* One class stops the whole clock: scenes, beats and progress bar alike. */
 .vsl.is-paused * { animation-play-state: paused; }
 
-/* Reduced motion gets the payoff scene as a still frame. The global rule in
-   the reset collapses every duration to nothing, which would otherwise leave
-   all six scenes stacked on their end state, which is invisible. */
+/* The step buttons and the scene counter only exist in step mode, below. */
+.vsl__step,
+.vsl__count,
+.vsl__title--step { display: none; }
+.vsl__step-icon--prev { rotate: 180deg; }
+
+/* Reduced motion gets the letter as six still pages. The global rule in the
+   reset collapses every duration to nothing, which would otherwise leave all
+   six scenes stacked on their end state, which is invisible, so every scene
+   is drawn at rest and only one is shown at a time. Without JavaScript that
+   one is the payoff scene and there are no controls. With it, app.js adds
+   `is-stepping`, marks the current scene and the visitor turns the pages. */
 @media (prefers-reduced-motion: reduce) {
   .vsl__scene { display: none; }
   .vsl__scene--still { display: block; }
@@ -804,6 +813,23 @@ a { color: inherit; }
     transform: none !important;
   }
   .vsl__controls { display: none; }
+
+  .vsl.is-stepping .vsl__scene { display: none; }
+  .vsl.is-stepping .vsl__scene.is-current { display: block; }
+  .vsl.is-stepping .vsl__controls { display: flex; }
+  .vsl.is-stepping .vsl__play:not(.vsl__step),
+  .vsl.is-stepping .vsl__clock:not(.vsl__count),
+  .vsl.is-stepping .vsl__title--play { display: none; }
+  .vsl.is-stepping .vsl__step { display: inline-flex; }
+  .vsl.is-stepping .vsl__count,
+  .vsl.is-stepping .vsl__title--step { display: inline; }
+  .vsl.is-stepping .vsl__step:disabled { opacity: .4; cursor: default; }
+  .vsl.is-stepping .vsl__step:disabled:hover { color: var(--text-muted); border-color: var(--border); }
+  /* The bar fills one segment per page instead of running on the clock. */
+  .vsl.is-stepping .vsl__progress-fill {
+    animation: none;
+    transform: scaleX(var(--vsl-step, 1));
+  }
 }
 
 /* --- Product mockups ---------------------------------------------------- */

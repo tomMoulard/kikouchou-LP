@@ -40,6 +40,7 @@ window.KKC_I18N.fr = {
   "hero.trust3": "Fonctionne sans réseau au fond du gîte",
 
   "vsl.title": "Pourquoi Kikouchou existe · 30 secondes, sans son",
+  "vsl.titleStep": "Pourquoi Kikouchou existe · six scènes, à votre rythme",
   "vsl.alt": "Une animation : une conversation de groupe qui se remplit de questions sans réponse, puis le même voyage posé dans Kikouchou avec les chambres, les trajets et l’argent du groupe.",
   "vsl.s1eyebrow": "Vendredi, 18h02 · la conversation de groupe",
   "vsl.s1line1": "Onze personnes. Six chambres.",
@@ -103,6 +104,8 @@ window.KKC_I18N.fr = {
   "vsl.s6meta": "Sans compte pour commencer, et le code est sur GitHub",
   "vsl.pause": "Mettre l’animation en pause",
   "vsl.play": "Lancer l’animation",
+  "vsl.prev": "Scène précédente",
+  "vsl.next": "Scène suivante",
   "vsl.transcript": "Onze personnes, six chambres, quatre jours d’arrivées, et une seule personne qui garde tout ça en tête pendant que trois cents messages restent sans réponse. Kikouchou transforme ça en un seul lien. Chacun l’ouvre et remplit sa propre partie : les chambres, les heures d’arrivée, les trajets depuis la gare et l’argent du groupe. Rien à installer, pas de compte pour commencer, et ça s’ouvre même quand le gîte n’a pas de réseau. Ouvrez l’app. Elle ne coûte rien.",
 
   "how.eyebrow": "Comment ça marche",

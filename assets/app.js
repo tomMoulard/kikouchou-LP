@@ -244,8 +244,8 @@
      thing left for JavaScript is to stop and start that clock. It pauses while
      the letter is off screen — a visitor reading the FAQ should not pay for six
      scenes nobody can see — and an explicit pause outranks scrolling back to
-     it. Reduced-motion visitors get a still frame from the stylesheet and no
-     controls at all, so nothing is wired up for them. */
+     it. Reduced-motion visitors get no clock at all: the stylesheet draws each
+     scene at rest, and the step buttons below show one scene at a time. */
   var vsl = doc.getElementById('vsl'),
       vslPlay = doc.getElementById('vsl-play');
 
@@ -268,5 +268,36 @@
         renderVsl();
       }, { threshold: 0.12 }).observe(vsl);
     }
+  }
+
+  var vslScenes = vsl ? vsl.querySelectorAll('.vsl__scene') : [],
+      vslPrev = doc.getElementById('vsl-prev'),
+      vslNext = doc.getElementById('vsl-next'),
+      vslCount = doc.getElementById('vsl-count');
+
+  if (vslScenes.length && vslPrev && vslNext && vslCount) {
+    var vslStep = 0;
+
+    var showVslStep = function (i) {
+      vslStep = Math.max(0, Math.min(vslScenes.length - 1, i));
+      vslScenes.forEach(function (scene, n) {
+        scene.classList.toggle('is-current', n === vslStep);
+      });
+      vslPrev.disabled = vslStep === 0;
+      vslNext.disabled = vslStep === vslScenes.length - 1;
+      vslCount.textContent = (vslStep + 1) + ' / ' + vslScenes.length;
+      vsl.style.setProperty('--vsl-step', (vslStep + 1) / vslScenes.length);
+    };
+
+    vslPrev.addEventListener('click', function () { showVslStep(vslStep - 1); });
+    vslNext.addEventListener('click', function () { showVslStep(vslStep + 1); });
+    showVslStep(0);
+
+    // The class, not the media query, turns step mode on, so a visitor who
+    // changes the setting with the page open gets the right player.
+    var reducedQuery = window.matchMedia('(prefers-reduced-motion: reduce)'),
+        syncVslMode = function () { vsl.classList.toggle('is-stepping', reducedQuery.matches); };
+    syncVslMode();
+    if (reducedQuery.addEventListener) reducedQuery.addEventListener('change', syncVslMode);
   }
 })();
