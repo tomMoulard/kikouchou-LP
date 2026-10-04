@@ -533,6 +533,9 @@ a { color: inherit; }
   max-width: 34rem;
 }
 .hero__cta { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2rem; }
+/* The `landing-hero-first-job` experiment link, under the two buttons. */
+.hero__job { display: flex; margin-top: .75rem; }
+.hero__job[hidden], .hero__job [hidden] { display: none; }
 
 /* Two differently sized pills stacked on a phone read as a mistake; full-width
    buttons give the hero a clean left edge and a bigger tap target. */
@@ -540,6 +543,7 @@ a { color: inherit; }
   .hero__cta,
   .cta__actions { flex-direction: column; align-items: stretch; }
   .hero__cta .btn,
+  .hero__job .btn,
   .cta__actions .btn { width: 100%; }
 }
 .hero__note {

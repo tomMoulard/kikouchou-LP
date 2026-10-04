@@ -301,6 +301,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </a>
       </div>
 
+      <!-- The `landing-hero-first-job` experiment. assets/analytics.js shows
+           the one link the visitor's variant names and leaves the rest hidden,
+           so a visitor with no analytics, no flag or another variant sees the
+           page as it was. -->
+      <div class="hero__job" hidden>
+        <a class="btn btn--ghost btn--lg" href="https://app.kikouchou.app" data-cta="hero-job" data-job="rooms" hidden>
+          <span data-i18n="cta.jobRooms">Who sleeps where</span>
+          <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
+        </a>
+        <a class="btn btn--ghost btn--lg" href="https://app.kikouchou.app" data-cta="hero-job" data-job="rides" hidden>
+          <span data-i18n="cta.jobRides">Who gets there how</span>
+          <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
+        </a>
+        <a class="btn btn--ghost btn--lg" href="https://app.kikouchou.app" data-cta="hero-job" data-job="money" hidden>
+          <span data-i18n="cta.jobMoney">Who owes how much</span>
+          <svg aria-hidden="true"><use href="#i-arrow-right"/></svg>
+        </a>
+      </div>
+
       <p class="hero__note" data-i18n="hero.note">
         Nothing to install, nothing to pay. Create a trip and it is already saved on your device.
       </p>

@@ -10,6 +10,7 @@
  * language switch — and unhandled errors. Session recording follows
  * `sessionRecording` in the config file and is off when it is absent. There is
  * not a single input on this page, so nothing a visitor types can be captured.
+ * One feature flag drives an experiment in the hero: see `firstJob`.
  * Every link into the app carries the visitor's PostHog ids, so the app can
  * continue the same person and session: see `handOff`.
  *
@@ -435,6 +436,42 @@
 
     handOff(ph);
     wire(ph);
+    firstJob(ph);
+  }
+
+  // ==========================================================================
+  // Experiment: which job the hero offers to settle first
+  // ==========================================================================
+
+  /* The multivariate flag behind the experiment, and the variants it may
+     return. Each variant names the `data-job` of one hidden link in the hero. */
+  var FIRST_JOB_FLAG = 'landing-hero-first-job';
+  var FIRST_JOB_VARIANTS = ['rooms', 'rides', 'money'];
+
+  /**
+   * Shows the one hero link this visitor's variant names.
+   *
+   * The links start hidden and stay hidden until the flags arrive, so nobody
+   * sees one phrase swapped for another. Any other value (no flag, a failed
+   * request, a `control` variant added later in PostHog) leaves the hero as it
+   * was. Reading the flag with `getFeatureFlag` is what sends PostHog its
+   * `$feature_flag_called` exposure event.
+   *
+   * `persistence: 'memory'` gives every visit a new distinct id, so the
+   * variant is drawn per visit, not per person.
+   */
+  function firstJob(ph) {
+    var box = document.querySelector('.hero__job');
+    if (!box || typeof ph.onFeatureFlags !== 'function') return;
+
+    ph.onFeatureFlags(function () {
+      var variant = ph.getFeatureFlag(FIRST_JOB_FLAG);
+      var show = FIRST_JOB_VARIANTS.indexOf(variant) !== -1;
+      Array.prototype.forEach.call(box.querySelectorAll('[data-job]'), function (link) {
+        link.hidden = !show || link.dataset.job !== variant;
+      });
+      box.hidden = !show;
+    });
   }
 
   // ==========================================================================
@@ -509,6 +546,8 @@
       /* The href as written in the HTML, without the ids `handOff` adds. */
       props.href = cta.dataset.appHref || cta.getAttribute('href');
       props.label = cta.textContent.trim().slice(0, 80);
+      /* The language-independent name of the hero experiment link. */
+      if (cta.dataset.job) props.job = cta.dataset.job;
       ph.capture('landing_cta_clicked', props);
     });
 

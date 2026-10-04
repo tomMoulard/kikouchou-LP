@@ -25,6 +25,9 @@ window.KKC_I18N.fr = {
   "a11y.theme": "Changer de thème",
 
   "cta.open": "Ouvrir l’app",
+  "cta.jobRooms": "Qui dort où",
+  "cta.jobRides": "Qui vient comment",
+  "cta.jobMoney": "Qui doit combien",
 
   "a11y.menu": "Menu",
 
