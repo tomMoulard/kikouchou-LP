@@ -526,8 +526,17 @@ a { color: inherit; }
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
-.hero__lede {
+/* What the product is, in one plain sentence, for the reader the headline's
+   question does not tell. */
+.hero__what {
   margin-top: 1.3rem;
+  font-size: var(--step-1);
+  font-weight: 650;
+  color: var(--text);
+  max-width: 34rem;
+}
+.hero__lede {
+  margin-top: .9rem;
   font-size: var(--step-1);
   color: var(--text-muted);
   max-width: 34rem;
