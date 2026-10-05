@@ -98,6 +98,19 @@
   var OPAQUE_EXCEPTION_FINGERPRINT = 'opaque-cross-origin-script';
 
   /**
+   * The fingerprint every exception thrown by Meta's in-app browser bridge is
+   * filed under.
+   *
+   * The computed fingerprint follows the stack, and the bridge throws from a
+   * different function each time (`sendJsBlockingTimeMessage`,
+   * `sendBeforeUnloadMessage`, `sendINPMessage`), so one cause was split into
+   * PostHog issues `01a0c807`, `01a0d4a3` and a third. Named here, they are one
+   * issue that one suppression rule can hold. The same constant is used by the
+   * app, in `src/lib/posthog.ts`.
+   */
+  var META_BRIDGE_FINGERPRINT = 'meta-iab-bridge';
+
+  /**
    * In-app browsers, by the token each one adds to the user agent.
    *
    * This matters because an in-app browser injects its own JavaScript into
@@ -169,7 +182,12 @@
    * no file, when the native side of the Facebook or Instagram webview is
    * already gone. Kept in step with `src/lib/posthog.ts` in the app.
    */
-  var META_BRIDGE_FUNCTIONS = ['sendDataToNative', 'sendJsBlockingTimeMessage', 'sendINPMessage'];
+  var META_BRIDGE_FUNCTIONS = [
+    'sendDataToNative',
+    'sendJsBlockingTimeMessage',
+    'sendINPMessage',
+    'sendBeforeUnloadMessage'
+  ];
 
   /**
    * The scheme Meta's in-app browser serves its injected scripts from.
@@ -340,6 +358,13 @@
         }
       }
       if (!list || !list.length) return event;
+      if (context.injected_bridge === 'meta_iab') {
+        /* Not our code, and nothing on this page can stop it. Sent, so the
+           volume stays visible, but as a warning in its own issue. */
+        event.properties['$exception_fingerprint'] = META_BRIDGE_FINGERPRINT;
+        event.properties['$exception_level'] = 'warning';
+        return event;
+      }
       for (var i = 0; i < list.length; i++) {
         if (!isOpaque(list[i])) return event;
       }
