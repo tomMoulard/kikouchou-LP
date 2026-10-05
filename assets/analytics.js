@@ -171,6 +171,16 @@
    */
   var META_BRIDGE_FUNCTIONS = ['sendDataToNative', 'sendJsBlockingTimeMessage', 'sendINPMessage'];
 
+  /**
+   * The scheme Meta's in-app browser serves its injected scripts from.
+   *
+   * The bridge frames are not file-less: posthog-js reads them as
+   * `iabjs://navigation_performance_logger_android`, so a file-less test alone
+   * never matched one, and every event of PostHog issue `01a0c807` read
+   * `injected_bridge: android_webview`.
+   */
+  var META_BRIDGE_SCHEME = 'iabjs://';
+
   /** When the page was last hidden with `pagehide`, on the performance clock. */
   var pageHiddenAt = null;
   window.addEventListener('pagehide', function () {
@@ -240,15 +250,19 @@
       }
       var frames = entry.stacktrace && entry.stacktrace.frames;
       if (!frames || !frames.length) continue;
-      var fileless = true;
+      var foreign = true;
       var named = false;
       for (var j = 0; j < frames.length; j++) {
         var frame = frames[j] || {};
+        var filename = typeof frame.filename === 'string' ? frame.filename : '';
+        var fromMeta = filename.indexOf(META_BRIDGE_SCHEME) === 0;
         /* posthog-js writes `<anonymous>` for a frame with no URL. */
-        if (frame.filename && frame.filename !== '<anonymous>') fileless = false;
-        if (META_BRIDGE_FUNCTIONS.indexOf(String(frame['function'])) !== -1) named = true;
+        if (filename && filename !== '<anonymous>' && !fromMeta) foreign = false;
+        if (fromMeta || META_BRIDGE_FUNCTIONS.indexOf(String(frame['function'])) !== -1) {
+          named = true;
+        }
       }
-      if (fileless && named) return 'meta_iab';
+      if (foreign && named) return 'meta_iab';
     }
     return sawJavaBridge ? 'android_webview' : null;
   }
