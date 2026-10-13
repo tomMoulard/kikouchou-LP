@@ -327,8 +327,9 @@
    * The two cross-origin fixes above stop this page producing opaque errors of
    * its own. What they cannot stop is genuinely outside it: a browser
    * extension's content script, or an in-app webview injecting its own
-   * JavaScript. Nothing in this repository can keep those from throwing, so the
-   * honest handling is to keep reporting them and make them tractable.
+   * JavaScript. Nothing in this repository can keep those from throwing. This
+   * only marks them; `beforeSend` drops the ones `isForeignException` reads
+   * from those marks.
    *
    * `in_app_browser` and `foreign_script_origins` are attached to every
    * exception, readable or not, because they are what separates "our bug" from
@@ -359,8 +360,8 @@
       }
       if (!list || !list.length) return event;
       if (context.injected_bridge === 'meta_iab') {
-        /* Not our code, and nothing on this page can stop it. Sent, so the
-           volume stays visible, but as a warning in its own issue. */
+        /* Not our code, and nothing on this page can stop it. Named so the
+           event reads as what it is; `beforeSend` then drops it. */
         event.properties['$exception_fingerprint'] = META_BRIDGE_FINGERPRINT;
         event.properties['$exception_level'] = 'warning';
         return event;
@@ -374,6 +375,58 @@
     } catch (e) {
       return event;
     }
+  }
+
+  /**
+   * Messages only a script riding along with the page throws. Nothing on this
+   * page names either global: `window.webkit` is the bridge an iOS in-app
+   * browser injects (PostHog issue `01a120eb`, Instagram), and `xbrowser` a
+   * global some Android browser's injected script expects (`01a11652`). The
+   * webview attributes its script to the document URL, so the message is the
+   * only thing to match on. The app keeps the same list in `src/lib/posthog.ts`.
+   */
+  var FOREIGN_EXCEPTION_MESSAGES = [
+    /\bwindow\.webkit\.messageHandlers\b/,
+    /\bxbrowser is not defined\b/
+  ];
+
+  /**
+   * Whether an exception was thrown by somebody else's code: an in-app
+   * browser's bridge failing (`01a10ced`), an opaque "Script error." with no
+   * frames (`01a0a5d4`; this page's own scripts load `crossorigin`, so their
+   * errors arrive readable), or a message from FOREIGN_EXCEPTION_MESSAGES on
+   * every entry. Reads what `markOpaqueExceptions` has just set.
+   */
+  function isForeignException(event) {
+    try {
+      if (!event || event.event !== '$exception' || !event.properties) return false;
+      var p = event.properties;
+      if (p.injected_bridge === 'meta_iab' || p.injected_bridge === 'android_webview') return true;
+      if (p.opaque_cross_origin === true) return true;
+      var list = p['$exception_list'];
+      if (!list || !list.length) return false;
+      for (var i = 0; i < list.length; i++) {
+        var value = list[i] && typeof list[i].value === 'string' ? list[i].value : '';
+        var matched = false;
+        for (var j = 0; j < FOREIGN_EXCEPTION_MESSAGES.length; j++) {
+          if (FOREIGN_EXCEPTION_MESSAGES[j].test(value)) matched = true;
+        }
+        if (!matched) return false;
+      }
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /**
+   * The last gate before an event leaves the browser: marks every exception,
+   * then drops the ones this page did not throw. They filed issues that no
+   * change here could close.
+   */
+  function beforeSend(event) {
+    var marked = markOpaqueExceptions(event);
+    return isForeignException(marked) ? null : marked;
   }
 
   // ==========================================================================
@@ -460,9 +513,9 @@
         return s;
       },
 
-      /* The last gate before an event leaves the browser. Nothing is dropped
-         here — see `markOpaqueExceptions`, which only ever adds properties. */
-      before_send: markOpaqueExceptions
+      /* The last gate before an event leaves the browser. Every exception is
+         marked; the ones this page did not throw are dropped. */
+      before_send: beforeSend
     });
 
     /* Which surface an event came from, on every event.
