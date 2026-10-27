@@ -526,6 +526,36 @@ a { color: inherit; }
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+/* The question slot. Every question sits in the same grid cell, so the slot
+   is as big as the longest one; only the one with `is-on` shows. */
+.flap__slot { display: inline-grid; }
+.flap__q { grid-area: 1 / 1; visibility: hidden; }
+.flap__q.is-on { visibility: visible; }
+
+/* While a question changes, assets/app.js cuts it into one `.flap__ch` per
+   letter, like the letters of a split-flap board. The letter in flow sets the
+   width and goes transparent; two copies of a letter drawn over it, clipped
+   to its top and bottom halves, do the flipping. The top half falls forward
+   over the middle of the line, then the next letter's bottom half swings
+   down to meet it. Once every letter has landed, the question is plain text
+   again. */
+.flap__word { white-space: nowrap; }
+.flap__ch {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+  perspective: 2.5em;
+}
+.flap__half {
+  position: absolute;
+  inset: 0;
+  color: var(--text);
+  text-align: center;
+  white-space: nowrap;
+  backface-visibility: hidden;
+}
+.flap__half--top { clip-path: inset(-.3em -1em 50% -1em); }
+.flap__half--bottom { clip-path: inset(50% -1em -.3em -1em); }
 /* What the product is, in one plain sentence, for the reader the headline's
    question does not tell. */
 .hero__what {

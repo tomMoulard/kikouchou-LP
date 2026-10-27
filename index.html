@@ -282,7 +282,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <section class="hero">
   <div class="container hero__grid">
     <div>
-      <h1 data-i18n-html="hero.title">Who sleeps where, and <em>who picks up whom</em>.</h1>
+      <!-- "Who" stays put and the question after it changes like a split-flap
+           departures board: assets/app.js flips each letter through a few
+           others before it lands on the next question. Every question sits in
+           the same grid cell, so the slot is as big as the longest one and the
+           lines under the headline never move. Screen readers get the whole
+           list once from the hidden sentence. Without JavaScript, or with
+           reduced motion, the first question stays. -->
+      <h1 class="flap">
+        <span class="sr-only" data-i18n="hero.title">Who sleeps where, who gets there how, who picks up whom, who does what and who pays for what.</span>
+        <span aria-hidden="true">
+          <span data-i18n="hero.who">Who</span>
+          <span class="flap__slot">
+            <span class="flap__q is-on"><em data-i18n="hero.q1">sleeps where?</em></span>
+            <span class="flap__q"><em data-i18n="hero.q2">gets there how?</em></span>
+            <span class="flap__q"><em data-i18n="hero.q3">picks up whom?</em></span>
+            <span class="flap__q"><em data-i18n="hero.q4">does what?</em></span>
+            <span class="flap__q"><em data-i18n="hero.q5">pays for what?</em></span>
+          </span>
+        </span>
+      </h1>
 
       <p class="hero__what" data-i18n="hero.what">Kikouchou is the app that shares out the organising of a group trip.</p>
 

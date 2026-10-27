@@ -10,7 +10,8 @@
  *   2. theme     — light/dark with a system default
  *   3. nav       — mobile sheet, sticky-header shadow
  *   4. reveal    — scroll-in animation, skipped for reduced-motion users
- *   5. vsl       — play/pause for the hero's animated sales letter
+ *   5. flap      - flips the hero question letter by letter, like a station board
+ *   6. vsl       - play/pause for the hero's animated sales letter
  */
 (function () {
   'use strict';
@@ -103,6 +104,9 @@
     if (canonical) {
       canonical.href = 'https://www.kikouchou.app/' + (lang === DEFAULT_LOCALE ? '' : '?lang=' + lang);
     }
+
+    // The hero headline listens for this to drop a flip that the new copy replaced.
+    doc.dispatchEvent(new Event('kkc:lang'));
   }
 
   /* The mockups pair a coloured circle with a name. Deriving the letter from
@@ -238,7 +242,136 @@
   }
 
   /* ====================================================================
-     5. Video sales letter
+     5. Split-flap headline
+     ====================================================================
+     Every few seconds the question in the headline changes the way a station
+     departures board does: each letter flips through a few others before it
+     lands on the next question, a little after the letter on its left. The
+     letters are cut apart only while they flip, so at rest the headline is
+     plain text with its kerning. It stops while the hero is off screen or the
+     tab is hidden. Reduced-motion visitors keep the first question. */
+  var flapQs = doc.querySelectorAll('.flap__q'),
+      FLAP_SPIN = 'abcdefghijklmnopqrstuvwxyz',
+      FLAP_STEP_MS = 110;
+
+  if (flapQs.length > 1 && !reduced && Element.prototype.animate) {
+    var flapIndex = 0,
+        flapRound = 0,
+        flapBusy = false,
+        flapOnScreen = true;
+
+    var questionText = function (el) {
+      return el.textContent.trim().replace(/[ \t\r\n]+/g, ' ');
+    };
+
+    var flapHalf = function (side) {
+      var half = doc.createElement('span');
+      half.className = 'flap__half flap__half--' + side;
+      return half;
+    };
+
+    // One `.flap__ch` per letter, inside one unbreakable `.flap__word` per
+    // word, so the question wraps exactly where its plain text would.
+    var cutIntoLetters = function (em, text) {
+      var cells = [];
+      em.textContent = '';
+      text.split(' ').forEach(function (word, w) {
+        if (w) em.appendChild(doc.createTextNode(' '));
+        var wordEl = doc.createElement('span');
+        wordEl.className = 'flap__word';
+        for (var i = 0; i < word.length; i++) {
+          var cell = doc.createElement('span');
+          cell.className = 'flap__ch';
+          cell.textContent = word.charAt(i);
+          cell.appendChild(flapHalf('top'));
+          cell.appendChild(flapHalf('bottom'));
+          wordEl.appendChild(cell);
+          cells.push(cell);
+        }
+        em.appendChild(wordEl);
+      });
+      return cells;
+    };
+
+    // One flip: the top half carries the old letter down to the middle of the
+    // line, then the new letter's bottom half swings down from it.
+    var flipLetter = function (cell, ch) {
+      var top = cell.children[0],
+          bottom = cell.children[1],
+          fall = top.animate(
+            [{ transform: 'rotateX(0deg)' }, { transform: 'rotateX(-90deg)' }],
+            { duration: FLAP_STEP_MS / 2, easing: 'ease-in', fill: 'forwards' }
+          );
+      return fall.finished.then(function () {
+        top.textContent = ch;
+        bottom.textContent = ch;
+        fall.cancel();
+        return bottom.animate(
+          [{ transform: 'rotateX(90deg)' }, { transform: 'rotateX(0deg)' }],
+          { duration: FLAP_STEP_MS / 2, easing: 'ease-out' }
+        ).finished;
+      });
+    };
+
+    var randomLetter = function () {
+      return FLAP_SPIN.charAt(Math.floor(Math.random() * FLAP_SPIN.length));
+    };
+
+    // A letter starts from the old question's letter in the same place, hunts
+    // through one to three random letters and lands on its own.
+    var spinLetter = function (cell, start, target, delay) {
+      // The no-break space before a French "?" is too narrow to show a letter.
+      if (/\s/.test(target)) return Promise.resolve();
+      var steps = [],
+          spins = 1 + Math.floor(Math.random() * 3);
+      cell.children[0].textContent = cell.children[1].textContent = start || randomLetter();
+      for (var i = 0; i < spins; i++) steps.push(randomLetter());
+      steps.push(target);
+      return new Promise(function (resolve) { window.setTimeout(resolve, delay); })
+        .then(function next() {
+          if (!steps.length) return;
+          return flipLetter(cell, steps.shift()).then(next);
+        });
+    };
+
+    var showQuestion = function (next) {
+      var round = flapRound,
+          em = flapQs[next].querySelector('em'),
+          from = questionText(flapQs[flapIndex]).replace(/ /g, ''),
+          text = questionText(em),
+          cells = cutIntoLetters(em, text);
+
+      flapQs[flapIndex].classList.remove('is-on');
+      flapQs[next].classList.add('is-on');
+      flapIndex = next;
+      flapBusy = true;
+
+      Promise.all(cells.map(function (cell, i) {
+        return spinLetter(cell, from.charAt(i), cell.firstChild.nodeValue, i * 35);
+      })).then(function () {
+        // A language switch during the flip already put the translated
+        // question in place; the old text must not overwrite it.
+        if (round === flapRound) em.textContent = text;
+        flapBusy = false;
+      });
+    };
+
+    doc.addEventListener('kkc:lang', function () { flapRound++; });
+
+    window.setInterval(function () {
+      if (flapBusy || doc.hidden || !flapOnScreen) return;
+      showQuestion((flapIndex + 1) % flapQs.length);
+    }, 3200);
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        flapOnScreen = entries[0].isIntersecting;
+      }).observe(flapQs[0].parentNode);
+    }
+  }
+
+  /* ====================================================================
+     6. Video sales letter
      ====================================================================
      The hero letter is pure CSS running on one 30-second clock, so the only
      thing left for JavaScript is to stop and start that clock. It pauses while
