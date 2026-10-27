@@ -515,6 +515,16 @@ a { color: inherit; }
   font-weight: 700;
   letter-spacing: -.032em;
 }
+/* Beside the letter, the headline is one line: the type shrinks with the
+   column until the longest question fits. That question, "Who picks up
+   whom?", is 9.7em wide; measure again if you write a longer one. */
+@media (min-width: 1000px) {
+  .hero__copy { container-type: inline-size; }
+  .hero h1.flap {
+    font-size: min(var(--step-4), 100cqi / 9.8);
+    white-space: nowrap;
+  }
+}
 /* The organiser went over the part that matters with a highlighter. The swipe
    is a skewed band under the lower two thirds of the line, and it clones onto
    every line the phrase wraps to. */
