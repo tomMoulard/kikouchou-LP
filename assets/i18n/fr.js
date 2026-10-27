@@ -32,8 +32,8 @@ window.KKC_I18N.fr = {
   "a11y.menu": "Menu",
 
   "hero.title": "Qui dort où, et <em>qui va chercher qui</em>.",
-  "hero.what": "Kikouchou, l’app gratuite qui organise les vacances en groupe sur un seul plan partagé.",
-  "hero.lede": "Vous avez loué une maison entre amis. Onze personnes, six chambres, des arrivées étalées sur quatre jours et trois trains à aller chercher à la gare. Kikouchou sort tout ça de la tête d’une seule personne et le pose sur un plan que tout le monde voit et remplit lui-même.",
+  "hero.what": "Kikouchou, l’app qui partage l’organisation d’un voyage de groupe.",
+  "hero.lede": "Vous avez loué une grande maison pour tous vos amis. Des chambres à répartir, des arrivées étalées sur plusieurs jours en train, en avion ou en voiture, des allers-retours à la gare, des activités à organiser et des dépenses à partager. Kikouchou sort cette charge mentale de la tête d’une seule personne et la partage avec tout le groupe : chacun voit le planning et remplit sa partie.",
 
   "cta.openFree": "Ouvrir l’app, c’est gratuit",
   "cta.see": "Voir comment ça marche",
