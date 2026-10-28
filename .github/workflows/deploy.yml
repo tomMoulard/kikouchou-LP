@@ -100,7 +100,7 @@ jobs:
               # og:image and friends are absolute URLs; check those files too.
               grep -ohE 'content="https://www\.kikouchou\.app/[^"]+"' _site/index.html \
                 | sed -E 's|.*https://www\.kikouchou\.app(/[^"]*)"|\1|'
-            } | sed 's/?.*//' | grep -v '^/$' | sort -u
+            } | sed 's/[?#].*//' | grep -v '^/$' | sort -u
           )
           for ref in $refs; do
             if [ ! -e "_site$ref" ]; then
