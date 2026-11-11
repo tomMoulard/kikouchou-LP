@@ -198,6 +198,42 @@ test('keeps an exception when one entry of the chain has no frames', () => {
   assert.equal(beforeSend(event), event);
 });
 
+test('keeps an exception when one entry has an empty stack', () => {
+  const beforeSend = loadBeforeSend();
+  const event = exception([
+    { type: 'TypeError', value: 'x is undefined', stacktrace: { frames: [gtagFrame('Xu', 577, 32)] } },
+    { type: 'Error', value: 'wrapped', stacktrace: { frames: [] } },
+  ]);
+  assert.equal(beforeSend(event), event);
+});
+
+test('keeps an exception with a frame that has no file', () => {
+  const beforeSend = loadBeforeSend();
+  const event = exception([{
+    type: 'TypeError',
+    value: 'x is undefined',
+    stacktrace: { frames: [{ function: 'boot', lineno: 1, colno: 1 }, gtagFrame('Xu', 577, 32)] },
+  }]);
+  assert.equal(beforeSend(event), event);
+});
+
+test("keeps an exception from the GTM container, which runs the project's own variables", () => {
+  const beforeSend = loadBeforeSend();
+  const event = exception([{
+    type: 'TypeError',
+    value: "Cannot read properties of undefined (reading 'foo')",
+    stacktrace: { frames: [{ filename: 'https://www.googletagmanager.com/gtm.js?id=GTM-THNTTWRZ', function: 'Ib', lineno: 1, colno: 2 }] },
+  }]);
+  assert.equal(beforeSend(event), event);
+});
+
+test('keeps a Google tag stack long enough to have lost its outer frames', () => {
+  const beforeSend = loadBeforeSend();
+  const frames = Array.from({ length: 10 }, (_, i) => gtagFrame(`f${i}`, 500 + i, 1));
+  const event = exception([{ type: 'TypeError', value: 'x is undefined', stacktrace: { frames } }]);
+  assert.equal(beforeSend(event), event);
+});
+
 test('keeps an ordinary exception, with its context', () => {
   const beforeSend = loadBeforeSend();
   const event = exception([{ type: 'TypeError', value: 'x is undefined' }]);

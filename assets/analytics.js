@@ -391,10 +391,75 @@
   ];
 
   /**
+   * The hosts of the ad and tag scripts this page loads: the Google tag and the
+   * GTM container from index.html, what the container and gtag.js fetch in
+   * turn, and Meta's pixel from meta-pixel.js. A host matches itself and its
+   * subdomains (`googleads.g.doubleclick.net`). PostHog's asset host is not
+   * here on purpose: an error inside posthog-js can come from how this file
+   * configures it. Nor is the container itself, `/gtm.js`: Google compiles the
+   * container's Custom JavaScript variables into it, and those are ours to fix
+   * in the GTM UI.
+   */
+  var THIRD_PARTY_SCRIPT_HOSTS = [
+    'googletagmanager.com',
+    'google-analytics.com',
+    'googleadservices.com',
+    'doubleclick.net',
+    'connect.facebook.net'
+  ];
+
+  /**
+   * How many frames Chromium keeps by default (`Error.stackTraceLimit`). A stack
+   * that long may have lost the outer frames, which is where this page's call
+   * would be, so it never counts as third-party only.
+   */
+  var TRUNCATED_STACK_LENGTH = 10;
+
+  /** Whether a frame's file is served from THIRD_PARTY_SCRIPT_HOSTS. */
+  function isThirdPartyFrame(frame) {
+    var url;
+    try {
+      /* Throws on a relative path, `<anonymous>` or a missing filename. */
+      url = new URL(frame.filename);
+    } catch (e) {
+      return false;
+    }
+    if (url.protocol !== 'https:' && url.protocol !== 'http:') return false;
+    if (url.pathname === '/gtm.js') return false;
+    var hostname = url.hostname;
+    for (var i = 0; i < THIRD_PARTY_SCRIPT_HOSTS.length; i++) {
+      var known = THIRD_PARTY_SCRIPT_HOSTS[i];
+      if (hostname === known ||
+          hostname.slice(-(known.length + 1)) === '.' + known) return true;
+    }
+    return false;
+  }
+
+  /**
+   * Whether every entry has a stack and every frame of it is an ad or tag
+   * script's. Such a throw never passed through this page's code, so nothing
+   * here can fix it: the Google tag calling `Promise.allSettled` on a page
+   * where something else had replaced `Promise` (Edge 122, 2026-11-10). One
+   * frame of this page, one frame with no URL, one entry with no frames, or a
+   * stack long enough to have been cut keeps the event.
+   */
+  function isThirdPartyOnly(list) {
+    for (var i = 0; i < list.length; i++) {
+      var frames = list[i] && list[i].stacktrace && list[i].stacktrace.frames;
+      if (!frames || !frames.length || frames.length >= TRUNCATED_STACK_LENGTH) return false;
+      for (var j = 0; j < frames.length; j++) {
+        if (!isThirdPartyFrame(frames[j])) return false;
+      }
+    }
+    return true;
+  }
+
+  /**
    * Whether an exception was thrown by somebody else's code: an in-app
    * browser's bridge failing (`01a10ced`), an opaque "Script error." with no
    * frames (`01a0a5d4`; this page's own scripts load `crossorigin`, so their
-   * errors arrive readable), or a message from FOREIGN_EXCEPTION_MESSAGES on
+   * errors arrive readable), a stack entirely inside an ad or tag script
+   * (`isThirdPartyOnly`), or a message from FOREIGN_EXCEPTION_MESSAGES on
    * every entry. Reads what `markOpaqueExceptions` has just set.
    */
   function isForeignException(event) {
@@ -405,6 +470,7 @@
       if (p.opaque_cross_origin === true) return true;
       var list = p['$exception_list'];
       if (!list || !list.length) return false;
+      if (isThirdPartyOnly(list)) return true;
       for (var i = 0; i < list.length; i++) {
         var value = list[i] && typeof list[i].value === 'string' ? list[i].value : '';
         var matched = false;
