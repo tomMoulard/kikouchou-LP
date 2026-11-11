@@ -74,6 +74,13 @@ function exception(list) {
   return { uuid: 'u', event: '$exception', properties: { $exception_list: list } };
 }
 
+const GTAG_URL = 'https://www.googletagmanager.com/gtag/js?id=AW-18455477906';
+
+/** One frame of the Google tag, in posthog-js's client-side shape. */
+function gtagFrame(name, lineno, colno) {
+  return { platform: 'web:javascript', filename: GTAG_URL, function: name, in_app: true, lineno, colno };
+}
+
 const FOREIGN = [
   [
     // PostHog 01a10ced: Meta's in-app browser bridge, after the native side is gone.
@@ -107,6 +114,28 @@ const FOREIGN = [
     "a browser's injected script",
     [{ type: 'ReferenceError', value: 'xbrowser is not defined' }],
   ],
+  [
+    // PostHog, 2026-11-10, Edge 122 on Windows 10: something on the visitor's
+    // page replaced `Promise`, and the Google tag tripped over it. Every frame
+    // is in gtag.js. Built as posthog-js 1.447.7 hands it to `before_send`:
+    // outermost call first, the full script URL in `filename`, no `abs_path`.
+    'an exception thrown entirely inside the Google tag',
+    [{
+      type: 'TypeError',
+      value: 'Promise.allSettled is not a function',
+      mechanism: { handled: false, synthetic: false, type: 'generic' },
+      stacktrace: {
+        type: 'raw',
+        frames: [
+          gtagFrame('Mu', 569, 634),
+          gtagFrame('Su', 574, 373),
+          gtagFrame('?', 574, 702),
+          gtagFrame('Tu', 574, 679),
+          gtagFrame('Xu', 577, 32),
+        ],
+      },
+    }],
+  ],
 ];
 
 for (const [name, list] of FOREIGN) {
@@ -120,6 +149,51 @@ test('keeps an error of the page that happens to read "Script error."', () => {
   const beforeSend = loadBeforeSend();
   const event = exception([
     { type: 'Error', value: 'Script error.', stacktrace: { frames: [{ filename: 'https://kikouchou.app/assets/app.js' }] } },
+  ]);
+  assert.equal(beforeSend(event), event);
+});
+
+test('keeps an exception whose stack passes through the page, even via the Google tag', () => {
+  const beforeSend = loadBeforeSend();
+  const event = exception([{
+    type: 'TypeError',
+    value: 'Promise.allSettled is not a function',
+    stacktrace: {
+      type: 'raw',
+      frames: [
+        { platform: 'web:javascript', filename: 'https://kikouchou.app/assets/app.js', function: 'track', in_app: true, lineno: 12, colno: 3 },
+        gtagFrame('Xu', 577, 32),
+      ],
+    },
+  }]);
+  assert.equal(beforeSend(event), event);
+});
+
+test('keeps an exception with a frame from a relative path', () => {
+  const beforeSend = loadBeforeSend();
+  const event = exception([{
+    type: 'TypeError',
+    value: 'x is undefined',
+    stacktrace: { frames: [gtagFrame('Xu', 577, 32), { filename: '/assets/app.js', function: 'boot', lineno: 1, colno: 1 }] },
+  }]);
+  assert.equal(beforeSend(event), event);
+});
+
+test('keeps an exception from a host that only looks like the Google tag', () => {
+  const beforeSend = loadBeforeSend();
+  const event = exception([{
+    type: 'TypeError',
+    value: 'x is undefined',
+    stacktrace: { frames: [{ filename: 'https://www.googletagmanager.com.example.net/gtag/js', function: 'Xu', lineno: 1, colno: 1 }] },
+  }]);
+  assert.equal(beforeSend(event), event);
+});
+
+test('keeps an exception when one entry of the chain has no frames', () => {
+  const beforeSend = loadBeforeSend();
+  const event = exception([
+    { type: 'Error', value: 'wrapped' },
+    { type: 'TypeError', value: 'x is undefined', stacktrace: { frames: [gtagFrame('Xu', 577, 32)] } },
   ]);
   assert.equal(beforeSend(event), event);
 });
